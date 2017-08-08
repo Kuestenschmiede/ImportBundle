@@ -1,0 +1,3 @@
+con4gis_api_import:
+    path:     /api/runimport/{id}
+    defaults: { _controller: con4gisImportBundle:Api:runImport }

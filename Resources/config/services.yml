@@ -1,0 +1,103 @@
+##
+# Services
+##
+services:
+
+
+    # RunImport
+    con4gis_import.onImportRunGetSettings:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetSettings }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunGetInputData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetInputData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunGetPath:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetPath }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunLoadData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunLoadData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunConvertData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunConvertData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunSaveData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunSaveData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onImportRunRenameFile:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunRenameFile }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+
+    # Convert Data
+    con4gis_import.onConvertDataToArray:
+        class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertDataToArray }
+
+    con4gis_import.onConvertFieldsByName:
+            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+            tags:
+                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertFields }
+
+    con4gis_import.onConvertRowsToArrays:
+            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+            tags:
+                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertRowsToArrays }
+
+    con4gis_import.onConvertRowsByName:
+            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+            tags:
+                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertRows }
+
+    con4gis_import.onConvertInsertFields:
+            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+            tags:
+                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertInsertFields }
+
+    con4gis_import.onConvertDeleteFields:
+            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
+            tags:
+                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertDeleteFields }
+
+
+    # Save Data
+    con4gis_import.onSaveDataTruncateTable:
+        class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataTruncateTable }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onSaveDataInsert:
+        class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataInsert }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
