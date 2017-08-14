@@ -56,7 +56,7 @@
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
-array_insert($GLOBALS['BE_MOD']['con4gis_administration'],8, array(
+array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],8, array(
     'import' => array
     (
         'tables'        => array('tl_con4gis_import'),
