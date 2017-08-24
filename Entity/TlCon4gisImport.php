@@ -39,27 +39,6 @@ class TlCon4gisImport
 
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $groupid = 0;
-
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $memberid = 0;
-
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $uuid = '';
-
-
-    /**
      * @var string
      * @ORM\Column(type="string")
      */
@@ -189,60 +168,6 @@ class TlCon4gisImport
     public function setTstamp(int $tstamp)
     {
         $this->tstamp = $tstamp;
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getGroupid(): int
-    {
-        return $this->groupid;
-    }
-
-
-    /**
-     * @param int $groupid
-     */
-    public function setGroupid(int $groupid)
-    {
-        $this->groupid = $groupid;
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getMemberid(): int
-    {
-        return $this->memberid;
-    }
-
-
-    /**
-     * @param int $memberid
-     */
-    public function setMemberid(int $memberid)
-    {
-        $this->memberid = $memberid;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getUuid(): string
-    {
-        return $this->uuid;
-    }
-
-
-    /**
-     * @param string $uuid
-     */
-    public function setUuid(string $uuid)
-    {
-        $this->uuid = $uuid;
     }
 
 
