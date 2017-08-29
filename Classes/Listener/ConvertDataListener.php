@@ -9,7 +9,7 @@
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
-use c4g\projects\C4GBrickCommon;
+use con4gis\ProjectBundle\Classes\Common\C4GBrickCommon;
 use Contao\Database;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
