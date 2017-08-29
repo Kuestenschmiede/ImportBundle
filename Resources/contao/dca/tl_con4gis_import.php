@@ -22,10 +22,10 @@
  *
  *
  * con4gis
- * @version   2.0.0
+ * @version   php 7
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
+ * @copyright Küstenschmiede GmbH Software & Design 2017
  * @link      https://www.kuestenschmiede.de
  */
 
@@ -156,6 +156,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'title' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['title'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50', 'rgxp'=>'alnum', 'nospace'=>true, 'spaceToUnderscore'=>true),
@@ -164,6 +165,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'description' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['description'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('tl_class'=>'clr', 'rte'=>'tinyMCE'),
@@ -172,6 +174,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'srcfile' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['srcfile'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'fileTree',
             'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv', 'tl_class'=>'clr wizard'),
@@ -180,6 +183,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'renamefile' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['renamefile'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12'),
@@ -188,6 +192,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'headerline' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['headerline'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12'),
@@ -196,6 +201,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'truncatetable' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['truncatetable'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12'),
@@ -204,6 +210,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'srctable' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['srctable'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
             'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetTables'),
@@ -213,6 +220,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'namedfields' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['namedfields'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
             'sql'                     => "blob NULL",
@@ -224,6 +232,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                     'destfields' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['destfields'],
+                        'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'select',
                         'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
@@ -232,6 +241,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                     'srccolumnname' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['srccolumnname'],
+                        'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
                         'eval'                    => array('style'=>'width:200px')
@@ -239,6 +249,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                     'defaultvalue' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['defaultvalue'],
+                        'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
                         'eval'                    => array('style'=>'width:200px')
@@ -246,6 +257,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                     'overridevalue' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['overridevalue'],
+                        'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'checkbox'
                     )
@@ -255,6 +267,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'additionaldata' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['additionaldata'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('tl_class'=>'clr'),
@@ -267,7 +280,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => ';',
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
+            'sql'                     => "char(1) NOT NULL default ';'"
         ),
         'enclosure' => array
         (
