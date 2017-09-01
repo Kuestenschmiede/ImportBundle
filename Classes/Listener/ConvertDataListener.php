@@ -1,15 +1,15 @@
 <?php
 /**
  * con4gis
- * @version   2.0.0
+ * @version   php 7
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
+ * @copyright Küstenschmiede GmbH Software & Design 2017
  * @link      https://www.kuestenschmiede.de
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
-use c4g\projects\C4GBrickCommon;
+use con4gis\ProjectBundle\Classes\Common\C4GBrickCommon;
 use Contao\Database;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
