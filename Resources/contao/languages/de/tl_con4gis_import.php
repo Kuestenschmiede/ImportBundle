@@ -30,7 +30,7 @@
 /**
  * Set Tablename
  */
-$strName = 'tl_con4gis_import';
+$strName = 'tl_c4g_import';
 
 
 /**
