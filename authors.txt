@@ -1,0 +1,4 @@
+Authors ordered by first contribution.
+
+Matthias Eilers (http://kuestenschmiede.de)
+Patrick Froch (https://easysolutionsit.de)
