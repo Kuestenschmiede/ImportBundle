@@ -35,7 +35,7 @@
     ]
   },
   "support": {
-    "issues": "https://github.com/Kuestenschmiede/ExportBundle/issues"
+    "issues": "https://github.com/Kuestenschmiede/ImportBundle/issues"
   },
   "config": {
     "preferred-install": "dist"
