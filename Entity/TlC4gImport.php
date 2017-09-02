@@ -12,13 +12,13 @@ namespace con4gis\ImportBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TlCon4gisImport
+ * Class TlC4gImport
  *
  * @ORM\Entity
- * @ORM\Table(name="tl_con4gis_import")
+ * @ORM\Table(name="tl_c4g_import")
  * @package con4gis\ImportBundle\Entity
  */
-class TlCon4gisImport
+class TlC4gImport
 {
 
 
