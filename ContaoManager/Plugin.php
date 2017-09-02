@@ -41,7 +41,6 @@ class Plugin implements RoutingPluginInterface, BundlePluginInterface
         return [
             BundleConfig::create(con4gisImportBundle::class)
                 ->setLoadAfter([con4gisCoreBundle::class])
-                ->setReplace(['Import']),
         ];
     }
 }
