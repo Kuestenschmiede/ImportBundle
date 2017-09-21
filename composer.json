@@ -1,0 +1,43 @@
+{
+  "name": "con4gis/import",
+  "type": "contao-bundle",
+  "description": "Contao bundle for creating generic imports.",
+  "keywords": ["con4gis", "import", "contao", "c4g", "con4gisimport", "con4gisimportbundle", "c4gimport"],
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Kuestenschmiede",
+      "homepage": "https://github.com/kuestenschmiede"
+    }
+  ],
+  "require": {
+    "con4gis/core": "~2.0"
+  },
+  "conflict": {
+    "contao/core": "*",
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "con4gis\\ImportBundle\\": ""
+    },
+    "classmap": [
+      "Resources/contao/"
+    ],
+    "exclude-from-classmap": [
+      "Resources/contao/config/",
+      "Resources/contao/dca/",
+      "Resources/contao/languages/",
+      "Resources/contao/templates/"
+    ]
+  },
+  "support": {
+    "issues": "https://github.com/Kuestenschmiede/ImportBundle/issues"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "extra": {
+    "contao-manager-plugin": "con4gis\\ImportBundle\\ContaoManager\\Plugin"
+  }
+}
