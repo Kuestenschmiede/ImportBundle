@@ -50,7 +50,7 @@ class ImportRunListener
     public function onImportRunGetSettings(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
         $importId           = $event->getImportId();
-        $respositoryName    = '\con4gis\ImportBundle\Entity\TlCon4gisImport';
+        $respositoryName    = '\con4gis\ImportBundle\Entity\TlC4gImport';
         $respository        = $this->entityManager->getRepository($respositoryName);
         $importSettings     = $respository->find($importId);
 

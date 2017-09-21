@@ -88,10 +88,31 @@ class TlC4gImport
 
 
     /**
-     * @var array
-     * @ORM\Column(type="array")
+     * @var string
+     * @ORM\Column(type="text")
      */
-    protected $namedfields = array();
+    protected $namedfields = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $sourcekind = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $srctablename = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    protected $fieldnames = '';
 
 
     /**
@@ -306,7 +327,7 @@ class TlC4gImport
      */
     public function getNamedfields(): array
     {
-        return $this->namedfields;
+        return deserialize($this->namedfields, true);
     }
 
 
@@ -315,7 +336,61 @@ class TlC4gImport
      */
     public function setNamedfields(array $namedfields)
     {
-        $this->namedfields = $namedfields;
+        $this->namedfields = serialize($namedfields);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSourcekind(): string
+    {
+        return $this->sourcekind;
+    }
+
+
+    /**
+     * @param string $sourcekind
+     */
+    public function setSourcekind(string $sourcekind)
+    {
+        $this->sourcekind = $sourcekind;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSrctablename(): string
+    {
+        return $this->srctablename;
+    }
+
+
+    /**
+     * @param string $srctablename
+     */
+    public function setSrctablename(string $srctablename)
+    {
+        $this->srctablename = $srctablename;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getFieldnames(): array
+    {
+        return deserialize($this->fieldnames, true);
+    }
+
+
+    /**
+     * @param array $fieldnames
+     */
+    public function setFieldnames(array $fieldnames)
+    {
+        $this->fieldnames = serialize($fieldnames);
     }
 
 
