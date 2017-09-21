@@ -12,13 +12,13 @@ namespace con4gis\ImportBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TlCon4gisImport
+ * Class TlC4gImport
  *
  * @ORM\Entity
- * @ORM\Table(name="tl_con4gis_import")
+ * @ORM\Table(name="tl_c4g_import")
  * @package con4gis\ImportBundle\Entity
  */
-class TlCon4gisImport
+class TlC4gImport
 {
 
 
@@ -88,10 +88,31 @@ class TlCon4gisImport
 
 
     /**
-     * @var array
-     * @ORM\Column(type="array")
+     * @var string
+     * @ORM\Column(type="text")
      */
-    protected $namedfields = array();
+    protected $namedfields = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $sourcekind = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $srctablename = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    protected $fieldnames = '';
 
 
     /**
@@ -306,7 +327,7 @@ class TlCon4gisImport
      */
     public function getNamedfields(): array
     {
-        return $this->namedfields;
+        return deserialize($this->namedfields, true);
     }
 
 
@@ -315,7 +336,61 @@ class TlCon4gisImport
      */
     public function setNamedfields(array $namedfields)
     {
-        $this->namedfields = $namedfields;
+        $this->namedfields = serialize($namedfields);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSourcekind(): string
+    {
+        return $this->sourcekind;
+    }
+
+
+    /**
+     * @param string $sourcekind
+     */
+    public function setSourcekind(string $sourcekind)
+    {
+        $this->sourcekind = $sourcekind;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSrctablename(): string
+    {
+        return $this->srctablename;
+    }
+
+
+    /**
+     * @param string $srctablename
+     */
+    public function setSrctablename(string $srctablename)
+    {
+        $this->srctablename = $srctablename;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getFieldnames(): array
+    {
+        return deserialize($this->fieldnames, true);
+    }
+
+
+    /**
+     * @param array $fieldnames
+     */
+    public function setFieldnames(array $fieldnames)
+    {
+        $this->fieldnames = serialize($fieldnames);
     }
 
 

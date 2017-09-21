@@ -102,7 +102,6 @@ class ModulImport
 
     /**
      * Generate the module
-     * @param bool $parseTemplate
      * @return string
      */
     public function runImport()

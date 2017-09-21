@@ -59,6 +59,47 @@ class SaveDataListener
 
 
     /**
+     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * @param SaveDataEvent             $event
+     * @param                           $eventName
+     * @param EventDispatcherInterface  $dispatcher
+     */
+    public function onSaveDataCreateTable(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $settings   = $event->getSettings();
+        $tableName  = $settings->getSrctablename();
+
+        if ($settings->getSourcekind() == 'create' && $tableName) {
+            $fields = $settings->getFieldnames();
+
+            if (is_array($fields) && count($fields)) {
+                $query = "CREATE TABLE IF NOT EXISTS $tableName (";
+                $query.= "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,";
+                $query.= "tstamp INT(10) NOT NULL default 0,";
+
+                foreach ($fields as $field) {
+                    $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'] . '(' . $field['fieldlength'];
+                    $query .= ') NOT NULL default ';
+
+                    if ($field['fieldtype'] == 'int' || $field['fieldtype'] == 'integer') {
+                        $query .= 0;
+                    } else {
+                        $query .= '""';
+                    }
+
+                    $query .= ',';
+                }
+
+                $query = substr($query, 0, strlen($query)-1);
+                $query .= ")";
+
+                \Contao\Database::getInstance()->execute($query);
+            }
+        }
+    }
+
+
+    /**
      * Fügt die neuen Daten ein.
      * @param SaveDataEvent             $event
      * @param                           $eventName
@@ -68,6 +109,7 @@ class SaveDataListener
     {
         $settings   = $event->getSettings();
         $tableName  = $settings->getSrctable();
+        $tableName  = ($tableName) ? $tableName : $settings->getSrctablename();
         $data       = $event->getData();
         $db         = Database::getInstance();  // Nicht alle Tabellen haben Entities!
 
