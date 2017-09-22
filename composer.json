@@ -2,14 +2,23 @@
   "name": "con4gis/import",
   "type": "contao-bundle",
   "description": "Contao bundle for creating generic imports.",
-  "keywords": ["con4gis", "import", "contao", "c4g", "con4gisimport", "con4gisimportbundle", "c4gimport"],
+  "keywords": ["con4gis", "import", "contao", "c4g", "ImportBundle", "csv", "table"],
   "license": "LGPL-3.0+",
   "authors": [
     {
-      "name": "Kuestenschmiede",
-      "homepage": "https://github.com/kuestenschmiede"
+      "name": "Kuestenschmiede GmbH Software & Design",
+      "homepage": "https://kuestenschmiede.de",
+      "role": "Operator"
+    },
+    {
+      "name": "con4gis community",
+      "homepage": "https://con4gis.org",
+      "role": "Developer"
     }
   ],
+  "support": {
+    "email": "support@con4gis.org"
+  },
   "require": {
     "con4gis/core": "~2.0"
   },
