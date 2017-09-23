@@ -30,7 +30,7 @@
 /**
  * Set Tablename
  */
-$strName = 'tl_con4gis_import';
+$strName = 'tl_c4g_import';
 
 
 /**
@@ -45,6 +45,7 @@ $strElement = 'Import';
 $GLOBALS['TL_LANG'][$strName]['title']              = array('Titel', 'Bitte geben Sie den Titel ein.');
 $GLOBALS['TL_LANG'][$strName]['description']        = array('Beschreibung', 'Bitte geben Sie eine Beschreibung ein.');
 $GLOBALS['TL_LANG'][$strName]['srckind']            = array('Art der Feldzuordnung', 'Bitte wählen Sie die Art der Feldzuordnung aus.');
+$GLOBALS['TL_LANG'][$strName]['sourcekind']         = array('Importart', 'Bitte wählen Sie die Art des Imports.');
 $GLOBALS['TL_LANG'][$strName]['srctable']           = array('Tabelle', 'Bitte wählen Sie die Quelltabelle aus.');
 $GLOBALS['TL_LANG'][$strName]['orderedfields']      = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und bringen sie in die Reihenfolge, in der sie auch in der Importdatei vorkommen.');
 $GLOBALS['TL_LANG'][$strName]['namedfields']        = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und tragen Sie die Spaltenüberschriften ein, wie sie auch in der Importdatei vorkommen.');
@@ -58,6 +59,10 @@ $GLOBALS['TL_LANG'][$strName]['headerline']         = array('Spaltenüberschrife
 $GLOBALS['TL_LANG'][$strName]['overridevalue']      = array('Importwert überschreiben', 'Bitte wählen Sie, ob der Vorgabewert den Importwert immer überschreiben soll, oder nur dann eingefügt wird, wenn kein Wert in der Importdatei vorhanden ist.');
 $GLOBALS['TL_LANG'][$strName]['delimiter']          = array('Feldtrennzeichen', 'Bitte wählen Sie das Feldtrennzeichen aus. Vorgabewert: ;');
 $GLOBALS['TL_LANG'][$strName]['enclosure']          = array('Textmarkierungszeichen', 'Bitte wählen Sie das Textmarkierungszeichen aus. Vorgabewert: "');
+$GLOBALS['TL_LANG'][$strName]['fieldnames']         = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und bringen sie in die Reihenfolge, in der sie auch in der Importdatei vorkommen.');
+$GLOBALS['TL_LANG'][$strName]['srctablename']       = array('Zieltabelle', 'Bitte geben Sie den Namen der Tabelle ein.');
+$GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Feldtyp', 'Bitte geben Sie den Typ des Feldname ein.');
+$GLOBALS['TL_LANG'][$strName]['fieldlength']        = array('Feldlänge', 'Bitte geben Sie die Länge des Feldes ein.');
 
 
 /**
@@ -72,7 +77,8 @@ $GLOBALS['TL_LANG'][$strName]['expert_legend']      = 'Experteneinstellungen';
 /**
  * Reference
  */
-$GLOBALS['TL_LANG'][$strName]['srckind_ref']   = array('byorder' => 'Felder anhand der Reihenfolge zuordnen (Es dürfen KEINE Spaltennamen in der Datei stehen!)', 'byname' => 'Felder anhand der Spaltenüberschriften zuordnen (In der ersten Zeile MÜSSEN die Spaltennamen stehen!)');
+$GLOBALS['TL_LANG'][$strName]['srckind_ref']        = array('byorder' => 'Felder anhand der Reihenfolge zuordnen (Es dürfen KEINE Spaltennamen in der Datei stehen!)', 'byname' => 'Felder anhand der Spaltenüberschriften zuordnen (In der ersten Zeile MÜSSEN die Spaltennamen stehen!)');
+$GLOBALS['TL_LANG'][$strName]['sourcekind_ref']     = array('import' => 'Nur importieren', 'create' => 'Tabellen anlegen und importieren');
 
 
 /**
