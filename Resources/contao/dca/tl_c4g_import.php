@@ -277,6 +277,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'fieldnames' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['fieldnames'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
             'load_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbLoadFieldNames')),
@@ -288,6 +289,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                     'destfields' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['destfields'],
+                        'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
                         'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
