@@ -196,45 +196,12 @@ class ConvertDataListener
                 if (!isset($data[$i]['tstamp']) || !$data[$i]['tstamp']) {
                     $data[$i]['tstamp'] = time();
                 }
-/*  raus, wqird nach Umstellung auf Bundels nicht mehr gefunden
-    @todo bei Bedarf wieder einfügen!
+/*  Raus! Nach Umstellung auf Bundels wird C4GBrickCommon::getGUID() nicht mehr gefunden!
+    @todo bei Bedarf korrigieren und wieder einfügen!
                 if ((!isset($data[$i]['uuid']) || !$data[$i]['uuid'])) {
                     $data[$i]['uuid'] = C4GBrickCommon::getGUID();
                 }
 */
-            }
-        }
-
-        $event->setData($data);
-    }
-
-
-    /**
-     * Löscht die Felder, die nicht in der Zieltabelle vorkommen.
-     * @param ConvertDataEvent         $event
-     * @param                          $eventName
-     * @param EventDispatcherInterface $dispatcher
-     */
-    public function onConvertDeleteFields(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
-    {
-        $settings   = $event->getSettings();
-        $table      = $settings->getSrctable();
-        $data       = $event->getData();
-
-        if ($settings->getSourcekind() == 'create') {
-            // Nur wenn die Tabelle nicht noch erzeugt werden muss!
-            for ($i = 0; $i < count($data); $i++) {
-                $tmpdata = array();
-                $row     = $data[$i];
-                foreach ($row as $field => $value) {
-                    if ($this->database->fieldExists($field, $table)) {
-                        $tmpdata[$field] = $value;
-                    }
-                }
-                if (is_array($tmpdata) && count($tmpdata)) {
-                    // original Zeile ersetzen!
-                    $data[$i] = $tmpdata;
-                }
             }
         }
 
