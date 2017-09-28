@@ -76,36 +76,61 @@ class SaveDataListener
         $settings   = $event->getSettings();
         $tableName  = $settings->getSrctablename();
 
-        if ($settings->getSourcekind() == 'create' && $tableName && !$this->db->tableExists($tableName)) {
+        if ($settings->getSourcekind() == 'create' && $tableName) {
+            if (!$this->db->tableExists($tableName)) {
+                $query = "CREATE TABLE IF NOT EXISTS $tableName (";
+                $query .= "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,";
+                $query .= "tstamp INT(10) NOT NULL default 0,";
+            } else {
+                $query = "ALTER TABLE $tableName";
+            }
+
             $fields = $settings->getFieldnames();
 
             if (is_array($fields) && count($fields)) {
-                $query = "CREATE TABLE IF NOT EXISTS $tableName (";
-                $query.= "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,";
-                $query.= "tstamp INT(10) NOT NULL default 0,";
 
                 foreach ($fields as $field) {
-                    $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'] . '(' . $field['fieldlength'];
-                    $query .= ') NOT NULL default ';
+                    if ($field['destfields'] != 'id' && $field['destfields'] != 'tstamp') {
+                        if ($this->db->tableExists($tableName)) {
+                            if ($this->db->fieldExists($field['destfields'], $tableName)) {
+                                $query .= " CHANGE {$field['destfields']}";
+                            } else {
+                                $query .= " ADD ";
+                            }
+                        }
 
-                    if ($field['fieldtype'] == 'int' || $field['fieldtype'] == 'integer') {
-                        $query .= 0;
-                    } else {
-                        $query .= '""';
+                        $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'];
+                        $query .= '(' . $field['fieldlength'] . ')';
+
+                        if ($field['fieldtype'] == 'varchar' || $field['fieldtype'] == 'char') {
+                            $query .= " COLLATE 'utf8_general_ci'";
+                        }
+
+                        $query .= ' NOT NULL default ';
+
+                        if ($field['fieldtype'] == 'int' || $field['fieldtype'] == 'integer') {
+                            $query .= "'0'";
+                        } else {
+                            $query .= '""';
+                        }
+
+                        $query .= ',';
                     }
-
-                    $query .= ',';
                 }
 
-                $query = substr($query, 0, strlen($query)-1);
-                $query .= ")";
+                $query = substr($query, 0, strlen($query) - 1);
+
+                if (!$this->db->tableExists($tableName)) {
+                    $query .= ") ENGINE='MyISAM' COLLATE 'utf8_general_ci';";
+                } else {
+                    $query .= ";";
+                }
 
                 $this->db->execute($query);
             }
         }
     }
 
-#@todo Update der Tabellenstruktur implementieren!!!
 
     /**
      * Löscht die Felder, die nicht in der Zieltabelle vorkommen.
@@ -124,7 +149,7 @@ class SaveDataListener
             $row     = $data[$i];
 
             foreach ($row as $field => $value) {
-                if ($this->database->fieldExists($field, $table)) {
+                if ($this->db->fieldExists($field, $table)) {
                     $tmpdata[$field] = $value;
                 }
             }

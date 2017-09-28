@@ -110,6 +110,6 @@ class ModulImport
         $event->setImportId($this->importId);
         $this->dispatcher->dispatch($event::NAME, $event);
         $this->template->importcount = count($event->getData());
-        return count($event->getData()) . ' Daten bearbeitet!';
+        return $this->template->parse();
     }
 }

@@ -81,11 +81,6 @@ services:
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertInsertFields }
 
-    con4gis_import.onConvertDeleteFields:
-            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
-            tags:
-                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertDeleteFields }
-
 
     # Save Data
     con4gis_import.onSaveDataTruncateTable:
