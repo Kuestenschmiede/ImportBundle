@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('sourcekind'),
-		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind;{expert_legend:hide},delimiter,enclosure;'
+		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind;{expert_legend:hide},delimiter,enclosure;{usequeue_legend},usequeue;'
 	),
 
 	// Subpalettes
@@ -336,6 +336,15 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '"',
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true)
+        ),
+        'usequeue' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['usequeue'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'checkbox',
+            'save_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbAddToQueue')),
+            'eval'                    => array('tl_class'=>'w50')
         )
 	)
 );

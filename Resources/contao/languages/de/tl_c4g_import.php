@@ -63,6 +63,7 @@ $GLOBALS['TL_LANG'][$strName]['fieldnames']         = array('Felder', 'Bitte wä
 $GLOBALS['TL_LANG'][$strName]['srctablename']       = array('Zieltabelle', 'Bitte geben Sie den Namen der Tabelle ein.');
 $GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Feldtyp', 'Bitte geben Sie den Typ des Feldname ein.');
 $GLOBALS['TL_LANG'][$strName]['fieldlength']        = array('Feldlänge', 'Bitte geben Sie die Länge des Feldes ein.');
+$GLOBALS['TL_LANG'][$strName]['usequeue']           = array('Abarbeitung über Warteschlange', 'Auftrag über Warteschlange abarbeiten.');
 
 
 /**
@@ -72,6 +73,7 @@ $GLOBALS['TL_LANG'][$strName]['title_legend']       = 'Titel';
 $GLOBALS['TL_LANG'][$strName]['srctable_legend']    = 'Tabelle';
 $GLOBALS['TL_LANG'][$strName]['srcfile_legend']     = 'Quelldatei';
 $GLOBALS['TL_LANG'][$strName]['expert_legend']      = 'Experteneinstellungen';
+$GLOBALS['TL_LANG'][$strName]['usequeue_legend']    = 'Einstellungen für die Warteschlange';
 
 
 /**

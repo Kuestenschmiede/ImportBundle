@@ -138,6 +138,13 @@ class TlC4gImport
 
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $usequeue = '';
+
+
+    /**
      * Setzt die Daten eines Arrays als Eigenschaften der Klasse.
      * @param $data
      */
@@ -469,5 +476,23 @@ class TlC4gImport
     public function setEnclosure(string $enclosure)
     {
         $this->enclosure = $enclosure;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getUsequeue(): string
+    {
+        return $this->usequeue;
+    }
+
+
+    /**
+     * @param string $usequeue
+     */
+    public function setUsequeue(string $usequeue)
+    {
+        $this->usequeue = $usequeue;
     }
 }

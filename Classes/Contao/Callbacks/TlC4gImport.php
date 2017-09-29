@@ -9,6 +9,8 @@
  */
 namespace con4gis\ImportBundle\Classes\Contao\Callbacks;
 
+use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
+use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
 use Contao\Image;
 
@@ -153,6 +155,25 @@ class TlC4gImport
                     }
                 }
             }
+        }
+
+        return $value;
+    }
+
+
+    /**
+     * submit_callback: Speichert den Import in der Queue.
+     * @param $value
+     * @param $dc
+     * @return mixed
+     */
+    public function cbAddToQueue($value, $dc)
+    {
+        if ($value) {
+            $event  = new ImportRunEvent();
+            $event->setImportId($dc->id);
+            $qm     = new QueueManager();
+            $qm->addToQueue($event);
         }
 
         return $value;
