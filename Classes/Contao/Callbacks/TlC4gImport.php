@@ -162,7 +162,7 @@ class TlC4gImport
 
 
     /**
-     * submit_callback: Speichert den Import in der Queue.
+     * save_callback: Speichert den Import in der Queue.
      * @param $value
      * @param $dc
      * @return mixed
@@ -173,7 +173,7 @@ class TlC4gImport
             $event  = new ImportRunEvent();
             $event->setImportId($dc->id);
             $qm     = new QueueManager();
-            $qm->addToQueue($event);
+            $qm->addToQueue($event, 1024, 'import', 'tl_c4g_import', $dc->id);
         }
 
         return $value;
