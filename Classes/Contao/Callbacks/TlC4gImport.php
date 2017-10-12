@@ -170,10 +170,23 @@ class TlC4gImport
     public function cbAddToQueue($value, $dc)
     {
         if ($value) {
-            $event  = new ImportRunEvent();
+            $event          = new ImportRunEvent();
             $event->setImportId($dc->id);
-            $qm     = new QueueManager();
-            $qm->addToQueue($event, 1024, 'import', 'tl_c4g_import', $dc->id);
+            $qm             = new QueueManager();
+            $interval       = '';   #@todo Wie auf Intervall zugreifen??? Ist ein anderes Feld!!!
+            $intervalcount  = '';   #@todo Wie auf $intervalcount zugreifen??? Ist ein anderes Feld!!!
+            $intervaltorun  = $intervalcount;
+
+            $metaData   = array(
+                'srcmodule'     => 'import',
+                'srctable'      => 'tl_c4g_import',
+                'srcid'         => $dc->id,
+                'intervalkind'  => $interval,
+                'intervalcount' => $intervalcount,
+                'intervaltorun' => $intervaltorun
+            );
+
+            $qm->addToQueue($event, 1024, $metaData);
         }
 
         return $value;
