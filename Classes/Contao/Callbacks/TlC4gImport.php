@@ -13,6 +13,7 @@ use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
 use Contao\Image;
+use Contao\Input;
 
 /**
  * Class TlC4gImport
@@ -171,13 +172,17 @@ class TlC4gImport
     {
         if ($value) {
             $event          = new ImportRunEvent();
-            $event->setImportId($dc->id);
             $qm             = new QueueManager();
-            $interval       = '';   #@todo Wie auf Intervall zugreifen??? Ist ein anderes Feld!!!
-            $intervalcount  = '';   #@todo Wie auf $intervalcount zugreifen??? Ist ein anderes Feld!!!
-            $intervaltorun  = $intervalcount;
+            $interval       = '';
+            $intervalcount  = 1;
 
-            $metaData   = array(
+            if (Input::post('useinterval')) {
+                $interval      = Input::post('intervalkind');
+                $intervalcount = Input::post('intervalcount');
+                $intervaltorun = $intervalcount;
+            }
+
+            $metaData = array(
                 'srcmodule'     => 'import',
                 'srctable'      => 'tl_c4g_import',
                 'srcid'         => $dc->id,
@@ -186,6 +191,7 @@ class TlC4gImport
                 'intervaltorun' => $intervaltorun
             );
 
+            $event->setImportId($dc->id);
             $qm->addToQueue($event, 1024, $metaData);
         }
 
