@@ -174,12 +174,11 @@ class TlC4gImport
             $event          = new ImportRunEvent();
             $qm             = new QueueManager();
             $interval       = '';
-            $intervalcount  = 1;
+            $intervalcount  = '';
 
             if (Input::post('useinterval')) {
                 $interval      = Input::post('intervalkind');
                 $intervalcount = Input::post('intervalcount');
-                $intervaltorun = $intervalcount;
             }
 
             $metaData = array(
@@ -187,9 +186,12 @@ class TlC4gImport
                 'srctable'      => 'tl_c4g_import',
                 'srcid'         => $dc->id,
                 'intervalkind'  => $interval,
-                'intervalcount' => $intervalcount,
-                'intervaltorun' => $intervaltorun
+                'intervalcount' => $intervalcount
             );
+
+            if ($intervalcount) {
+                $metaData['intervaltorun'] = $intervalcount;
+            }
 
             $event->setImportId($dc->id);
             $qm->addToQueue($event, 1024, $metaData);

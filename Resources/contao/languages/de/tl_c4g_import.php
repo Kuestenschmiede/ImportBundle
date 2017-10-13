@@ -66,7 +66,7 @@ $GLOBALS['TL_LANG'][$strName]['fieldlength']        = array('Feldlänge', 'Bitte
 $GLOBALS['TL_LANG'][$strName]['usequeue']           = array('Abarbeitung über Warteschlange', 'Auftrag über Warteschlange abarbeiten.');
 $GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Intervallausführung', 'Bitt wählen Sie aus, ober der Auftrag in einem bestimmten Intervall wiederholt ausgeführt werden soll.');
 $GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Intervall', 'Bitt legen Sie das Intervall fest, in dem der Auftrag wiederholt werden soll.');
-$GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximale Anzahl der Ausführungen', 'Bitt legen Sie fest, ob der Auftrag nach einer bestimmten Anzahl von Ausführungen beendet sein soll. Für unendliche Ausführung bitte 0 eingeben.');
+$GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximale Anzahl der Ausführungen', 'Bitt legen Sie fest, ob der Auftrag nach einer bestimmten Anzahl von Ausführungen beendet sein soll. Für unendliche Ausführung bitte leer lassen.');
 
 
 /**
