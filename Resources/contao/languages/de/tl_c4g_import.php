@@ -63,6 +63,10 @@ $GLOBALS['TL_LANG'][$strName]['fieldnames']         = array('Felder', 'Bitte wä
 $GLOBALS['TL_LANG'][$strName]['srctablename']       = array('Zieltabelle', 'Bitte geben Sie den Namen der Tabelle ein.');
 $GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Feldtyp', 'Bitte geben Sie den Typ des Feldname ein.');
 $GLOBALS['TL_LANG'][$strName]['fieldlength']        = array('Feldlänge', 'Bitte geben Sie die Länge des Feldes ein.');
+$GLOBALS['TL_LANG'][$strName]['usequeue']           = array('Abarbeitung über Warteschlange', 'Auftrag über Warteschlange abarbeiten.');
+$GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Intervallausführung', 'Bitt wählen Sie aus, ober der Auftrag in einem bestimmten Intervall wiederholt ausgeführt werden soll.');
+$GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Intervall', 'Bitt legen Sie das Intervall fest, in dem der Auftrag wiederholt werden soll.');
+$GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximale Anzahl der Ausführungen', 'Bitt legen Sie fest, ob der Auftrag nach einer bestimmten Anzahl von Ausführungen beendet sein soll. Für unendliche Ausführung bitte leer lassen.');
 
 
 /**
@@ -72,6 +76,7 @@ $GLOBALS['TL_LANG'][$strName]['title_legend']       = 'Titel';
 $GLOBALS['TL_LANG'][$strName]['srctable_legend']    = 'Tabelle';
 $GLOBALS['TL_LANG'][$strName]['srcfile_legend']     = 'Quelldatei';
 $GLOBALS['TL_LANG'][$strName]['expert_legend']      = 'Experteneinstellungen';
+$GLOBALS['TL_LANG'][$strName]['usequeue_legend']    = 'Einstellungen für die Warteschlange';
 
 
 /**
@@ -79,12 +84,13 @@ $GLOBALS['TL_LANG'][$strName]['expert_legend']      = 'Experteneinstellungen';
  */
 $GLOBALS['TL_LANG'][$strName]['srckind_ref']        = array('byorder' => 'Felder anhand der Reihenfolge zuordnen (Es dürfen KEINE Spaltennamen in der Datei stehen!)', 'byname' => 'Felder anhand der Spaltenüberschriften zuordnen (In der ersten Zeile MÜSSEN die Spaltennamen stehen!)');
 $GLOBALS['TL_LANG'][$strName]['sourcekind_ref']     = array('import' => 'Nur importieren', 'create' => 'Tabellen anlegen und importieren');
+$GLOBALS['TL_LANG'][$strName]['intervalkind_ref']   = array('hourly' => 'stündlich', 'daily' => 'täglich', 'weekly' => 'wöchentlich', 'monthly' => 'monatlich', 'yearly' => 'jährlich');
 
 
 /**
  * Operations
  */
-$GLOBALS['TL_LANG'][$strName]['runimport'] = array('Import durchführen', 'Import durchführen');
+$GLOBALS['TL_LANG'][$strName]['runimport']          = array('Import durchführen', 'Import durchführen');
 
 
 /**

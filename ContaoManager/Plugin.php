@@ -46,6 +46,7 @@ class Plugin implements RoutingPluginInterface, BundlePluginInterface, ConfigPlu
         ];
     }
 
+
     /**
      * Allows a plugin to load container configuration.
      *
