@@ -13,6 +13,7 @@ use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
 use Contao\Image;
+use Contao\Input;
 
 /**
  * Class TlC4gImport
@@ -170,10 +171,30 @@ class TlC4gImport
     public function cbAddToQueue($value, $dc)
     {
         if ($value) {
-            $event  = new ImportRunEvent();
+            $event          = new ImportRunEvent();
+            $qm             = new QueueManager();
+            $interval       = '';
+            $intervalcount  = '';
+
+            if (Input::post('useinterval')) {
+                $interval      = Input::post('intervalkind');
+                $intervalcount = Input::post('intervalcount');
+            }
+
+            $metaData = array(
+                'srcmodule'     => 'import',
+                'srctable'      => 'tl_c4g_import',
+                'srcid'         => $dc->id,
+                'intervalkind'  => $interval,
+                'intervalcount' => $intervalcount
+            );
+
+            if ($intervalcount) {
+                $metaData['intervaltorun'] = $intervalcount;
+            }
+
             $event->setImportId($dc->id);
-            $qm     = new QueueManager();
-            $qm->addToQueue($event, 1024, 'import', 'tl_c4g_import', $dc->id);
+            $qm->addToQueue($event, 1024, $metaData);
         }
 
         return $value;
