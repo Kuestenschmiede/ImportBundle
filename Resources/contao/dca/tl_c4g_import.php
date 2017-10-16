@@ -140,9 +140,9 @@ $GLOBALS['TL_DCA'][$strName] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-	    'sourcekind_import'           => '{srctable_legend},srctable,namedfields;',
-        'sourcekind_create'           => '{srctable_legend},srctablename,fieldnames;',
-        'useinterval'                 => 'intervalkind,intervalcount;'
+	    'sourcekind_import'           => '{srctable_legend},srctable,namedfields',
+        'sourcekind_create'           => '{srctable_legend},srctablename,fieldnames',
+        'useinterval'                 => 'intervalkind,intervalcount'
 	),
 
 	// Fields
