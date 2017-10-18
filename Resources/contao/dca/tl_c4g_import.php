@@ -192,7 +192,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('tl_class'=>'w50 m12')
+            'eval'                    => array('tl_class'=>'w50 m12', 'submitOnChange'=>true)
         ),
         'truncatetable' => array
         (
@@ -246,8 +246,9 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['srccolumnname'],
                         'default'                 => '',
                         'exclude'                 => true,
-                        'inputType'               => 'text',
-                        'eval'                    => array('style'=>'width:200px')
+                        'inputType'               => 'select',
+                        'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'),
+                        'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px')
                     ),
                     'defaultvalue' => array
                     (

@@ -116,53 +116,6 @@ class TlC4gImport
 
 
     /**
-     * Lädt die Namen der Spalten, falls diese in der Importdatei angegeben sind.
-     * @param $value
-     * @param $dc
-     * @return mixed
-     */
-    public function cbLoadFieldNames($value, $dc)
-    {
-        if (!$value) {
-            $row    = $dc->activeRecord;
-            $file   = \FilesModel::findByUuid($row->srcfile);
-
-            if ($file && is_file(TL_ROOT . '/' . $file->path)) {
-                $content = file_get_contents(TL_ROOT . '/' . $file->path);
-
-                if ($content) {
-                    $lines = explode(PHP_EOL, $content);
-
-                    if (is_array($lines) && count($lines)) {
-                        $line      = array_shift($lines);
-                        $delimiter = $row->delimiter;
-                        $enclosure = $row->enclosure;
-
-                        if ($line && $delimiter && $enclosure) {
-                            $fields     = str_getcsv($line, $delimiter, $enclosure);
-                            $tmpValues  = array();
-
-                            foreach ($fields as $field) {
-                                $temp['destfields'] = $field;
-                                $temp['fieldtype']  = 'varchar';
-                                $temp['fieldwidth'] = 255;
-                                $tmpValues[] = $temp;
-                            }
-
-                            if (is_array($tmpValues) && count($tmpValues)) {
-                                $value = serialize($tmpValues);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return $value;
-    }
-
-
-    /**
      * save_callback: Speichert den Import in der Queue.
      * @param $value
      * @param $dc
@@ -198,5 +151,97 @@ class TlC4gImport
         }
 
         return $value;
+    }
+
+
+    /**
+     * load_callback: Lädt die Namen der Spalten, falls diese in der Importdatei angegeben sind.
+     * @param $value
+     * @param $dc
+     * @return mixed
+     */
+    public function cbLoadFieldNames($value, $dc)
+    {
+        if (!$value) {
+            $row    = $dc->activeRecord;
+            $fields = $this->getFields($row->srcfile, $row->delimiter, $row->enclosure, $row->headerline);
+            $i      = 1;
+
+            foreach ($fields as $field) {
+                if ($row->headerline) {
+                    $temp['destfields'] = $field;
+                } else {
+                    $temp['destfields'] = $i;
+                }
+
+                $temp['fieldtype']  = 'varchar';
+                $temp['fieldwidth'] = 255;
+                $tmpValues[] = $temp;
+                $i++;
+            }
+
+            if (is_array($tmpValues) && count($tmpValues)) {
+                $value = serialize($tmpValues);
+            }
+        }
+
+        return $value;
+    }
+
+
+    /**
+     * options_callback: Lädt die Felder einer CSV-Datei bzw. ein Array mit den Spaltennummern.
+     * @param $dc
+     * @return array
+     */
+    public function getFieldsFromFile($dc)
+    {
+        $row    = $dc->activeRecord;
+        return $this->getFields($row->srcfile, $row->delimiter, $row->enclosure, $row->headerline);
+
+    }
+
+
+    /**
+     * Lädt die Felder einer CSV-Datei bzw. ein Array mit den Spaltennummern.
+     * @param $srcfile
+     * @param $delimiter
+     * @param $enclosure
+     * @param $headerline
+     * @return array
+     */
+    protected function getFields($srcfile, $delimiter, $enclosure, $headerline)
+    {
+        $file   = \FilesModel::findByUuid($srcfile);
+        $data   = array();
+
+        if ($file && is_file(TL_ROOT . '/' . $file->path)) {
+            $content = file_get_contents(TL_ROOT . '/' . $file->path);
+
+            if ($content) {
+                $lines = explode(PHP_EOL, $content);
+
+                if (is_array($lines) && count($lines)) {
+                    $line      = array_shift($lines);
+
+                    if ($line && $delimiter && $enclosure) {
+                        $fields    = str_getcsv($line, $delimiter, $enclosure);
+                        $i         = 1;
+
+                        foreach ($fields as $field) {
+                            if ($headerline) {
+                                $data[] = $field;
+                            } else {
+                                $data[] = $i;
+                            }
+
+                            $i++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 }
