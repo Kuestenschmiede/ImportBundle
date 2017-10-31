@@ -21,6 +21,7 @@
     "issues": "https://github.com/Kuestenschmiede/ImportBundle/issues"
   },
   "require": {
+    "contao/core-bundle": "^4.4",
     "con4gis/core": "~2.0"
   },
   "conflict": {
