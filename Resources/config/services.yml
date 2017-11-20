@@ -40,6 +40,13 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
+    con4gis_import.onImportRunBeforeSaveData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunBeforeSaveData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
     con4gis_import.onImportRunSaveData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
