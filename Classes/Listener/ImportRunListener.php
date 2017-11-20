@@ -127,6 +127,7 @@ class ImportRunListener
         $convertEvent   = new ConvertDataEvent();
         $convertEvent->setSettings($settings);
         $convertEvent->setImportData($importData);
+        $convertEvent->setData($event->getData());
         $dispatcher->dispatch($convertEvent::NAME, $convertEvent);
         $data           = $convertEvent->getData();
         $event->setData($data);
