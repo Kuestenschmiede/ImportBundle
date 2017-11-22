@@ -88,10 +88,31 @@ class TlC4gImport
 
 
     /**
-     * @var array
-     * @ORM\Column(type="array")
+     * @var string
+     * @ORM\Column(type="text")
      */
-    protected $namedfields = array();
+    protected $namedfields = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $sourcekind = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $srctablename = '';
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    protected $fieldnames = '';
 
 
     /**
@@ -103,6 +124,7 @@ class TlC4gImport
 
 
     /**
+     * Trennzeichen des CSV-Strings
      * @var string
      * @ORM\Column(type="string", length=1)
      */
@@ -110,10 +132,43 @@ class TlC4gImport
 
 
     /**
+     * Texteinschlusszeichen des CSV-Strings
      * @var string
      * @ORM\Column(type="string", length=1)
      */
     protected $enclosure = '"';
+
+
+    /**
+     * Verarbeitung über Queue
+     * @var string
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $usequeue = '';
+
+
+    /**
+     * Verarbeitungsintervall in der Queue benutzen
+     * @var string
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $useinterval = '';
+
+
+    /**
+     * Verarbeitungsintervall in der Queue
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $intervalkind = '';
+
+
+    /**
+     * Verarbeitungsanzahl in der Queue
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $intervalcount = '';
 
 
     /**
@@ -306,7 +361,7 @@ class TlC4gImport
      */
     public function getNamedfields(): array
     {
-        return $this->namedfields;
+        return deserialize($this->namedfields, true);
     }
 
 
@@ -315,7 +370,61 @@ class TlC4gImport
      */
     public function setNamedfields(array $namedfields)
     {
-        $this->namedfields = $namedfields;
+        $this->namedfields = serialize($namedfields);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSourcekind(): string
+    {
+        return $this->sourcekind;
+    }
+
+
+    /**
+     * @param string $sourcekind
+     */
+    public function setSourcekind(string $sourcekind)
+    {
+        $this->sourcekind = $sourcekind;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSrctablename(): string
+    {
+        return $this->srctablename;
+    }
+
+
+    /**
+     * @param string $srctablename
+     */
+    public function setSrctablename(string $srctablename)
+    {
+        $this->srctablename = $srctablename;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getFieldnames(): array
+    {
+        return deserialize($this->fieldnames, true);
+    }
+
+
+    /**
+     * @param array $fieldnames
+     */
+    public function setFieldnames(array $fieldnames)
+    {
+        $this->fieldnames = serialize($fieldnames);
     }
 
 
@@ -394,5 +503,77 @@ class TlC4gImport
     public function setEnclosure(string $enclosure)
     {
         $this->enclosure = $enclosure;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getUsequeue(): string
+    {
+        return $this->usequeue;
+    }
+
+
+    /**
+     * @param string $usequeue
+     */
+    public function setUsequeue(string $usequeue)
+    {
+        $this->usequeue = $usequeue;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getUseinterval(): string
+    {
+        return $this->useinterval;
+    }
+
+
+    /**
+     * @param string $useinterval
+     */
+    public function setUseinterval(string $useinterval)
+    {
+        $this->useinterval = $useinterval;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIntervalkind(): string
+    {
+        return $this->intervalkind;
+    }
+
+
+    /**
+     * @param string $intervalkind
+     */
+    public function setIntervalkind(string $intervalkind)
+    {
+        $this->intervalkind = $intervalkind;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIntervalcount(): string
+    {
+        return $this->intervalcount;
+    }
+
+
+    /**
+     * @param string $intervalcount
+     */
+    public function setIntervalcount(string $intervalcount)
+    {
+        $this->intervalcount = $intervalcount;
     }
 }

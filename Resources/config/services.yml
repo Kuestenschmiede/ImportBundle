@@ -40,6 +40,13 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
+    con4gis_import.onImportRunBeforeSaveData:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunBeforeSaveData }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
     con4gis_import.onImportRunSaveData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
@@ -81,17 +88,26 @@ services:
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertInsertFields }
 
-    con4gis_import.onConvertDeleteFields:
-            class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
-            tags:
-                - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertDeleteFields }
-
 
     # Save Data
     con4gis_import.onSaveDataTruncateTable:
         class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
         tags:
             - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataTruncateTable }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onSaveDataCreateTable:
+        class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataCreateTable }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
+    con4gis_import.onConvertDeleteFields:
+        class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.save, method: onConvertDeleteFields }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 

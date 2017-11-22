@@ -9,6 +9,7 @@
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
+use con4gis\ImportBundle\Classes\Events\BeforeSaveDataEvent;
 use Contao\FilesModel;
 use Doctrine\ORM\EntityManager;
 use con4gis\CoreBundle\Classes\Helper\InputHelper;
@@ -50,7 +51,7 @@ class ImportRunListener
     public function onImportRunGetSettings(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
         $importId           = $event->getImportId();
-        $respositoryName    = '\con4gis\ImportBundle\Entity\TlCon4gisImport';
+        $respositoryName    = '\con4gis\ImportBundle\Entity\TlC4gImport';
         $respository        = $this->entityManager->getRepository($respositoryName);
         $importSettings     = $respository->find($importId);
 
@@ -127,8 +128,27 @@ class ImportRunListener
         $convertEvent   = new ConvertDataEvent();
         $convertEvent->setSettings($settings);
         $convertEvent->setImportData($importData);
+        $convertEvent->setData($event->getData());
         $dispatcher->dispatch($convertEvent::NAME, $convertEvent);
         $data           = $convertEvent->getData();
+        $event->setData($data);
+    }
+
+    /**
+     * Führt mögliche Aufrufe vor dem Speichern der Daten in die Datenbank aus.
+     * @param ImportRunEvent $event
+     * @param $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function onImportRunBeforeSaveData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $settings        = $event->getSettings();
+        $data            = $event->getData();
+        $beforeSaveEvent = new BeforeSaveDataEvent();
+        $beforeSaveEvent->setData($data);
+        $beforeSaveEvent->setSettings($settings);
+        $dispatcher->dispatch($beforeSaveEvent::NAME, $beforeSaveEvent);
+        $data = $beforeSaveEvent->getData();
         $event->setData($data);
     }
 
