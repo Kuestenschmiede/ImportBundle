@@ -110,6 +110,8 @@ class SaveDataListener
 
                         if ($field['fieldtype'] == 'int' || $field['fieldtype'] == 'integer') {
                             $query .= "'0'";
+                        } elseif ($field['fieldtype'] == 'decimal') {
+                            $query .= "'0.00'";
                         } else {
                             $query .= '""';
                         }
