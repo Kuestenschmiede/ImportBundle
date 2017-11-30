@@ -9,7 +9,7 @@
  */
 namespace con4gis\ImportBundle\Classes\Contao\Callbacks;
 
-use con4gis\CoreBundle\Classes\Helper\StingHelper;
+use con4gis\CoreBundle\Classes\Helper\StringHelper;
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
@@ -164,7 +164,7 @@ class TlC4gImport
     public function cbLoadFieldNames($value, $dc)
     {
         if (!$value) {
-            $sh     = new StingHelper();
+            $sh     = new StringHelper();
             $row    = $dc->activeRecord;
             $fields = $this->getFields($row->srcfile, $row->delimiter, $row->enclosure, $row->headerline);
             $i      = 1;
