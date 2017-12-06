@@ -76,7 +76,7 @@ class ConvertDataListener
             // Spaltennamen auslesen, wenn Spaltennamen vorhanden.
             $sh         = new StringHelper();
             // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
-            $headline   = $sh->removeSpecialSigns(array_shift($data), '-_');
+            $headline   = $sh->removeSpecialSigns(array_shift($data), '');
             $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
             $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
