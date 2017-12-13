@@ -61,6 +61,12 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
+    con4gis_import.onImportRunCleanupEvent:
+        class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunCleanupEvent, priority: -1024 }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
 
     # Convert Data
     con4gis_import.onConvertDataToArray:

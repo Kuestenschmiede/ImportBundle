@@ -191,4 +191,15 @@ class ImportRunListener
             rename($path, $path . ".$filerenamesuffix");
         }
     }
+
+    /**
+     * Removes the import data from the event, so it will not cause an error when the queue processes import events.
+     * @param ImportRunEvent $event
+     * @param $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function onImportRunCleanupEvent(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $event->setData([]);
+    }
 }
