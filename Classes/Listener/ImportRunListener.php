@@ -146,9 +146,11 @@ class ImportRunListener
     {
         $settings        = $event->getSettings();
         $data            = $event->getData();
+        $additionalData  = $event->getAdditionalData();
         $beforeSaveEvent = new BeforeSaveDataEvent();
         $beforeSaveEvent->setData($data);
         $beforeSaveEvent->setSettings($settings);
+        $beforeSaveEvent->setAdditionalData($additionalData);
         $dispatcher->dispatch($beforeSaveEvent::NAME, $beforeSaveEvent);
         $data = $beforeSaveEvent->getData();
         $event->setData($data);
