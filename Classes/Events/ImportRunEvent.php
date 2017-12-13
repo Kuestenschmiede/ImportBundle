@@ -61,6 +61,13 @@ class ImportRunEvent extends QueueEvent
 
 
     /**
+     * Zusätzliches Feld für Daten, die für Import-Erweiterungen gebraucht werden.
+     * @var array
+     */
+    protected $additionalData = array();
+
+
+    /**
      * @return int
      */
     public function getImportId(): int
@@ -147,5 +154,21 @@ class ImportRunEvent extends QueueEvent
     public function setData(array $data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalData(): array
+    {
+        return $this->additionalData;
+    }
+
+    /**
+     * @param array $additionalData
+     */
+    public function setAdditionalData(array $additionalData)
+    {
+        $this->additionalData = $additionalData;
     }
 }

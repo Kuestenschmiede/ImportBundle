@@ -54,6 +54,13 @@ class ConvertDataEvent extends Event
 
 
     /**
+     * Zusätzliches Feld für Daten, die für Import-Erweiterungen gebraucht werden.
+     * @var array
+     */
+    protected $additionalData = array();
+
+
+    /**
      * @return null
      */
     public function getSettings()
@@ -122,5 +129,21 @@ class ConvertDataEvent extends Event
     public function setData(array $data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalData(): array
+    {
+        return $this->additionalData;
+    }
+
+    /**
+     * @param array $additionalData
+     */
+    public function setAdditionalData(array $additionalData)
+    {
+        $this->additionalData = $additionalData;
     }
 }

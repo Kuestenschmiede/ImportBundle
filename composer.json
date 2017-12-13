@@ -17,10 +17,13 @@
     }
   ],
   "support": {
-    "email": "support@con4gis.org"
+    "email": "support@con4gis.org",
+    "issues": "https://github.com/Kuestenschmiede/ImportBundle/issues"
   },
   "require": {
-    "con4gis/core": "~2.0"
+    "contao/core-bundle": "^4.4",
+    "con4gis/core": "~2.2",
+    "con4gis/queue": "~1.0"
   },
   "conflict": {
     "contao/core": "*",
@@ -39,9 +42,6 @@
       "Resources/contao/languages/",
       "Resources/contao/templates/"
     ]
-  },
-  "support": {
-    "issues": "https://github.com/Kuestenschmiede/ImportBundle/issues"
   },
   "config": {
     "preferred-install": "dist"

@@ -9,6 +9,7 @@
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
+use con4gis\CoreBundle\Classes\Helper\StringHelper;
 use con4gis\ProjectsBundle\Classes\Common\C4GBrickCommon;
 use Contao\Database;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
@@ -73,7 +74,9 @@ class ConvertDataListener
 
         if ($settings->getHeaderline()) {
             // Spaltennamen auslesen, wenn Spaltennamen vorhanden.
-            $headline   = array_shift($data);
+            $sh         = new StringHelper();
+            // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
+            $headline   = $sh->removeSpecialSigns(array_shift($data), '');
             $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
             $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
