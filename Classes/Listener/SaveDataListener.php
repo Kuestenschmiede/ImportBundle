@@ -98,7 +98,6 @@ class SaveDataListener
                                 $query .= " ADD ";
                             }
                         }
-
                         $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'];
                         $query .= '(' . $field['fieldlength'] . ')';
 
@@ -195,7 +194,13 @@ class SaveDataListener
                 }
 
                 foreach ($datum as $field => $value) {
-                    $query .= "`$field` = '$value', ";
+                    // check for string to prevent double 's
+                    if (is_string($value)) {
+                        // if $value is a string, it is already quoted
+                        $query .= "`$field` = $value, ";
+                    } else {
+                        $query .= "`$field` = '$value', ";
+                    }
                 }
 
                 $query = substr($query, 0, strlen($query)-2) . $where;
