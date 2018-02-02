@@ -109,7 +109,7 @@ class ImportRunListener
         $path = $event->getImportFile();
 
         if (is_file($path)) {
-            $content = file_get_contents($path);
+            $content = utf8_encode(file_get_contents($path));
             $event->setImportData($content);
         }
     }
@@ -125,10 +125,12 @@ class ImportRunListener
     {
         $settings       = $event->getSettings();
         $importData     = $event->getImportData();
+        $additionalData = $event->getAdditionalData();
         $convertEvent   = new ConvertDataEvent();
         $convertEvent->setSettings($settings);
         $convertEvent->setImportData($importData);
         $convertEvent->setData($event->getData());
+        $convertEvent->setAdditionalData($additionalData);
         $dispatcher->dispatch($convertEvent::NAME, $convertEvent);
         $data           = $convertEvent->getData();
         $event->setData($data);
@@ -144,9 +146,11 @@ class ImportRunListener
     {
         $settings        = $event->getSettings();
         $data            = $event->getData();
+        $additionalData  = $event->getAdditionalData();
         $beforeSaveEvent = new BeforeSaveDataEvent();
         $beforeSaveEvent->setData($data);
         $beforeSaveEvent->setSettings($settings);
+        $beforeSaveEvent->setAdditionalData($additionalData);
         $dispatcher->dispatch($beforeSaveEvent::NAME, $beforeSaveEvent);
         $data = $beforeSaveEvent->getData();
         $event->setData($data);
@@ -186,5 +190,17 @@ class ImportRunListener
         if ($renameFile && is_file($path) && $filerenamesuffix) {
             rename($path, $path . ".$filerenamesuffix");
         }
+    }
+
+    /**
+     * Removes the import data from the event, so it will not cause an error when the queue processes import events.
+     * @param ImportRunEvent $event
+     * @param $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function onImportRunCleanupEvent(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        // TODO triggers always the output that 0 datasets has been processed
+        $event->setData([]);
     }
 }

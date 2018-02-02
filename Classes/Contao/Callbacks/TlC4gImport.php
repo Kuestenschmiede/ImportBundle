@@ -246,4 +246,25 @@ class TlC4gImport
 
         return $data;
     }
+
+    /**
+     * Converts specialchars from the fieldnames, so no &#40;-like stuff will be saved into the database.
+     * @param $value
+     * @param $dc
+     * @return string
+     */
+    public function cbConvertFieldNames($value, $dc)
+    {
+        $arrFields = deserialize($value);
+        foreach ($arrFields as $key => $field) {
+            // catch specialchars in the fieldname
+            $field['destfields'] = html_entity_decode($field['destfields']);
+            // replace forbidden characters
+            $field['destfields'] = str_replace('(', '_', $field['destfields']);
+            $field['destfields'] = str_replace(')', '_', $field['destfields']);
+            $field['destfields'] = str_replace(' ', '_', $field['destfields']);
+            $arrFields[$key] = $field;
+        }
+        return serialize($arrFields);
+    }
 }

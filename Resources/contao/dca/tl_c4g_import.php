@@ -283,6 +283,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
             'load_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbLoadFieldNames')),
+            'save_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbConvertFieldNames')),
             'eval'                    => array
             (
                 'tl_class' => 'clr',
