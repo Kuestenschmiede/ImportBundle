@@ -31,8 +31,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['import']    = array('Import', 'Verwaltung der Importeinstellungen');
-$GLOBALS['TL_LANG']['MOD']['runimport'] = array('Import', 'Verwaltung der Importeinstellungen');
+$GLOBALS['TL_LANG']['MOD']['import']    = array('Datenimport', 'Verwaltung der Importeinstellungen');
+$GLOBALS['TL_LANG']['MOD']['runimport'] = array('Datenimport', 'Verwaltung der Importeinstellungen');
 
 
 /**
