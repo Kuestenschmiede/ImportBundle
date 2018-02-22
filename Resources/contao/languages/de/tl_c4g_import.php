@@ -47,8 +47,8 @@ $GLOBALS['TL_LANG'][$strName]['description']        = array('Beschreibung', 'Bit
 $GLOBALS['TL_LANG'][$strName]['srckind']            = array('Art der Feldzuordnung', 'Bitte wählen Sie die Art der Feldzuordnung aus.');
 $GLOBALS['TL_LANG'][$strName]['sourcekind']         = array('Importart', 'Bitte wählen Sie die Art des Imports.');
 $GLOBALS['TL_LANG'][$strName]['srctable']           = array('Tabelle', 'Bitte wählen Sie die Quelltabelle aus. Wird die Datei geändert, MUSS der Datensatz gespeichert werden, damit die Änderungen in den anderen Feldern sichtbar werden!');
-$GLOBALS['TL_LANG'][$strName]['orderedfields']      = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und bringen sie in die Reihenfolge, in der sie auch in der Importdatei vorkommen. Die Spaltennamen in der erstellten Tabelle entsprechen dann den angegebenen Namen aus der Importdatei.');
-$GLOBALS['TL_LANG'][$strName]['namedfields']        = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und tragen Sie die Spaltenüberschriften ein, wie sie auch in der Importdatei vorkommen.');
+$GLOBALS['TL_LANG'][$strName]['orderedfields']      = array('Felder', 'Bitte wählen Sie die Felder für den Import aus und bringen sie in die Reihenfolge, in der sie auch in der Importdatei vorkommen. Die Spaltennamen in der erstellten Tabelle entsprechen dann den angegebenen Namen aus der Importdatei.');
+$GLOBALS['TL_LANG'][$strName]['namedfields']        = array('Felder', 'Bitte wählen Sie die Felder für den Import aus und tragen Sie die Spaltenüberschriften ein, wie sie auch in der Importdatei vorkommen.');
 $GLOBALS['TL_LANG'][$strName]['destfields']         = array('Zielfeld', 'Bitte wählen Sie das Zielfeld der Datenbank aus.');
 $GLOBALS['TL_LANG'][$strName]['srccolumnname']      = array('Quellspalte oder -nummer', 'Bitte geben Sie die Überschrift oder die Nummer der Quellspalte der Importdatei ein.');
 $GLOBALS['TL_LANG'][$strName]['srcfile']            = array('Quelldatei', 'Bitte wählen Sie die Quelldatei aus.');
@@ -61,12 +61,12 @@ $GLOBALS['TL_LANG'][$strName]['delimiter']          = array('Feldtrennzeichen', 
 $GLOBALS['TL_LANG'][$strName]['enclosure']          = array('Textmarkierungszeichen', 'Bitte wählen Sie das Textmarkierungszeichen aus. Vorgabewert: "');
 $GLOBALS['TL_LANG'][$strName]['fieldnames']         = array('Felder', 'Bitte wählen Sie sie Felder für den Import aus und bringen sie in die Reihenfolge, in der sie auch in der Importdatei vorkommen. Die Spaltennamen in der erstellten Tabelle entsprechen dann den angegebenen Namen aus der Importdatei.');
 $GLOBALS['TL_LANG'][$strName]['srctablename']       = array('Zieltabelle', 'Bitte geben Sie den Namen der Tabelle ein.');
-$GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Feldtyp', 'Bitte geben Sie den Typ des Feldname ein.');
+$GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Feldtyp', 'Bitte geben Sie den Typ des Feldes ein.');
 $GLOBALS['TL_LANG'][$strName]['fieldlength']        = array('Feldlänge', 'Bitte geben Sie die Länge des Feldes ein.');
 $GLOBALS['TL_LANG'][$strName]['usequeue']           = array('Abarbeitung über Warteschlange', 'Auftrag über Warteschlange abarbeiten.');
-$GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Intervallausführung', 'Bitt wählen Sie aus, ober der Auftrag in einem bestimmten Intervall wiederholt ausgeführt werden soll.');
-$GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Intervall', 'Bitt legen Sie das Intervall fest, in dem der Auftrag wiederholt werden soll.');
-$GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximale Anzahl der Ausführungen', 'Bitt legen Sie fest, ob der Auftrag nach einer bestimmten Anzahl von Ausführungen beendet sein soll. Für unendliche Ausführung bitte leer lassen.');
+$GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Intervallausführung', 'Bitte wählen Sie aus, ob der Auftrag in einem bestimmten Intervall wiederholt ausgeführt werden soll.');
+$GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Intervall', 'Bitte legen Sie das Intervall fest, in dem der Auftrag wiederholt werden soll.');
+$GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximale Anzahl der Ausführungen', 'Bitte legen Sie fest, ob der Auftrag nach einer bestimmten Anzahl von Ausführungen beendet sein soll. Für unendliche Ausführung bitte leer lassen.');
 
 
 /**
