@@ -148,12 +148,14 @@ $GLOBALS['TL_DCA'][$strName] = array
 	// Fields
 	'fields' => array
 	(
-		'id' => array
-		(
-		),
-		'tstamp' => array
-		(
-		),
+        'id' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+        ),
+        'tstamp' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
         'title' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['title'],
