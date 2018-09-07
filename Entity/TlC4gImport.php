@@ -10,6 +10,7 @@
 namespace con4gis\ImportBundle\Entity;
 
 use \Doctrine\ORM\Mapping as ORM;
+use con4gis\CoreBundle\Entity\BaseEntity;
 
 /**
  * Class TlC4gImport
@@ -18,7 +19,7 @@ use \Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tl_c4g_import")
  * @package con4gis\ImportBundle\Entity
  */
-class TlC4gImport
+class TlC4gImport extends BaseEntity
 {
 
 
