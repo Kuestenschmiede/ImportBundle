@@ -20,6 +20,6 @@
     <div class="inner">
         <h2>Import</h2>
 
-        <div>Es wurden <?php echo $this->importcount; ?> Datensätze verarbeitet.</div>
+        <div>Es wurden Datensätze verarbeitet.</div>
     </div>
 </div>
