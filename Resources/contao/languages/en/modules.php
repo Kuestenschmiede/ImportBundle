@@ -14,8 +14,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['import']    = array('Import: Data Import', 'Manage Import Settings');
-$GLOBALS['TL_LANG']['MOD']['runimport'] = array('Import: Data Import', 'Manage Import Settings');
+$GLOBALS['TL_LANG']['MOD']['import']    = array('Data Import', 'Manage Import Settings');
+$GLOBALS['TL_LANG']['MOD']['runimport'] = array('Data Import', 'Manage Import Settings');
 
 
 /**
