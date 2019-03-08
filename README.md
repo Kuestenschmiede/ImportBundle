@@ -1,15 +1,19 @@
-con4gis-Import
-==============
-The import brick of the Contao GIS-kit **con4gis**.
+# con4gis-ImportBundle
+## Overview
+The import brick of the Contao GIS-kit **con4gis**. This bundle enables the import
+of CSV files in the contao backend. The import configuration is built flexible, so you can
+define your own mapping of the CSV file into a database table of your choice.
 
-**Git Repository:** ImportBundle  
-**Composer Vendor/Package:** [con4gis/import](https://packagist.org/packages/con4gis/import)  
-**Website:** [con4gis.org](https://con4gis.org)
+## Installation
+Via composer:
+```
+composer require con4gis/import
+```
+Alternatively, you can use the Contao Manager to install the con4gis-ImportBundle.
 
-**Requires:**
-- [Contao](https://github.com/contao/core) (***4.4.x***)   
+## Requirements
+- [Contao](https://github.com/contao/core-bundle) (***4.4.x LTS*** or latest stable release)
 - [CoreBundle](https://github.com/Kuestenschmiede/CoreBundle/releases) (*latest stable release*)
 
-**Extendable with all other con4gis and Contao bundles**  
-con4gis is not a connectable application. It's a collection of content 
-elements for your website. So you can build your own individual and limitless web applications.
+## Documentation
+Visit [docs.con4gis.org](https://docs.con4gis.org) for a user documentation. You can also contact us via the support forum there.
