@@ -130,22 +130,13 @@ $GLOBALS['TL_DCA'][$strName] = array
 	// Fields
 	'fields' => array
 	(
-        'id' => array
-        (
-            'sql'                     => "int(10) unsigned NOT NULL auto_increment"
-        ),
-        'tstamp' => array
-        (
-            'sql'                     => "int(10) unsigned NOT NULL default '0'"
-        ),
-        'title' => array
+	    'title' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['title'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50', 'rgxp'=>'alnum', 'nospace'=>false, 'spaceToUnderscore'=>true),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'description' => array
         (
@@ -154,7 +145,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('tl_class'=>'clr', 'rte'=>'tinyMCE'),
-            'sql'                     => "mediumtext NULL"
         ),
         'srcfile' => array
         (
@@ -163,7 +153,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'fileTree',
             'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'tl_class'=>'clr wizard'),
-            'sql'                     => "blob NULL"
         ),
         'renamefile' => array
         (
@@ -172,7 +161,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12'),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'headerline' => array
         (
@@ -181,7 +169,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12', 'submitOnChange'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'truncatetable' => array
         (
@@ -190,7 +177,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50 m12'),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'sourcekind' => array
         (
@@ -201,7 +187,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'options'                 => array('import', 'create'),
             'reference'               => $GLOBALS['TL_LANG'][$strName]['sourcekind_ref'],
             'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true, 'includeBlankOption'=>true, 'chosen'=>true),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'srctable' => array
         (
@@ -211,7 +196,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'inputType'               => 'select',
             'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetTables'),
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr', 'submitOnChange'=>true, 'includeBlankOption'=>true, 'chosen'=>true),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'namedfields' => array
         (
@@ -219,7 +203,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
-            'sql'                     => "blob NULL",
             'eval'                    => array
             (
                 'tl_class' => 'clr',
@@ -268,7 +251,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr'),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'fieldnames' => array
         (
@@ -276,7 +258,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
-            'sql'                     => "blob NULL",
             'load_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbLoadFieldNames')),
             'save_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbConvertFieldNames')),
             'eval'                    => array
@@ -318,7 +299,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('tl_class'=>'clr'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'delimiter' => array
         (
@@ -327,7 +307,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => ';',
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'enclosure' => array
         (
@@ -336,7 +315,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '"',
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'usequeue' => array
         (
@@ -346,7 +324,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'inputType'               => 'checkbox',
             'save_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbAddToQueue')),
             'eval'                    => array('tl_class'=>'w50'),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'useinterval' => array
         (
@@ -355,7 +332,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'checkbox',
             'eval'                    => array('tl_class'=>'w50', 'submitOnChange'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'intervalkind' => array
         (
@@ -366,7 +342,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'options'                 => array('hourly', 'daily', 'weekly', 'monthly', 'yearly'),
             'reference'               => $GLOBALS['TL_LANG'][$strName]['intervalkind_ref'],
             'eval'                    => array('tl_class'=>'w50', 'includeBlankOption'=>true, 'chosen'=>true),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'intervalcount' => array
         (
@@ -375,7 +350,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('tl_class'=>'w50', 'rgxp'=>'natural'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
         )
 	)
 );
