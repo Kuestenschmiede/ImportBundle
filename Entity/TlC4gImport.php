@@ -37,84 +37,84 @@ class TlC4gImport extends BaseEntity
 
     /**
      * @var int
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned":true, "default":0})
      */
     protected $tstamp = 0;
 
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $title = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description = '';
 
 
     /**
      * @var resource
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="blob", nullable=true)
      */
     protected $srcfile = null;
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
-    protected $headerline = '';
+    protected $headerline = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
-    protected $renamefile = '';
+    protected $renamefile = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
-    protected $truncatetable = '';
+    protected $truncatetable = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $srctable = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $namedfields = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $sourcekind = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $srctablename = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $fieldnames = '';
 
@@ -122,7 +122,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Array für die Ablage zusätzlicher Daten.
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $additionaldata = '';
 
@@ -130,7 +130,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Trennzeichen des CSV-Strings
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     protected $delimiter = ';';
 
@@ -138,7 +138,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Texteinschlusszeichen des CSV-Strings
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     protected $enclosure = '"';
 
@@ -146,7 +146,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Verarbeitung über Queue
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     protected $usequeue = '';
 
@@ -154,7 +154,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Verarbeitungsintervall in der Queue benutzen
      * @var string
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     protected $useinterval = '';
 
@@ -162,7 +162,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Verarbeitungsintervall in der Queue
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $intervalkind = '';
 
@@ -170,7 +170,7 @@ class TlC4gImport extends BaseEntity
     /**
      * Verarbeitungsanzahl in der Queue
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $intervalcount = '';
 
