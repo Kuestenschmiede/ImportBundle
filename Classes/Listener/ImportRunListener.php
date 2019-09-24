@@ -112,7 +112,7 @@ class ImportRunListener
         $path = $event->getImportFile();
 
         if (is_file($path)) {
-            $content = utf8_encode(file_get_contents($path));
+            $content = file_get_contents($path);
             $event->setImportData($content);
         }
     }
