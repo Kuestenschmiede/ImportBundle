@@ -135,8 +135,8 @@ class ConvertDataListener
                     foreach ($destFields as $field) {
                         if (isset($field['destfields'])) {
                             $dbField      = $field['destfields'];
-                            $defaultValue = ($field['defaultvalue']) ? $field['defaultvalue'] : '';
-                            $override     = ($field['overridevalue']) ? $field['overridevalue'] : '';
+                            $defaultValue = $field['defaultvalue'];
+                            $override     = $field['overridevalue'];
 
                             if (isset($field['srccolumnname']) && $field['srccolumnname']) {
                                 $csvField = $field['srccolumnname'];
@@ -151,11 +151,12 @@ class ConvertDataListener
                                 $cloumnNumber = $csvField - 1;
                             }
 
-                            if ($defaultValue &&
+                            if ($defaultValue !== '' &&
                                 (
-                                    $override ||
+                                    $override !== '' ||
                                     !isset($row[$cloumnNumber]) ||
-                                    $row[$cloumnNumber] == ''
+                                    $row[$cloumnNumber] === '' ||
+                                    $row[$cloumnNumber] === null
                                 )
                             ) {
                                 $tmprow[$dbField] = $defaultValue;
@@ -169,7 +170,7 @@ class ConvertDataListener
                                     ) {
                                         $tmprow[$dbField] = $row[$cloumnNumber];
                                     } else {
-                                        $tmprow[$dbField] = '';
+                                        $tmprow[$dbField] = null;
                                     }
                                 }
                             }
