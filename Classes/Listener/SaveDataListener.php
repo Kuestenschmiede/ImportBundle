@@ -125,7 +125,7 @@ class SaveDataListener
                 $query = substr($query, 0, strlen($query) - 1);
 
                 if (!$this->db->tableExists($tableName)) {
-                    $query .= ") ENGINE='MyISAM' COLLATE 'utf8_general_ci';";
+                    $query .= ") ENGINE='InnoDB' COLLATE 'utf8mb4_general_ci';";
                 } else {
                     $query .= ";";
                 }
