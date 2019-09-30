@@ -195,7 +195,9 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'select',
             'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetTables'),
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr', 'submitOnChange'=>true, 'includeBlankOption'=>true, 'chosen'=>true),
+            'load_callback'           => [['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'loadSrcTableValue']],
+            'save_callback'           => [['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'saveSrcTableValue']],
+            'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr', 'submitOnChange'=>true, 'includeBlankOption'=>true, 'chosen'=>true, 'multiple' => true),
         ),
         'namedfields' => array
         (
@@ -214,7 +216,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'select',
-                        'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
+                        'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getTableFields'),
                         'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
                     ),
                     'srccolumnname' => array

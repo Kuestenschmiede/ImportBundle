@@ -12,12 +12,15 @@
  */
 namespace con4gis\ImportBundle\Classes\Contao\Callbacks;
 
+use con4gis\CoreBundle\Classes\Helper\DcaHelper;
 use con4gis\CoreBundle\Classes\Helper\StringHelper;
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
 use Contao\Image;
 use Contao\Input;
+use Contao\System;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class TlC4gImport
@@ -25,8 +28,23 @@ use Contao\Input;
  */
 class TlC4gImport
 {
-
-
+    /**
+     * @var EntityManager
+     */
+    private $entityManager = null;
+    
+    /**
+     * TlC4gImport constructor.
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager = null)
+    {
+        if ($entityManager === null) {
+            $entityManager = System::getContainer()->get('doctrine.orm.default_entity_manager');
+        }
+        $this->entityManager = $entityManager;
+    }
+    
     /**
      * button_callback: Prüft, ob ein Import ausgeführt werden kann.
      * @param $arrRow
@@ -269,5 +287,38 @@ class TlC4gImport
             $arrFields[$key] = $field;
         }
         return serialize($arrFields);
+    }
+    
+    /**
+     * load callback: converts the comma separated list into a serialized array.
+     * @param $value
+     * @return string
+     */
+    public function loadSrcTableValue($value)
+    {
+        return serialize(explode(",", $value));
+    }
+    
+    /**
+     * save callback: converts serialized array into a comma separated list.
+     * @param $value
+     */
+    public function saveSrcTableValue($value)
+    {
+        return implode(",", unserialize($value));
+    }
+    
+    public function getTableFields($dc)
+    {
+        $objImport = $this->entityManager->getRepository(\con4gis\ImportBundle\Entity\TlC4gImport::class)
+            ->findOneBy(['id' => $dc->activeRecord->id]);
+        $srcTables = $objImport->getSrcTable();
+        $dcaHelper = new DcaHelper();
+        $arrTables = explode(",", $srcTables);
+        $arrFields = [];
+        foreach ($arrTables as $table) {
+            $arrFields = array_merge($dcaHelper->cbGetFields($dc, $table), $arrFields);
+        }
+        return $arrFields;
     }
 }

@@ -59,11 +59,16 @@ class SaveDataListener
     {
         $settings   = $event->getSettings();
         $tableName  = $settings->getSrctable();
-
-        if ($settings->getTruncatetable() && $tableName) {
-            $connection = $this->entityManager->getConnection();
-            $platform   = $connection->getDatabasePlatform();
-            $connection->executeUpdate($platform->getTruncateTableSQL($tableName, true));
+        if (strpos($tableName, ",") !== false) {
+            // multiple table names
+            $arrTables = explode(",", $tableName);
+            foreach ($arrTables as $table) {
+                if ($settings->getTruncatetable() && $table) {
+                    $connection = $this->entityManager->getConnection();
+                    $platform   = $connection->getDatabasePlatform();
+                    $connection->executeUpdate($platform->getTruncateTableSQL($table, true));
+                }
+            }
         }
     }
 
@@ -147,22 +152,33 @@ class SaveDataListener
         $settings   = $event->getSettings();
         $table      = $settings->getSrctable();
         $data       = $event->getData();
-
-        for ($i = 0; $i < count($data); $i++) {
-            $tmpdata = array();
-            $row     = $data[$i];
-
-            foreach ($row as $field => $value) {
-                if ($this->db->fieldExists($field, $table)) {
-                    $tmpdata[$field] = $value;
+        
+        // TODO auf mehrere src tables umbauen
+//        if (strpos($table, ",") !== false) {
+        // TODO prüfen ob "foo" ein 1element array erzeugt
+        $arrTables = explode(",", $table);
+        foreach ($arrTables as $table) {
+            $tableData = $data[$table];
+            for ($i = 0; $i < count($tableData); $i++) {
+                $tmpdata = array();
+                $row     = $tableData[$i];
+        
+                foreach ($row as $field => $value) {
+                    if ($this->db->fieldExists($field, $table)) {
+                        $tmpdata[$field] = $value;
+                    }
+                }
+        
+                if (is_array($tmpdata) && count($tmpdata)) {
+                    // original Zeile ersetzen!
+                    $tableData[$i] = $tmpdata;
                 }
             }
-
-            if (is_array($tmpdata) && count($tmpdata)) {
-                // original Zeile ersetzen!
-                $data[$i] = $tmpdata;
-            }
+            $data[$table] = $tableData;
         }
+//        }
+        
+        
 
         $event->setData($data);
     }
@@ -179,32 +195,37 @@ class SaveDataListener
         $tableName  = $settings->getSrctable();
         $tableName  = ($tableName) ? $tableName : $settings->getSrctablename();
         $data       = $event->getData();
+        
+        // TODO prüfen mit einer Tablle und Tabelle erzeugen
 
         if (is_array($data) && count($data) && $tableName) {
-            foreach ($data as $datum) {
-                $query = "INSERT INTO $tableName SET ";
-                $where = '';
-
-                if (isset($datum['id'])) {
-                    // Wenn Datensatz vorhanden ist, soll ein UPDATE ausgeführt werden!
-                    $searchQuery  = "SELECT * FROM $tableName WHERE id = {$datum['id']}";
-                    $searchResult = $this->db->execute($searchQuery);
-
-                    if ($searchResult->numRows) {
-                        $query = "UPDATE $tableName SET ";
-                        $where = " WHERE id = {$datum['id']}";
+            foreach ($data as $tableName => $tableData) {
+                foreach ($tableData as $datum) {
+                    $query = "INSERT INTO $tableName SET ";
+                    $where = '';
+        
+                    if (isset($datum['id'])) {
+                        // Wenn Datensatz vorhanden ist, soll ein UPDATE ausgeführt werden!
+                        $searchQuery  = "SELECT * FROM $tableName WHERE id = {$datum['id']}";
+                        $searchResult = $this->db->execute($searchQuery);
+            
+                        if ($searchResult->numRows) {
+                            $query = "UPDATE $tableName SET ";
+                            $where = " WHERE id = {$datum['id']}";
+                        }
                     }
+        
+                    foreach ($datum as $field => $value) {
+                        // replace commas with dots to prevent SQL syntax error
+                        $value = str_replace(',', '.', $value);
+                        $query .= "`$field` = '$value', ";
+                    }
+        
+                    $query = substr($query, 0, strlen($query)-2) . $where;
+                    $this->db->execute($query);
                 }
-
-                foreach ($datum as $field => $value) {
-                    // replace commas with dots to prevent SQL syntax error
-                    $value = str_replace(',', '.', $value);
-                    $query .= "`$field` = '$value', ";
-                }
-
-                $query = substr($query, 0, strlen($query)-2) . $where;
-                $this->db->execute($query);
             }
+            
         }
     }
 }

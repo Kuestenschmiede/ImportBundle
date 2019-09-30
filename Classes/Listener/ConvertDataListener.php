@@ -126,6 +126,10 @@ class ConvertDataListener
         $destFields = $settings->getNamedfields();
         $destFields = ($destFields) ? $destFields : $settings->getFieldnames(); // Felder beim Anlegen der Tabelle!
         $tmpdata    = array();
+        $arrTableNames = explode(",", $settings->getSrcTable());
+        foreach ($arrTableNames as $tableName) {
+            $tmpdata[$tableName] = [];
+        }
 
         if (is_array($data) && count($data)) {
             foreach ($data as $row) {
@@ -176,8 +180,16 @@ class ConvertDataListener
                             }
                         }
                     }
-
-                    $tmpdata[] = $tmprow;
+                    
+                    if (isset($field['destfields'])) {
+                        foreach ($arrTableNames as $tableName) {
+                            if (strpos($dbField, $tableName) !== false) {
+                                $tmpdata[$tableName] = $tmprow;
+                            }
+                        }
+                    }
+                    
+//                    $tmpdata[] = $tmprow;
                 }
             }
 
@@ -199,17 +211,20 @@ class ConvertDataListener
         $data = $event->getData();
 
         if (is_array($data) && count($data)) {
-            for ($i = 0; $i < count($data); $i++) {
-                if (!isset($data[$i]['tstamp']) || !$data[$i]['tstamp']) {
-                    $data[$i]['tstamp'] = time();
+            foreach ($data as $tableData) {
+                for ($i = 0; $i < count($tableData); $i++) {
+                    if (!isset($tableData[$i]['tstamp']) || !$tableData[$i]['tstamp']) {
+                        $tableData[$i]['tstamp'] = time();
+                    }
+                    /*  Raus! Nach Umstellung auf Bundels wird C4GBrickCommon::getGUID() nicht mehr gefunden!
+                        @todo bei Bedarf korrigieren und wieder einfügen!
+                                    if ((!isset($data[$i]['uuid']) || !$data[$i]['uuid'])) {
+                                        $data[$i]['uuid'] = C4GBrickCommon::getGUID();
+                                    }
+                    */
                 }
-/*  Raus! Nach Umstellung auf Bundels wird C4GBrickCommon::getGUID() nicht mehr gefunden!
-    @todo bei Bedarf korrigieren und wieder einfügen!
-                if ((!isset($data[$i]['uuid']) || !$data[$i]['uuid'])) {
-                    $data[$i]['uuid'] = C4GBrickCommon::getGUID();
-                }
-*/
             }
+            
         }
 
         $event->setData($data);

@@ -3,6 +3,12 @@
 ##
 services:
 
+    # Callback class service
+    con4gis.import_callback:
+        class: con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport
+        public: true
+        arguments:
+            - "@doctrine.orm.entity_manager"
 
     # RunImport
     con4gis_import.onImportRunGetSettings:
