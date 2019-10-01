@@ -79,9 +79,10 @@ class ConvertDataListener
             // Spaltennamen auslesen, wenn Spaltennamen vorhanden.
             $sh         = new StringHelper();
             // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
-            $headline   = $sh->removeSpecialSigns(array_shift($data));
+            
             $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
+            $headline   = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Z0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
             $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
             $event->setFieldnames($fieldnames);
             $event->setData($data); // wegen dem Löschen der Überschriften!
@@ -151,7 +152,7 @@ class ConvertDataListener
                                 $cloumnNumber = $csvField - 1;
                             }
 
-                            if ($defaultValue !== '' &&
+                            if ($defaultValue !== null && $defaultValue !== '' &&
                                 (
                                     $override !== '' ||
                                     !isset($row[$cloumnNumber]) ||

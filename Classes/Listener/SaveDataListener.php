@@ -59,6 +59,11 @@ class SaveDataListener
     {
         $settings   = $event->getSettings();
         $tableName  = $settings->getSrctable();
+        
+        // also truncate the table to be created
+        if ($tableName === "") {
+            $tableName = $settings->getSrctablename();
+        }
 
         if ($settings->getTruncatetable() && $tableName) {
             $connection = $this->entityManager->getConnection();
