@@ -141,6 +141,8 @@ class ConvertDataListener
 
                             if (isset($field['srccolumnname']) && $field['srccolumnname']) {
                                 $csvField = $field['srccolumnname'];
+                            } else if (isset($field['csvField']) && $field['csvField']) {
+                                $csvField = $field['csvField'];
                             } else {
                                 $csvField = $field['destfields'];
                             }

@@ -274,8 +274,22 @@ class TlC4gImport
     
     public function getAddressGeoFields($dc)
     {
-        $table = $dc->activeRecord->geotable;
-        $dh = new DcaHelper();
-        return $dh->cbGetFields($dc, $table);
+        $sourcekind = $dc->activeRecord->sourcekind;
+        // case import
+        switch ($sourcekind) {
+            case "import":
+                $dh = new DcaHelper();
+                return $dh->cbGetFields($dc);
+                break;
+            case "create":
+                $fields = unserialize($dc->activeRecord->fieldnames);
+                $arrFields = [];
+                foreach ($fields as $key => $field) {
+                    $arrFields[$key] = $field['destfields'];
+                }
+                return $arrFields;
+                break;
+        }
+        
     }
 }

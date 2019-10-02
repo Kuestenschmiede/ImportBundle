@@ -258,8 +258,8 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
-            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
-            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true, 'multiple' => true),
+            'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getAddressGeoFields'),
+            'eval'                    => array('mandatory'=>false,'chosen'=>true, 'includeBlankOption'=>true, 'multiple' => true),
         ),
         'geoxfield' => array
         (
@@ -267,8 +267,8 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
-            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
-            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true),
+            'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getAddressGeoFields'),
+            'eval'                    => array('mandatory'=>false,'chosen'=>true, 'includeBlankOption'=>true),
         ),
         'geoyfield' => array
         (
@@ -276,8 +276,8 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
-            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
-            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true),
+            'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getAddressGeoFields'),
+            'eval'                    => array('mandatory'=>false,'chosen'=>true, 'includeBlankOption'=>true),
         ),
         'srctablename' => array
         (
@@ -308,6 +308,15 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'inputType'               => 'text',
                         'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
                     ),
+                    'csvField' => array
+                    (
+                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['csvField'],
+                        'default'                 => '',
+                        'exclude'                 => true,
+                        'inputType'               => 'select',
+                        'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'),
+                        'eval'                    => array('mandatory'=>false, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
+                    ),
                     'fieldtype' => array
                     (
                         'label'                   => &$GLOBALS['TL_LANG'][$strName]['fieldtype'],
@@ -324,7 +333,8 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'inputType'               => 'text',
                         'eval'                    => array('style'=>'width:200px')
                     )
-                )
+                ),
+                "submitOnChange" => true
             )
         ),
         'additionaldata' => array
