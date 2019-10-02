@@ -68,6 +68,11 @@ class ImportRunEvent extends QueueEvent
      * @var array
      */
     protected $additionalData = array();
+    
+    /**
+     * @var int
+     */
+    protected $dataCount = 0;
 
 
     /**
@@ -173,5 +178,21 @@ class ImportRunEvent extends QueueEvent
     public function setAdditionalData(array $additionalData)
     {
         $this->additionalData = $additionalData;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getDataCount(): int
+    {
+        return $this->dataCount;
+    }
+    
+    /**
+     * @param int $dataCount
+     */
+    public function setDataCount(int $dataCount): void
+    {
+        $this->dataCount = $dataCount;
     }
 }

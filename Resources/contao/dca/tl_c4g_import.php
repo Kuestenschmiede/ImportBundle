@@ -115,8 +115,8 @@ $GLOBALS['TL_DCA'][$strName] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('sourcekind', 'useinterval'),
-		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind;{expert_legend:hide},delimiter,enclosure;{usequeue_legend},usequeue,useinterval;'
+		'__selector__'                => array('sourcekind', 'useinterval', 'importaddresses'),
+		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind,importaddresses;{expert_legend:hide},delimiter,enclosure;{usequeue_legend},usequeue,useinterval;'
 	),
 
 	// Subpalettes
@@ -124,7 +124,8 @@ $GLOBALS['TL_DCA'][$strName] = array
 	(
 	    'sourcekind_import'           => '{srctable_legend},srctable,namedfields',
         'sourcekind_create'           => '{srctable_legend},srctablename,fieldnames',
-        'useinterval'                 => 'intervalkind,intervalcount'
+        'useinterval'                 => 'intervalkind,intervalcount',
+        'importaddresses'             => 'addressfields,geotable,geoxfield,geoyfield'
 	),
 
 	// Fields
@@ -243,6 +244,40 @@ $GLOBALS['TL_DCA'][$strName] = array
                     )
                 )
             )
+        ),
+        'importaddresses' => [
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['importaddresses'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'checkbox',
+            'eval'                    => array('tl_class'=>'w50 m12', 'submitOnChange'=>true),
+        ],
+        'addressfields' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['addressfields'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
+            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true, 'multiple' => true),
+        ),
+        'geoxfield' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['geoxfield'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
+            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true),
+        ),
+        'geoyfield' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['geoyfield'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => array('\con4gis\CoreBundle\Classes\Helper\DcaHelper', 'cbGetFields'),
+            'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true),
         ),
         'srctablename' => array
         (

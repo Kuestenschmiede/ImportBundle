@@ -117,6 +117,13 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
+    con4gis_import.onSaveDataConvertAddresses:
+        class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataConvertAddresses }
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+
     con4gis_import.onSaveDataInsert:
         class: con4gis\ImportBundle\Classes\Listener\SaveDataListener
         tags:

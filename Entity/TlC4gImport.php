@@ -96,7 +96,30 @@ class TlC4gImport extends BaseEntity
      * @ORM\Column(type="text", nullable=true)
      */
     protected $namedfields = '';
-
+    
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    protected $importaddresses = '0';
+    
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $addressfields = '';
+    
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $geoxfield = '';
+    
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $geoyfield = '';
 
     /**
      * @var string
@@ -580,4 +603,69 @@ class TlC4gImport extends BaseEntity
     {
         $this->intervalcount = $intervalcount;
     }
+    
+    /**
+     * @return string
+     */
+    public function getImportaddresses(): string
+    {
+        return $this->importaddresses;
+    }
+    
+    /**
+     * @param string $importaddresses
+     */
+    public function setImportaddresses(string $importaddresses): void
+    {
+        $this->importaddresses = $importaddresses;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAddressfields(): string
+    {
+        return $this->addressfields;
+    }
+    
+    /**
+     * @param string $addressfields
+     */
+    public function setAddressfields(string $addressfields): void
+    {
+        $this->addressfields = $addressfields;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getGeoxfield(): string
+    {
+        return $this->geoxfield;
+    }
+    
+    /**
+     * @param string $geoxfield
+     */
+    public function setGeoxfield(string $geoxfield): void
+    {
+        $this->geoxfield = $geoxfield;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getGeoyfield(): string
+    {
+        return $this->geoyfield;
+    }
+    
+    /**
+     * @param string $geoyfield
+     */
+    public function setGeoyfield(string $geoyfield): void
+    {
+        $this->geoyfield = $geoyfield;
+    }
+    
 }

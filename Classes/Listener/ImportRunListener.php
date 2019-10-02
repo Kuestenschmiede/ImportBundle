@@ -203,7 +203,8 @@ class ImportRunListener
      */
     public function onImportRunCleanupEvent(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        // TODO triggers always the output that 0 datasets has been processed
+        $data = $event->getData();
+        $event->setDataCount(count($data));
         $event->setData([]);
     }
 }

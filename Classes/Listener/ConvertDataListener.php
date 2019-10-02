@@ -82,7 +82,7 @@ class ConvertDataListener
             
             $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
-            $headline   = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Z0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+            $headline   = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
             $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
             $event->setFieldnames($fieldnames);
             $event->setData($data); // wegen dem Löschen der Überschriften!

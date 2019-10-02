@@ -12,7 +12,10 @@
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
+use con4gis\CoreBundle\Resources\contao\classes\C4GUtils;
+use con4gis\CoreBundle\Resources\contao\models\C4gSettingsModel;
 use Contao\Database;
+use Contao\Request;
 use Doctrine\ORM\EntityManager;
 use con4gis\ImportBundle\Classes\Events\SaveDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -170,6 +173,68 @@ class SaveDataListener
         }
 
         $event->setData($data);
+    }
+    
+    public function onSaveDataConvertAddresses(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $settings = $event->getSettings();
+        if ($settings->getImportaddresses() !== "1") {
+            return;
+        }
+        if ($settings->getAddressfields() === ""
+            || $settings->getGeoxfield() === ""
+            || $settings->getGeoyfield() === "") {
+            return;
+        }
+        
+        $c4gSettings = C4gSettingsModel::findSettings();
+        if (!$c4gSettings->con4gisIoKey || !$c4gSettings->con4gisIoUrl) {
+            return;
+        }
+
+        $addressFields = $settings->getAddressfields();
+        $arrAddressFields = unserialize($addressFields);
+        $geoxField = $settings->getGeoxfield();
+        $geoyField = $settings->getGeoyfield();
+        $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', "", false);
+        $key = $keyForward['key'];
+        $url = $c4gSettings->con4gisIoUrl . "search.php?format=json&q=";
+        $data = $event->getData();
+        
+        foreach ($data as $index => $datum) {
+            $queryString = "";
+            $first = true;
+            foreach ($arrAddressFields as $addressField) {
+                if ($datum[$addressField] !== null && $datum[$addressField] !== "") {
+                    if (!$first) {
+                        $queryString .= " ";
+                    }
+                    $queryString .= $datum[$addressField];
+                }
+                if ($first) {
+                    $first = false;
+                }
+            }
+            
+            $queryUrl = $url . urlencode($queryString) . "&key=" . $key;
+            $request = new Request();
+            $request->send($queryUrl);
+            if ($request->response) {
+                try {
+                    $response = \GuzzleHttp\json_decode($request->response, true);
+                } catch (\Exception $e) {
+                    continue;
+                }
+                $geox = $response[0]['lon'];
+                $geoy = $response[0]['lat'];
+                $datum[$geoxField] = $geox;
+                $datum[$geoyField] = $geoy;
+                $data[$index] = $datum;
+            }
+        }
+        
+        $event->setData($data);
+    
     }
 
     /**
