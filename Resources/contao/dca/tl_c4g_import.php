@@ -250,7 +250,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('tl_class'=>'w50 m12', 'submitOnChange'=>true),
+            'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true),
         ],
         'addressfields' => array
         (

@@ -51,6 +51,11 @@ $GLOBALS['TL_LANG'][$strName]['usequeue']           = array('Process via Queue',
 $GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Interval Execution', 'Please choose whether the task should be repeated in a set interval.');
 $GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Interval', 'Please choose the interval in which to repeat the task.');
 $GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximum Number of Executions', 'Please choose whether the task should finish after a set number of executions. Leave empty for infinite executions.');
+$GLOBALS['TL_LANG'][$strName]['csvField']      = array('Source column or -number', 'Please enter the header or number of the source column in the import file.');
+$GLOBALS['TL_LANG'][$strName]['importaddresses']      = array('Convert addresses (requires con4gis.io)', 'Set this checkbox if you wish to convert addresses into coordinates while importing data (requires a valid con4gis.io key)');
+$GLOBALS['TL_LANG'][$strName]['addressfields']      = array('Address fields', 'Select the fields that hold the address.');
+$GLOBALS['TL_LANG'][$strName]['geoxfield']      = array('Field for X coordinate', 'Select the database field where the X coordinate should be stored.');
+$GLOBALS['TL_LANG'][$strName]['geoyfield']      = array('Field for Y coordinate', 'Select the database field where the Y coordinate should be stored.');
 
 
 /**
