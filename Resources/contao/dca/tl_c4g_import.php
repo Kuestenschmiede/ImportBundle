@@ -306,7 +306,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
+                        'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px', "submitOnChange" => true),
                     ),
                     'csvField' => array
                     (
@@ -315,7 +315,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'exclude'                 => true,
                         'inputType'               => 'select',
                         'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'),
-                        'eval'                    => array('mandatory'=>false, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px'),
+                        'eval'                    => array('mandatory'=>false, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px', 'submitOnChange' => true),
                     ),
                     'fieldtype' => array
                     (
@@ -323,7 +323,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'default'                 => 'varchar',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('style'=>'width:200px')
+                        'eval'                    => array('style'=>'width:200px', "submitOnChange" => true)
                     ),
                     'fieldlength' => array
                     (
@@ -331,10 +331,9 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'default'                 => '255',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('style'=>'width:200px')
+                        'eval'                    => array('style'=>'width:200px', "submitOnChange" => true)
                     )
-                ),
-                "submitOnChange" => true
+                )
             )
         ),
         'additionaldata' => array
