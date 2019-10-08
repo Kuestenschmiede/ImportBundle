@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('sourcekind', 'useinterval', 'importaddresses'),
-		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind,importaddresses;{expert_legend:hide},delimiter,enclosure;{usequeue_legend},usequeue,useinterval;'
+		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind,importaddresses;{expert_legend:hide},delimiter,enclosure,saveTlTables;{usequeue_legend},usequeue,useinterval;'
 	),
 
 	// Subpalettes
@@ -285,6 +285,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
+            'save_callback'           => array(array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbConvertTableName')),
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr'),
         ),
         'fieldnames' => array
@@ -359,6 +360,14 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '"',
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true),
+        ),
+        'saveTlTables' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['saveTlTables'],
+            'exclude'                 => true,
+            'default'                 => false,
+            'inputType'               => 'checkbox',
+            'eval'                    => array('tl_class' => 'clr', 'submitOnChange' => true),
         ),
         'usequeue' => array
         (

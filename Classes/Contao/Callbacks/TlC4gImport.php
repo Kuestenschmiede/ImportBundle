@@ -14,6 +14,7 @@ namespace con4gis\ImportBundle\Classes\Contao\Callbacks;
 
 use con4gis\CoreBundle\Classes\Helper\DcaHelper;
 use con4gis\CoreBundle\Classes\Helper\StringHelper;
+use con4gis\CoreBundle\Resources\contao\classes\C4GUtils;
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
 use Contao\Controller;
@@ -191,6 +192,16 @@ class TlC4gImport
             }
         }
 
+        return $value;
+    }
+
+    public function cbConvertTableName($value, $dc)
+    {
+        if ($dc->activeRecord->saveTlTables !== '1') {
+            if (C4GUtils::startsWith($value, 'tl_') === true) {
+                return '';
+            }
+        }
         return $value;
     }
 

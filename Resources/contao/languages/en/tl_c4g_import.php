@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG'][$strName]['headerline']         = array('Column headers are 
 $GLOBALS['TL_LANG'][$strName]['overridevalue']      = array('Override Import Value', 'Please choose whether the default value should always override the value in the import file or only be included if the import file has no corresponding value.');
 $GLOBALS['TL_LANG'][$strName]['delimiter']          = array('Field Separator', 'Please choose the field separator. Default: ;');
 $GLOBALS['TL_LANG'][$strName]['enclosure']          = array('Text marker character', 'Please choose the text marker character. Default: "');
+$GLOBALS['TL_LANG'][$strName]['saveTlTables']       = array('Save Contao tables', 'Tables beginning with "tl_", may only be selected if this is set. It is possible the website is damaged.');
 $GLOBALS['TL_LANG'][$strName]['fieldnames']         = array('Fields', 'Please enter the desired column names and select the corresponding fields from the import file. If you do not select a field from the file, the column will be created empty (e.g. coordinate fields can be created for address import).');
 $GLOBALS['TL_LANG'][$strName]['srctablename']       = array('Target Table', 'Please enter the name of the table');
 $GLOBALS['TL_LANG'][$strName]['fieldtype']          = array('Field Type', 'Please enter the field type.');

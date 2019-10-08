@@ -165,6 +165,12 @@ class TlC4gImport extends BaseEntity
      */
     protected $enclosure = '"';
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    protected $saveTlTables = '0';
+
 
     /**
      * Verarbeitung über Queue
