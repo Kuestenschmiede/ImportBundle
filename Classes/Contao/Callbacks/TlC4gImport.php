@@ -233,6 +233,13 @@ class TlC4gImport
                     if ($line && $delimiter && $enclosure) {
                         $fields    = str_getcsv($line, $delimiter, $enclosure);
                         $i         = 1;
+                        if (count($fields) === 1) {
+                            // check if fields are separable with the other possible delimiter
+                            $tmpFields    = str_getcsv($line, $delimiter === ";" ? ",": ";", $enclosure);
+                            if (count($tmpFields) > 1) {
+                                $fields = $tmpFields;
+                            }
+                        }
 
                         foreach ($fields as $field) {
                             if ($headerline) {
