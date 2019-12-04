@@ -111,20 +111,22 @@ class SaveDataListener
                             }
                         }
                         $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'];
-                        $query .= '(' . $field['fieldlength'] . ')';
+                        if ($field['fieldtype'] !== 'TEXT') {
+                            $query .= '(' . $field['fieldlength'] . ')';
+                        }
 
-                        if ($field['fieldtype'] == 'varchar' || $field['fieldtype'] == 'char') {
+                        if ($field['fieldtype'] == 'varchar' || $field['fieldtype'] == 'char' || $field['fieldtype'] === 'TEXT') {
                             $query .= " COLLATE 'utf8_general_ci'";
                         }
 
-                        $query .= ' NOT NULL default ';
-
                         if ($field['fieldtype'] == 'int' || $field['fieldtype'] == 'integer') {
-                            $query .= "'0'";
+                            $query .= " NOT NULL default '0'";
                         } elseif ($field['fieldtype'] == 'decimal') {
-                            $query .= "'0.00'";
+                            $query .= " NOT NULL default '0.00'";
+                        } elseif ($field['fieldtype'] === 'text') {
+                            $query .= ' NULL ';
                         } else {
-                            $query .= '""';
+                            $query .= " NOT NULL default ''";
                         }
 
                         $query .= ',';
