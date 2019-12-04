@@ -16,7 +16,6 @@ use con4gis\CoreBundle\Resources\contao\classes\C4GUtils;
 use con4gis\CoreBundle\Resources\contao\models\C4gSettingsModel;
 use Contao\Database;
 use Contao\Request;
-use Contao\StringUtil;
 use Doctrine\ORM\EntityManager;
 use con4gis\ImportBundle\Classes\Events\SaveDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -271,13 +270,7 @@ class SaveDataListener
 
                 foreach ($datum as $field => $value) {
                     // replace commas with dots to prevent SQL syntax error
-
-                    if (strtotime($value) !== false) {
-                        $value = strtotime($value);
-                    }
-
                     $value = str_replace(',', '.', $value);
-
                     $query .= "`$field` = '$value', ";
                 }
 
