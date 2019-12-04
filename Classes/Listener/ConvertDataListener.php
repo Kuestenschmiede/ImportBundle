@@ -206,12 +206,6 @@ class ConvertDataListener
                 if (!isset($data[$i]['tstamp']) || !$data[$i]['tstamp']) {
                     $data[$i]['tstamp'] = time();
                 }
-/*  Raus! Nach Umstellung auf Bundels wird C4GBrickCommon::getGUID() nicht mehr gefunden!
-    @todo bei Bedarf korrigieren und wieder einfügen!
-                if ((!isset($data[$i]['uuid']) || !$data[$i]['uuid'])) {
-                    $data[$i]['uuid'] = C4GBrickCommon::getGUID();
-                }
-*/
             }
         }
 
