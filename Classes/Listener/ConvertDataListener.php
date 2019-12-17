@@ -147,12 +147,10 @@ class ConvertDataListener
                                 $csvField = '';
                             }
 
+                            $csvField = str_replace('.', '', $csvField);
+
                             if ($csvField !== '') {
-                                if ($settings->getHeaderline()) {
-                                    $cloumnNumber = array_search($csvField, $srcFields);
-                                } else {
-                                    $cloumnNumber = $csvField - 1;
-                                }
+                                $cloumnNumber = array_search($csvField, $srcFields);
 
                                 if ($defaultValue !== null && $defaultValue !== '' &&
                                     (
