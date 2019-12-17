@@ -144,38 +144,41 @@ class ConvertDataListener
                             } else if (isset($field['csvField']) && $field['csvField']) {
                                 $csvField = $field['csvField'];
                             } else {
-                                $csvField = $field['destfields'];
+                                $csvField = '';
                             }
 
+                            if ($csvField !== '') {
+                                if ($settings->getHeaderline()) {
+                                    $cloumnNumber = array_search($csvField, $srcFields);
+                                } else {
+                                    $cloumnNumber = $csvField - 1;
+                                }
 
-                            if ($settings->getHeaderline()) {
-                                $cloumnNumber = array_search($csvField, $srcFields);
-                            } else {
-                                $cloumnNumber = $csvField - 1;
-                            }
+                                if ($defaultValue !== null && $defaultValue !== '' &&
+                                    (
+                                        $override !== '' ||
+                                        !isset($row[$cloumnNumber]) ||
+                                        $row[$cloumnNumber] === '' ||
+                                        $row[$cloumnNumber] === null
+                                    )
+                                ) {
+                                    $tmprow[$dbField] = $defaultValue;
+                                } else {
 
-                            if ($defaultValue !== null && $defaultValue !== '' &&
-                                (
-                                    $override !== '' ||
-                                    !isset($row[$cloumnNumber]) ||
-                                    $row[$cloumnNumber] === '' ||
-                                    $row[$cloumnNumber] === null
-                                )
-                            ) {
-                                $tmprow[$dbField] = $defaultValue;
-                            } else {
-
-                                if (isset($row[$cloumnNumber])) {
-                                    if ($row[$cloumnNumber] !== 'NULL' &&
-                                        $row[$cloumnNumber] !== 'Null' &&
-                                        $row[$cloumnNumber] !== 'null' &&
-                                        $row[$cloumnNumber] !== null
-                                    ) {
-                                        $tmprow[$dbField] = $row[$cloumnNumber];
-                                    } else {
-                                        $tmprow[$dbField] = null;
+                                    if (isset($row[$cloumnNumber])) {
+                                        if ($row[$cloumnNumber] !== 'NULL' &&
+                                            $row[$cloumnNumber] !== 'Null' &&
+                                            $row[$cloumnNumber] !== 'null' &&
+                                            $row[$cloumnNumber] !== null
+                                        ) {
+                                            $tmprow[$dbField] = $row[$cloumnNumber];
+                                        } else {
+                                            $tmprow[$dbField] = null;
+                                        }
                                     }
                                 }
+                            } else {
+                                $tmprow[$dbField] = $defaultValue ?: '';
                             }
                         }
                     }

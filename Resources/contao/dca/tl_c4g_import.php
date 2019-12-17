@@ -225,7 +225,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'exclude'                 => true,
                         'inputType'               => 'select',
                         'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'),
-                        'eval'                    => array('mandatory'=>true,'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px')
+                        'eval'                    => array('mandatory'=>false,'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px')
                     ),
                     'defaultvalue' => array
                     (
