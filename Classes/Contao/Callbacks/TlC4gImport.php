@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -27,8 +27,6 @@ use Contao\Input;
  */
 class TlC4gImport
 {
-
-
     /**
      * button_callback: Prüft, ob ein Import ausgeführt werden kann.
      * @param $arrRow
@@ -58,17 +56,16 @@ class TlC4gImport
                                      $strPrevious,
                                      $strNext
     ) {
-
         if ($this->testImport($arrRow)) {
-            $link   = '<a href="' . Controller::addToUrl($href) . '&id=' . $arrRow['id'];
-            $link  .= '" title="' . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label);
-            $link  .= '</a> ';
+            $link = '<a href="' . Controller::addToUrl($href) . '&id=' . $arrRow['id'];
+            $link .= '" title="' . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label);
+            $link .= '</a> ';
         } else {
             $link = '<span style="opacity: 0.4;">' . Image::getHtml($icon, $label) . '</span>';
         }
+
         return $link;
     }
-
 
     /**
      * Prüft, ob die Mindestangaben für einen Import vorliegen.
@@ -77,12 +74,11 @@ class TlC4gImport
      */
     protected function testImport($row)
     {
-
         if (!isset($row['srcfile']) || $row['srcfile'] == '') {
             return false;
         }
 
-        if  ($row['sourcekind'] == 'import' && (!isset($row['srctable']) || !isset($row['namedfields']))) {
+        if ($row['sourcekind'] == 'import' && (!isset($row['srctable']) || !isset($row['namedfields']))) {
             return false;
         }
 
@@ -116,10 +112,8 @@ class TlC4gImport
             }
         }
 
-
         return true;
     }
-
 
     /**
      * save_callback: Speichert den Import in der Queue.
@@ -130,23 +124,23 @@ class TlC4gImport
     public function cbAddToQueue($value, $dc)
     {
         if ($value) {
-            $event          = new ImportRunEvent();
-            $qm             = new QueueManager();
-            $interval       = '';
-            $intervalcount  = '';
+            $event = new ImportRunEvent();
+            $qm = new QueueManager();
+            $interval = '';
+            $intervalcount = '';
 
             if (Input::post('useinterval')) {
-                $interval      = Input::post('intervalkind');
+                $interval = Input::post('intervalkind');
                 $intervalcount = Input::post('intervalcount');
             }
 
-            $metaData = array(
-                'srcmodule'     => 'import',
-                'srctable'      => 'tl_c4g_import',
-                'srcid'         => $dc->id,
-                'intervalkind'  => $interval,
-                'intervalcount' => $intervalcount
-            );
+            $metaData = [
+                'srcmodule' => 'import',
+                'srctable' => 'tl_c4g_import',
+                'srcid' => $dc->id,
+                'intervalkind' => $interval,
+                'intervalcount' => $intervalcount,
+            ];
 
             if ($intervalcount) {
                 $metaData['intervaltorun'] = $intervalcount;
@@ -159,7 +153,6 @@ class TlC4gImport
         return $value;
     }
 
-
     /**
      * load_callback: Lädt die Namen der Spalten, falls diese in der Importdatei angegeben sind.
      * @param $value
@@ -169,10 +162,10 @@ class TlC4gImport
     public function cbLoadFieldNames($value, $dc)
     {
         if (!$value) {
-            $sh     = new StringHelper();
-            $row    = $dc->activeRecord;
+            $sh = new StringHelper();
+            $row = $dc->activeRecord;
             $fields = $this->getFields($row->srcfile, $row->delimiter, $row->enclosure, $row->headerline);
-            $i      = 1;
+            $i = 1;
 
             foreach ($fields as $field) {
                 if ($row->headerline) {
@@ -181,7 +174,7 @@ class TlC4gImport
                     $temp['destfields'] = $i;
                 }
 
-                $temp['fieldtype']  = 'varchar';
+                $temp['fieldtype'] = 'varchar';
                 $temp['fieldwidth'] = 255;
                 $tmpValues[] = $sh->removeSpecialSigns($temp, '-_');
                 $i++;
@@ -202,9 +195,9 @@ class TlC4gImport
                 return '';
             }
         }
+
         return $value;
     }
-
 
     /**
      * options_callback: Lädt die Felder einer CSV-Datei bzw. ein Array mit den Spaltennummern.
@@ -213,11 +206,10 @@ class TlC4gImport
      */
     public function getFieldsFromFile($dc)
     {
-        $row    = $dc->activeRecord;
+        $row = $dc->activeRecord;
+
         return $this->getFields($row->srcfile, $row->delimiter, $row->enclosure, $row->headerline);
-
     }
-
 
     /**
      * Lädt die Felder einer CSV-Datei bzw. ein Array mit den Spaltennummern.
@@ -229,8 +221,8 @@ class TlC4gImport
      */
     protected function getFields($srcfile, $delimiter, $enclosure, $headerline)
     {
-        $file   = \FilesModel::findByUuid($srcfile);
-        $data   = array();
+        $file = \FilesModel::findByUuid($srcfile);
+        $data = [];
 
         if ($file && is_file(TL_ROOT . '/' . $file->path)) {
             $content = file_get_contents(TL_ROOT . '/' . $file->path);
@@ -239,14 +231,14 @@ class TlC4gImport
                 $lines = explode(PHP_EOL, $content);
 
                 if (is_array($lines) && count($lines)) {
-                    $line      = array_shift($lines);
+                    $line = array_shift($lines);
 
                     if ($line && $delimiter && $enclosure) {
-                        $fields    = str_getcsv($line, $delimiter, $enclosure);
-                        $i         = 1;
+                        $fields = str_getcsv($line, $delimiter, $enclosure);
+                        $i = 1;
                         if (count($fields) === 1) {
                             // check if fields are separable with the other possible delimiter
-                            $tmpFields    = str_getcsv($line, $delimiter === ";" ? ",": ";", $enclosure);
+                            $tmpFields = str_getcsv($line, $delimiter === ';' ? ',': ';', $enclosure);
                             if (count($tmpFields) > 1) {
                                 $fields = $tmpFields;
                             }
@@ -287,27 +279,31 @@ class TlC4gImport
             $field['destfields'] = str_replace(' ', '_', $field['destfields']);
             $arrFields[$key] = $field;
         }
+
         return serialize($arrFields);
     }
-    
+
     public function getAddressGeoFields($dc)
     {
         $sourcekind = $dc->activeRecord->sourcekind;
         // case import
         switch ($sourcekind) {
-            case "import":
+            case 'import':
                 $dh = new DcaHelper();
+
                 return $dh->cbGetFields($dc);
+
                 break;
-            case "create":
+            case 'create':
                 $fields = unserialize($dc->activeRecord->fieldnames);
                 $arrFields = [];
                 foreach ($fields as $key => $field) {
                     $arrFields[$key] = $field['destfields'];
                 }
+
                 return $arrFields;
+
                 break;
         }
-        
     }
 }

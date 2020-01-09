@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -27,13 +27,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ImportRunListener
 {
-
-
     /**
      * @var EntityManager|null
      */
     protected $entityManager = null;
-
 
     /**
      * ImportRunListener constructor.
@@ -44,7 +41,6 @@ class ImportRunListener
         $this->entityManager = $em;
     }
 
-
     /**
      * Lädt die Einstellungen für den Import.
      * @param ImportRunEvent            $event
@@ -53,10 +49,10 @@ class ImportRunListener
      */
     public function onImportRunGetSettings(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $importId           = $event->getImportId();
-        $respositoryName    = '\con4gis\ImportBundle\Entity\TlC4gImport';
-        $respository        = $this->entityManager->getRepository($respositoryName);
-        $importSettings     = $respository->find($importId);
+        $importId = $event->getImportId();
+        $respositoryName = '\con4gis\ImportBundle\Entity\TlC4gImport';
+        $respository = $this->entityManager->getRepository($respositoryName);
+        $importSettings = $respository->find($importId);
 
         if ($importSettings && isset($GLOBALS['con4gis']['importsettings']['addditionalSettings'])) {
             $importSettings->setAdditionaldata($GLOBALS['con4gis']['importsettings']['addditionalSettings']);
@@ -64,7 +60,6 @@ class ImportRunListener
 
         $event->setSettings($importSettings);
     }
-
 
     /**
      * GET- und POST-Daten überschreiben die Einstellungen der Importkonfiguration.
@@ -74,15 +69,14 @@ class ImportRunListener
      */
     public function onImportRunGetInputData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $importSettings     = $event->getSettings();
-        $getData            = InputHelper::getAllData('get');
-        $postData           = InputHelper::getAllData('post');
+        $importSettings = $event->getSettings();
+        $getData = InputHelper::getAllData('get');
+        $postData = InputHelper::getAllData('post');
         $importSettings->setData($getData);
         $importSettings->setData($postData);
 
         $event->setSettings($importSettings);
     }
-
 
     /**
      * Erstellt den Pfad zur Importdatei.
@@ -93,13 +87,12 @@ class ImportRunListener
     public function onImportRunGetPath(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
         $importSettings = $event->getSettings();
-        $srcfile        = $importSettings->getSrcfile();
-        $modleFiles     = FilesModel::findByUuid($srcfile);
-        $path           = $modleFiles->path;
-        $path           = TL_ROOT . '/' . $path;
+        $srcfile = $importSettings->getSrcfile();
+        $modleFiles = FilesModel::findByUuid($srcfile);
+        $path = $modleFiles->path;
+        $path = TL_ROOT . '/' . $path;
         $event->setImportFile($path);
     }
-
 
     /**
      * Lädt die Daten für den Import aus der Datei.
@@ -117,7 +110,6 @@ class ImportRunListener
         }
     }
 
-
     /**
      * Ruft die Umwandlung der Daten auf.
      * @param ImportRunEvent            $event
@@ -126,16 +118,16 @@ class ImportRunListener
      */
     public function onImportRunConvertData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings       = $event->getSettings();
-        $importData     = $event->getImportData();
+        $settings = $event->getSettings();
+        $importData = $event->getImportData();
         $additionalData = $event->getAdditionalData();
-        $convertEvent   = new ConvertDataEvent();
+        $convertEvent = new ConvertDataEvent();
         $convertEvent->setSettings($settings);
         $convertEvent->setImportData($importData);
         $convertEvent->setData($event->getData());
         $convertEvent->setAdditionalData($additionalData);
         $dispatcher->dispatch($convertEvent::NAME, $convertEvent);
-        $data           = $convertEvent->getData();
+        $data = $convertEvent->getData();
         $event->setData($data);
     }
 
@@ -147,9 +139,9 @@ class ImportRunListener
      */
     public function onImportRunBeforeSaveData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings        = $event->getSettings();
-        $data            = $event->getData();
-        $additionalData  = $event->getAdditionalData();
+        $settings = $event->getSettings();
+        $data = $event->getData();
+        $additionalData = $event->getAdditionalData();
         $beforeSaveEvent = new BeforeSaveDataEvent();
         $beforeSaveEvent->setData($data);
         $beforeSaveEvent->setSettings($settings);
@@ -159,7 +151,6 @@ class ImportRunListener
         $event->setData($data);
     }
 
-
     /**
      * Ruft die Umwandlung der Daten auf.
      * @param ImportRunEvent            $event
@@ -168,14 +159,13 @@ class ImportRunListener
      */
     public function onImportRunSaveData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $data       = $event->getData();
-        $saveEvent  = new SaveDataEvent();
+        $settings = $event->getSettings();
+        $data = $event->getData();
+        $saveEvent = new SaveDataEvent();
         $saveEvent->setSettings($settings);
         $saveEvent->setData($data);
         $dispatcher->dispatch($saveEvent::NAME, $saveEvent);
     }
-
 
     /**
      * Ruft die Umwandlung der Daten auf.
@@ -185,10 +175,10 @@ class ImportRunListener
      */
     public function onImportRunRenameFile(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings           = $event->getSettings();
-        $path               = $event->getImportFile();
-        $renameFile         = $settings->getRenamefile();
-        $filerenamesuffix   = $settings->getAdditionaldata('filerenamesuffix');
+        $settings = $event->getSettings();
+        $path = $event->getImportFile();
+        $renameFile = $settings->getRenamefile();
+        $filerenamesuffix = $settings->getAdditionaldata('filerenamesuffix');
 
         if ($renameFile && is_file($path) && $filerenamesuffix) {
             rename($path, $path . ".$filerenamesuffix");

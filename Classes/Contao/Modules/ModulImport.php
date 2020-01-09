@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,20 +22,16 @@ use Contao\System;
  */
 class ModulImport
 {
-
-
     /**
      * Template
      * @var string
      */
     protected $templateName = 'be_mod_import';
 
-
     /**
      * @var \Contao\BackendTemplate|null
      */
     protected $template = null;
-
 
     /**
      * Instanz von doctrine.orm.default_entity_manager
@@ -43,20 +39,17 @@ class ModulImport
      */
     protected $entityManager = null;
 
-
     /**
      * Instanz des Symfony EventDispatchers
      * @var null
      */
     protected $dispatcher = null;
 
-
     /**
      * Id der Importkonfiguration
      * @var int
      */
     protected $importId = 0;
-
 
     /**
      * ModulImport constructor.
@@ -79,11 +72,10 @@ class ModulImport
 
         System::loadLanguageFile('default');
         $this->template = new BackendTemplate($this->templateName);
-        $this->importId = (isset($_GET ['id'])) ? $_GET['id'] : 0;
+        $this->importId = (isset($_GET['id'])) ? $_GET['id'] : 0;
         $this->importId = (isset($_POST['id'])) ? $_POST['id'] : $this->importId;
         // Contao funktioniert nicht: \Contao\Environment::get('id');
     }
-
 
     /**
      * @return int
@@ -93,7 +85,6 @@ class ModulImport
         return $this->importId;
     }
 
-
     /**
      * @param int $importId
      */
@@ -101,7 +92,6 @@ class ModulImport
     {
         $this->importId = $importId;
     }
-
 
     /**
      * Generate the module
@@ -113,6 +103,7 @@ class ModulImport
         $event->setImportId($this->importId);
         $this->dispatcher->dispatch($event::NAME, $event);
         $this->template->dataCount = $event->getDataCount();
+
         return $this->template->parse();
     }
 }

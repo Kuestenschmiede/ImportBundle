@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use con4gis\QueueBundle\Classes\Events\QueueEvent;
  */
 class ImportRunEvent extends QueueEvent
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.import.run';
-
 
     /**
      * Id der Importkonfiguration
@@ -34,13 +31,11 @@ class ImportRunEvent extends QueueEvent
      */
     protected $importId = 0;
 
-
     /**
      * Entity mit den Einstellungen für den Import
      * @var null
      */
     protected $settings = null;
-
 
     /**
      * Pfad zur Importdatei.
@@ -48,32 +43,28 @@ class ImportRunEvent extends QueueEvent
      */
     protected $importFile = '';
 
-
     /**
      * Daten für den Import.
      * @var string
      */
     protected $importData = '';
 
-
     /**
      * Daten für das Speichern in der Datenbank
      * @var array
      */
-    protected $data = array();
-
+    protected $data = [];
 
     /**
      * Zusätzliches Feld für Daten, die für Import-Erweiterungen gebraucht werden.
      * @var array
      */
-    protected $additionalData = array();
-    
+    protected $additionalData = [];
+
     /**
      * @var int
      */
     protected $dataCount = 0;
-
 
     /**
      * @return int
@@ -83,7 +74,6 @@ class ImportRunEvent extends QueueEvent
         return $this->importId;
     }
 
-
     /**
      * @param int $importId
      */
@@ -91,7 +81,6 @@ class ImportRunEvent extends QueueEvent
     {
         $this->importId = $importId;
     }
-
 
     /**
      * @return null
@@ -101,7 +90,6 @@ class ImportRunEvent extends QueueEvent
         return $this->settings;
     }
 
-
     /**
      * @param null $settings
      */
@@ -109,7 +97,6 @@ class ImportRunEvent extends QueueEvent
     {
         $this->settings = $settings;
     }
-
 
     /**
      * @return string
@@ -119,7 +106,6 @@ class ImportRunEvent extends QueueEvent
         return $this->importFile;
     }
 
-
     /**
      * @param string $importFile
      */
@@ -127,7 +113,6 @@ class ImportRunEvent extends QueueEvent
     {
         $this->importFile = $importFile;
     }
-
 
     /**
      * @return string
@@ -137,7 +122,6 @@ class ImportRunEvent extends QueueEvent
         return $this->importData;
     }
 
-
     /**
      * @param string $importData
      */
@@ -146,7 +130,6 @@ class ImportRunEvent extends QueueEvent
         $this->importData = $importData;
     }
 
-
     /**
      * @return array
      */
@@ -154,7 +137,6 @@ class ImportRunEvent extends QueueEvent
     {
         return $this->data;
     }
-
 
     /**
      * @param array $data
@@ -179,7 +161,7 @@ class ImportRunEvent extends QueueEvent
     {
         $this->additionalData = $additionalData;
     }
-    
+
     /**
      * @return int
      */
@@ -187,7 +169,7 @@ class ImportRunEvent extends QueueEvent
     {
         return $this->dataCount;
     }
-    
+
     /**
      * @param int $dataCount
      */

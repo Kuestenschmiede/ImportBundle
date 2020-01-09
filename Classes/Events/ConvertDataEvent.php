@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class ConvertDataEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.import.convert';
-
 
     /**
      * Entity mit den Einstellungen für den Import
@@ -34,34 +31,29 @@ class ConvertDataEvent extends Event
      */
     protected $settings = null;
 
-
     /**
      * Daten für den Import.
      * @var string
      */
     protected $importData = '';
 
-
     /**
      * Array mit den Spaltenüberschriften
      * @var array
      */
-    protected $fieldnames = array();
-
+    protected $fieldnames = [];
 
     /**
      * Daten für das Speichern in der Datenbank
      * @var array
      */
-    protected $data = array();
-
+    protected $data = [];
 
     /**
      * Zusätzliches Feld für Daten, die für Import-Erweiterungen gebraucht werden.
      * @var array
      */
-    protected $additionalData = array();
-
+    protected $additionalData = [];
 
     /**
      * @return null
@@ -71,7 +63,6 @@ class ConvertDataEvent extends Event
         return $this->settings;
     }
 
-
     /**
      * @param null $settings
      */
@@ -79,7 +70,6 @@ class ConvertDataEvent extends Event
     {
         $this->settings = $settings;
     }
-
 
     /**
      * @return string
@@ -89,7 +79,6 @@ class ConvertDataEvent extends Event
         return $this->importData;
     }
 
-
     /**
      * @param string $importData
      */
@@ -97,7 +86,6 @@ class ConvertDataEvent extends Event
     {
         $this->importData = $importData;
     }
-
 
     /**
      * @return array
@@ -107,7 +95,6 @@ class ConvertDataEvent extends Event
         return $this->fieldnames;
     }
 
-
     /**
      * @param array $fieldnames
      */
@@ -116,7 +103,6 @@ class ConvertDataEvent extends Event
         $this->fieldnames = $fieldnames;
     }
 
-
     /**
      * @return array
      */
@@ -124,7 +110,6 @@ class ConvertDataEvent extends Event
     {
         return $this->data;
     }
-
 
     /**
      * @param array $data

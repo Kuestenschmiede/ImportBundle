@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -13,7 +13,6 @@
 namespace con4gis\ImportBundle\Classes\Listener;
 
 use con4gis\CoreBundle\Resources\contao\classes\C4GUtils;
-use con4gis\CoreBundle\Resources\contao\models\C4gLogModel;
 use con4gis\CoreBundle\Resources\contao\models\C4gSettingsModel;
 use Contao\Database;
 use Contao\Request;
@@ -27,20 +26,16 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class SaveDataListener
 {
-
-
     /**
      * Doctrine
      * @var null
      */
     protected $entityManager = null;
 
-
     /**
      * @var Database|null
      */
     protected $db = null;
-
 
     /**
      * AreaImport constructor.
@@ -48,10 +43,9 @@ class SaveDataListener
      */
     public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager    = $entityManager;
-        $this->db               = Database::getInstance();
+        $this->entityManager = $entityManager;
+        $this->db = Database::getInstance();
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
@@ -61,21 +55,20 @@ class SaveDataListener
      */
     public function onSaveDataTruncateTable(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $tableName  = $settings->getSrctable();
-        
+        $settings = $event->getSettings();
+        $tableName = $settings->getSrctable();
+
         // also truncate the table to be created
-        if ($tableName === "") {
+        if ($tableName === '') {
             $tableName = $settings->getSrctablename();
         }
 
         if ($settings->getTruncatetable() && $tableName) {
             $connection = $this->entityManager->getConnection();
-            $platform   = $connection->getDatabasePlatform();
+            $platform = $connection->getDatabasePlatform();
             $connection->executeUpdate($platform->getTruncateTableSQL($tableName, true));
         }
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
@@ -85,14 +78,14 @@ class SaveDataListener
      */
     public function onSaveDataCreateTable(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $tableName  = $settings->getSrctablename();
+        $settings = $event->getSettings();
+        $tableName = $settings->getSrctablename();
 
         if ($settings->getSourcekind() == 'create' && $tableName) {
             if (!$this->db->tableExists($tableName)) {
                 $query = "CREATE TABLE IF NOT EXISTS $tableName (";
-                $query .= "id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,";
-                $query .= "tstamp INT(10) NOT NULL default 0,";
+                $query .= 'id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,';
+                $query .= 'tstamp INT(10) NOT NULL default 0,';
             } else {
                 $query = "ALTER TABLE $tableName";
             }
@@ -100,14 +93,13 @@ class SaveDataListener
             $fields = $settings->getFieldnames();
 
             if (is_array($fields) && count($fields)) {
-
                 foreach ($fields as $field) {
                     if ($field['destfields'] != 'id' && $field['destfields'] != 'tstamp') {
                         if ($this->db->tableExists($tableName)) {
                             if ($this->db->fieldExists($field['destfields'], $tableName)) {
                                 $query .= " CHANGE {$field['destfields']}";
                             } else {
-                                $query .= " ADD ";
+                                $query .= ' ADD ';
                             }
                         }
                         $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'];
@@ -138,14 +130,13 @@ class SaveDataListener
                 if (!$this->db->tableExists($tableName)) {
                     $query .= ") ENGINE='InnoDB' COLLATE 'utf8mb4_general_ci';";
                 } else {
-                    $query .= ";";
+                    $query .= ';';
                 }
 
                 $this->db->execute($query);
             }
         }
     }
-
 
     /**
      * Löscht die Felder, die nicht in der Zieltabelle vorkommen.
@@ -155,13 +146,13 @@ class SaveDataListener
      */
     public function onConvertDeleteFields(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $table      = $settings->getSrctable();
-        $data       = $event->getData();
+        $settings = $event->getSettings();
+        $table = $settings->getSrctable();
+        $data = $event->getData();
 
         for ($i = 0; $i < count($data); $i++) {
-            $tmpdata = array();
-            $row     = $data[$i];
+            $tmpdata = [];
+            $row = $data[$i];
 
             foreach ($row as $field => $value) {
                 if ($this->db->fieldExists($field, $table)) {
@@ -177,19 +168,19 @@ class SaveDataListener
 
         $event->setData($data);
     }
-    
+
     public function onSaveDataConvertAddresses(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
         $settings = $event->getSettings();
-        if ($settings->getImportaddresses() !== "1") {
+        if ($settings->getImportaddresses() !== '1') {
             return;
         }
-        if ($settings->getAddressfields() === ""
-            || $settings->getGeoxfield() === ""
-            || $settings->getGeoyfield() === "") {
+        if ($settings->getAddressfields() === ''
+            || $settings->getGeoxfield() === ''
+            || $settings->getGeoyfield() === '') {
             return;
         }
-        
+
         $c4gSettings = C4gSettingsModel::findSettings();
         if (!$c4gSettings->con4gisIoKey || !$c4gSettings->con4gisIoUrl) {
             return;
@@ -199,18 +190,18 @@ class SaveDataListener
         $arrAddressFields = unserialize($addressFields);
         $geoxField = $settings->getGeoxfield();
         $geoyField = $settings->getGeoyfield();
-        $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', "", false);
+        $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', '', false);
         $key = $keyForward['key'];
-        $url = $c4gSettings->con4gisIoUrl . "search.php?format=json&q=";
+        $url = $c4gSettings->con4gisIoUrl . 'search.php?format=json&q=';
         $data = $event->getData();
-        
+
         foreach ($data as $index => $datum) {
-            $queryString = "";
+            $queryString = '';
             $first = true;
             foreach ($arrAddressFields as $addressField) {
-                if ($datum[$addressField] !== null && $datum[$addressField] !== "") {
+                if ($datum[$addressField] !== null && $datum[$addressField] !== '') {
                     if (!$first) {
-                        $queryString .= " ";
+                        $queryString .= ' ';
                     }
                     $queryString .= $datum[$addressField];
                 }
@@ -218,15 +209,14 @@ class SaveDataListener
                     $first = false;
                 }
             }
-            
-            $queryUrl = $url . urlencode($queryString) . "&key=" . $key;
+
+            $queryUrl = $url . urlencode($queryString) . '&key=' . $key;
             $request = new Request();
             $request->send($queryUrl);
             if ($request->response) {
                 try {
                     $response = \GuzzleHttp\json_decode($request->response, true);
                 } catch (\Exception $e) {
-                    C4gLogModel::addLogEntry('import', $e->getMessage());
                     continue;
                 }
                 $geox = $response[0]['lon'];
@@ -236,9 +226,8 @@ class SaveDataListener
                 $data[$index] = $datum;
             }
         }
-        
+
         $event->setData($data);
-    
     }
 
     /**
@@ -249,10 +238,10 @@ class SaveDataListener
      */
     public function onSaveDataInsert(SaveDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $tableName  = $settings->getSrctable();
-        $tableName  = ($tableName) ? $tableName : $settings->getSrctablename();
-        $data       = $event->getData();
+        $settings = $event->getSettings();
+        $tableName = $settings->getSrctable();
+        $tableName = ($tableName) ? $tableName : $settings->getSrctablename();
+        $data = $event->getData();
 
         if (is_array($data) && count($data) && $tableName) {
             foreach ($data as $datum) {
@@ -261,7 +250,7 @@ class SaveDataListener
 
                 if (isset($datum['id'])) {
                     // Wenn Datensatz vorhanden ist, soll ein UPDATE ausgeführt werden!
-                    $searchQuery  = "SELECT * FROM $tableName WHERE id = {$datum['id']}";
+                    $searchQuery = "SELECT * FROM $tableName WHERE id = {$datum['id']}";
                     $searchResult = $this->db->execute($searchQuery);
 
                     if ($searchResult->numRows) {
@@ -276,7 +265,7 @@ class SaveDataListener
                     $query .= "`$field` = '$value', ";
                 }
 
-                $query = substr($query, 0, strlen($query)-2) . $where;
+                $query = substr($query, 0, strlen($query) - 2) . $where;
                 $this->db->execute($query);
             }
         }

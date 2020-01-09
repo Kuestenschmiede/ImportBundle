@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -13,7 +13,6 @@
 namespace con4gis\ImportBundle\Classes\Listener;
 
 use con4gis\CoreBundle\Classes\Helper\StringHelper;
-use con4gis\ProjectsBundle\Classes\Common\C4GBrickCommon;
 use Contao\Database;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -24,14 +23,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ConvertDataListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ConvertDataListener constructor.
@@ -45,7 +41,6 @@ class ConvertDataListener
             $this->database = Database::getInstance();
         }
     }
-
 
     /**
      * Erstellt aus dem CSV-String ein Array mit den einzelnen Zeilen.
@@ -63,7 +58,6 @@ class ConvertDataListener
         }
     }
 
-
     /**
      * Erstellt bei der Zuorgnung nach Name eine Liste der Felder.
      * @param ConvertDataEvent         $event
@@ -72,23 +66,22 @@ class ConvertDataListener
      */
     public function onConvertFields(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $data       = $event->getData();
+        $settings = $event->getSettings();
+        $data = $event->getData();
 
         if ($settings->getHeaderline()) {
             // Spaltennamen auslesen, wenn Spaltennamen vorhanden.
-            $sh         = new StringHelper();
+            $sh = new StringHelper();
             // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
-            
-            $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
-            $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
-            $headline   = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+
+            $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
+            $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
+            $headline = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
             $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
             $event->setFieldnames($fieldnames);
             $event->setData($data); // wegen dem Löschen der Überschriften!
         }
     }
-
 
     /**
      * Konvertiert die einzelnen Reihen der zu importiernen Daten in je ein Array.
@@ -98,19 +91,18 @@ class ConvertDataListener
      */
     public function onConvertRowsToArrays(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $data       = $event->getData();
+        $settings = $event->getSettings();
+        $data = $event->getData();
         //$data = array_map('str_getcsv', $data, array(';')); // funktioniert nur beim ersten Element!
 
-        for ($i=0; $i<count($data); $i++) {
-            $delimiter  = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
-            $enclosure  = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
+        for ($i = 0; $i < count($data); $i++) {
+            $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
+            $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
             $data[$i] = str_getcsv($data[$i], $delimiter, $enclosure);
         }
 
         $event->setData($data);
     }
-
 
     /**
      * Ordnet die Daten den Datenbankfelden anhand der Namen der Importfelder zu.
@@ -120,28 +112,28 @@ class ConvertDataListener
      */
     public function onConvertRows(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings   = $event->getSettings();
-        $data       = $event->getData();
+        $settings = $event->getSettings();
+        $data = $event->getData();
         $sourcekind = $settings->getSourcekind();
-        $srcFields  = $event->getFieldnames();
+        $srcFields = $event->getFieldnames();
         $destFields = $settings->getNamedfields();
         $destFields = ($destFields) ? $destFields : $settings->getFieldnames(); // Felder beim Anlegen der Tabelle!
-        $tmpdata    = array();
+        $tmpdata = [];
 
         if (is_array($data) && count($data)) {
             foreach ($data as $row) {
                 if (is_array($row) && count($row) && isset($row[0]) && $row[0] !== null) {
-                    $tmprow = array();
+                    $tmprow = [];
 
                     foreach ($destFields as $field) {
                         if (isset($field['destfields'])) {
-                            $dbField      = $field['destfields'];
+                            $dbField = $field['destfields'];
                             $defaultValue = $field['defaultvalue'];
-                            $override     = $field['overridevalue'];
+                            $override = $field['overridevalue'];
 
                             if (isset($field['srccolumnname']) && $field['srccolumnname']) {
                                 $csvField = $field['srccolumnname'];
-                            } else if (isset($field['csvField']) && $field['csvField']) {
+                            } elseif (isset($field['csvField']) && $field['csvField']) {
                                 $csvField = $field['csvField'];
                             } else {
                                 $csvField = '';
@@ -162,7 +154,6 @@ class ConvertDataListener
                                 ) {
                                     $tmprow[$dbField] = $defaultValue;
                                 } else {
-
                                     if (isset($row[$cloumnNumber])) {
                                         if ($row[$cloumnNumber] !== 'NULL' &&
                                             $row[$cloumnNumber] !== 'Null' &&
@@ -190,7 +181,6 @@ class ConvertDataListener
             }
         }
     }
-
 
     /**
      * Erzeugt die Standardfelder (tstamp und uuid) falls sie nicht vorhanden sind.

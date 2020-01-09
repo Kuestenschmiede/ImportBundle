@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -25,7 +25,7 @@ class BeforeSaveDataEvent extends Event
      * Data to save
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Entity mit den Einstellungen für den Import
@@ -37,7 +37,7 @@ class BeforeSaveDataEvent extends Event
      * Zusätzliches Feld für Daten, die für Import-Erweiterungen gebraucht werden.
      * @var array
      */
-    protected $additionalData = array();
+    protected $additionalData = [];
 
     /**
      * @return array

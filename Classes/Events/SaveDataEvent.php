@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class SaveDataEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.import.save';
-
 
     /**
      * Entity mit den Einstellungen für den Import
@@ -34,13 +31,11 @@ class SaveDataEvent extends Event
      */
     protected $settings = null;
 
-
     /**
      * Daten für das Speichern in der Datenbank
      * @var array
      */
-    protected $data = array();
-
+    protected $data = [];
 
     /**
      * @return null
@@ -50,7 +45,6 @@ class SaveDataEvent extends Event
         return $this->settings;
     }
 
-
     /**
      * @param null $settings
      */
@@ -59,7 +53,6 @@ class SaveDataEvent extends Event
         $this->settings = $settings;
     }
 
-
     /**
      * @return array
      */
@@ -67,7 +60,6 @@ class SaveDataEvent extends Event
     {
         return $this->data;
     }
-
 
     /**
      * @param array $data
