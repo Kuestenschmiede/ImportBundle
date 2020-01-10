@@ -63,6 +63,7 @@ $GLOBALS['TL_LANG'][$strName]['geoyfield']      = array('Field for Y coordinate'
  * Legends
  */
 $GLOBALS['TL_LANG'][$strName]['title_legend']       = 'Title';
+$GLOBALS['TL_LANG'][$strName]['sourcekind_legend']  = 'Import type';
 $GLOBALS['TL_LANG'][$strName]['srctable_legend']    = 'Table';
 $GLOBALS['TL_LANG'][$strName]['srcfile_legend']     = 'Source file';
 $GLOBALS['TL_LANG'][$strName]['expert_legend']      = 'Expert Settings';
