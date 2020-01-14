@@ -27,14 +27,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true/*,
-		'sql' => array
-		(
-			'keys' => array
-			(
-				'id' => 'primary'
-			)
-		)*/
+		'enableVersioning'            => true
 	),
 
 	// List

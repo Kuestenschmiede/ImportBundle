@@ -12,7 +12,8 @@
  */
 
 $GLOBALS['con4gis']['import']['installed'] = true;
-array_insert($GLOBALS['BE_MOD']['con4gis'], array_search('con4gis', array_keys($GLOBALS['BE_MOD'])) + 1, array(
+
+$GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array(
     'c4g_import' => array(
         'tables'        => array('tl_c4g_import'),
         'runimport'     => array('\con4gis\ImportBundle\Classes\Contao\Modules\ModulImport', 'runImport')
