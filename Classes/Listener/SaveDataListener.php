@@ -12,7 +12,7 @@
  */
 namespace con4gis\ImportBundle\Classes\Listener;
 
-use con4gis\CoreBundle\Resources\contao\classes\C4GUtils;
+use con4gis\CoreBundle\Classes\C4GUtils;
 use con4gis\CoreBundle\Resources\contao\models\C4gSettingsModel;
 use Contao\Database;
 use Contao\Request;
