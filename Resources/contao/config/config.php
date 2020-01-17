@@ -13,8 +13,10 @@
 
 $GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array(
     'c4g_import' => array(
-        'tables'        => array('tl_c4g_import'),
-        'runimport'     => array('\con4gis\ImportBundle\Classes\Contao\Modules\ModulImport', 'runImport')
+        'brick' => 'import',
+        'tables'    => array('tl_c4g_import'),
+        'runimport' => array('\con4gis\ImportBundle\Classes\Contao\Modules\ModulImport', 'runImport'),
+        'icon'      => 'bundles/con4giscore/images/be-icons/edit.svg'
     )
 ));
 
