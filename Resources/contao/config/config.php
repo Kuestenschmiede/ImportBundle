@@ -28,7 +28,3 @@ $GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array
 $GLOBALS['con4gis']['importsettings']['addditionalSettings'] = array(
     'filerenamesuffix' => 'old'
 );
-
-if(TL_MODE == "BE") {
-    $GLOBALS['TL_CSS'][] = '/bundles/con4gisimport/css/con4gis.css';
-}
