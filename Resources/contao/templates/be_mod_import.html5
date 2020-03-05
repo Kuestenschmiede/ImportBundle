@@ -14,7 +14,7 @@
 </style>
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
     <div id="tl_buttons">
-        <a href="<?php echo \Contao\Environment::get('scriptName'); ?>/contao?do=import" class="header_back" title="" accesskey="b" onclick="Backend.getScrollOffset()">Zurück</a>
+        <a href="<?php echo \Contao\Environment::get('scriptName'); ?>/contao?do=c4g_import" class="header_back" title="" accesskey="b" onclick="Backend.getScrollOffset()">Zurück</a>
     </div>
 
     <div class="inner">
