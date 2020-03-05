@@ -106,6 +106,7 @@ class ImportRunListener
 
         if (is_file($path)) {
             $content = file_get_contents($path);
+            $content = mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content));
             $event->setImportData($content);
         }
     }
