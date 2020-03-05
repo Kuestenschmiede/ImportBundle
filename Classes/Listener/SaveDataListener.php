@@ -248,7 +248,11 @@ class SaveDataListener
                 $query = "INSERT INTO $tableName SET ";
                 $where = '';
 
-                if (isset($datum['id'])) {
+                if (isset($datum['id']) && $datum['id'] === '') {
+                    continue;
+                }
+
+                if (!empty($datum['id'])) {
                     // Wenn Datensatz vorhanden ist, soll ein UPDATE ausgeführt werden!
                     $searchQuery = "SELECT * FROM $tableName WHERE id = {$datum['id']}";
                     $searchResult = $this->db->execute($searchQuery);

@@ -615,7 +615,7 @@ class TlC4gImport extends BaseEntity
      */
     public function getImportaddresses(): string
     {
-        return $this->importaddresses;
+        return $this->importaddresses ?: '';
     }
     
     /**
