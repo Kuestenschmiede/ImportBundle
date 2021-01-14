@@ -50,12 +50,7 @@ class ConvertDataListener
      */
     public function onConvertDataToArray(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $importData = $event->getImportData();
-
-        if ($importData) {
-            $data = explode(PHP_EOL, $importData);
-            $event->setData($data);
-        }
+        $event->setData($event->getImportData());
     }
 
     /**
@@ -76,8 +71,11 @@ class ConvertDataListener
 
             $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
-            $headline = $sh->removeSpecialSigns(array_shift($data), 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
-            $fieldnames = str_getcsv($headline, $delimiter, $enclosure);
+            $fieldnames = array_shift($data);
+            foreach ($fieldnames as $key => $value) {
+                $fieldnames[$key] = $sh->removeSpecialSigns($value, 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+            }
+
             $event->setFieldnames($fieldnames);
             $event->setData($data); // wegen dem Löschen der Überschriften!
         }
@@ -91,17 +89,7 @@ class ConvertDataListener
      */
     public function onConvertRowsToArrays(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $settings = $event->getSettings();
-        $data = $event->getData();
-        //$data = array_map('str_getcsv', $data, array(';')); // funktioniert nur beim ersten Element!
 
-        for ($i = 0; $i < count($data); $i++) {
-            $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
-            $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
-            $data[$i] = str_getcsv($data[$i], $delimiter, $enclosure);
-        }
-
-        $event->setData($data);
     }
 
     /**

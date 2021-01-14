@@ -33,9 +33,9 @@ class ConvertDataEvent extends Event
 
     /**
      * Daten für den Import.
-     * @var string
+     * @var array
      */
-    protected $importData = '';
+    protected $importData = [];
 
     /**
      * Array mit den Spaltenüberschriften
@@ -72,17 +72,17 @@ class ConvertDataEvent extends Event
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getImportData(): string
+    public function getImportData(): array
     {
         return $this->importData;
     }
 
     /**
-     * @param string $importData
+     * @param array $importData
      */
-    public function setImportData(string $importData)
+    public function setImportData(array $importData)
     {
         $this->importData = $importData;
     }

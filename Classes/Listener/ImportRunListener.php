@@ -102,12 +102,21 @@ class ImportRunListener
      */
     public function onImportRunLoadData(ImportRunEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $path = $event->getImportFile();
+        $file = $event->getImportFile();
+        $settings = $event->getSettings();
+        $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
+        $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
 
-        if (is_file($path)) {
-            $content = file_get_contents($path);
-            $content = mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content));
-            $event->setImportData($content);
+
+        if (is_file($file)) {
+            $file = fopen($file, 'r');
+            $data = [];
+            $line = fgetcsv($file, 0, $delimiter , $enclosure , "\\");
+            while ($line !== false) {
+                $data[] = mb_convert_encoding($line, 'UTF-8', mb_detect_encoding($line));
+                $line = fgetcsv($file, 0, $delimiter , $enclosure , "\\");
+            }
+            $event->setImportData($data);
         }
     }
 

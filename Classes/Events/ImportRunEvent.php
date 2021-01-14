@@ -45,9 +45,9 @@ class ImportRunEvent extends QueueEvent
 
     /**
      * Daten für den Import.
-     * @var string
+     * @var array
      */
-    protected $importData = '';
+    protected $importData = [];
 
     /**
      * Daten für das Speichern in der Datenbank
@@ -115,17 +115,17 @@ class ImportRunEvent extends QueueEvent
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getImportData(): string
+    public function getImportData(): array
     {
         return $this->importData;
     }
 
     /**
-     * @param string $importData
+     * @param array $importData
      */
-    public function setImportData(string $importData)
+    public function setImportData(array $importData)
     {
         $this->importData = $importData;
     }
