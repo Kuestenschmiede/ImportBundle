@@ -89,7 +89,6 @@ class ConvertDataListener
      */
     public function onConvertRowsToArrays(ConvertDataEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-
     }
 
     /**
@@ -127,7 +126,7 @@ class ConvertDataListener
                                 $csvField = '';
                             }
 
-                            $csvField = str_replace('.', '', $csvField);
+                            $csvField = str_replace(['.',' '], '', $csvField);
 
                             if ($csvField !== '') {
                                 $cloumnNumber = array_search($csvField, $srcFields);

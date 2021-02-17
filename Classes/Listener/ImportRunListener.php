@@ -107,14 +107,13 @@ class ImportRunListener
         $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
         $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
 
-
         if (is_file($file)) {
             $file = fopen($file, 'r');
             $data = [];
-            $line = fgetcsv($file, 0, $delimiter , $enclosure , "\\");
+            $line = fgetcsv($file, 0, $delimiter, $enclosure, '\\');
             while ($line !== false) {
                 $data[] = mb_convert_encoding($line, 'UTF-8', mb_detect_encoding($line));
-                $line = fgetcsv($file, 0, $delimiter , $enclosure , "\\");
+                $line = fgetcsv($file, 0, $delimiter, $enclosure, '\\');
             }
             $event->setImportData($data);
         }
