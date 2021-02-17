@@ -192,7 +192,10 @@ class SaveDataListener
         $geoyField = $settings->getGeoyfield();
         $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', '', false);
         $key = $keyForward['key'];
-        $url = $c4gSettings->con4gisIoUrl . 'search.php?format=json&q=';
+        $lastChar = substr($c4gSettings->con4gisIoUrl, strlen($c4gSettings->con4gisIoUrl)-1);
+
+        $addChar = ($lastChar != '/') ? '/' : '';
+        $url = $c4gSettings->con4gisIoUrl. $addChar . 'search.php?format=json&q=';
         $data = $event->getData();
 
         foreach ($data as $index => $datum) {
