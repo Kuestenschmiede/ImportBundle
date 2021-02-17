@@ -212,7 +212,7 @@ class SaveDataListener
                     $first = false;
                 }
             }
-
+            $queryString .= "&limit=1";
             $queryUrl = $url . urlencode($queryString) . '&key=' . $key;
             $request = new Request();
             if ($_SERVER['HTTP_REFERER']) {
