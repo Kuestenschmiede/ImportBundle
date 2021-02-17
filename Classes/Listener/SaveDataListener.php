@@ -212,6 +212,9 @@ class SaveDataListener
 
             $queryUrl = $url . urlencode($queryString) . '&key=' . $key;
             $request = new Request();
+            if ($_SERVER['HTTP_REFERER']) {
+              $request->setHeader('Referer', $_SERVER['HTTP_REFERER'])
+            }
             $request->send($queryUrl);
             if ($request->response) {
                 try {
