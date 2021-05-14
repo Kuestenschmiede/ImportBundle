@@ -23,7 +23,7 @@
   },
   "require": {
     "contao/core-bundle": "^4.4",
-    "con4gis/core": "^4.1",
+    "con4gis/core": "^4.2",
     "con4gis/queue": "^1.3",
     "doctrine/orm": "^2.8.1",
     "doctrine/data-fixtures": "^1.4.4",
