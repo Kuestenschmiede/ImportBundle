@@ -5,7 +5,7 @@
  * @version 8
  * @author con4gis contributors (see "authors.txt")
  * @license LGPL-3.0-or-later
- * @copyright (c) 2010-2021, by Küstenschmiede GmbH Software & Design
+ * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
 namespace con4gis\ImportBundle\Classes\Listener;
@@ -185,7 +185,7 @@ class SaveDataListener
         }
 
         $addressFields = $settings->getAddressfields();
-        $arrAddressFields = unserialize($addressFields);
+        $arrAddressFields = \Contao\StringUtil::deserialize($addressFields);
         $geoxField = $settings->getGeoxfield();
         $geoyField = $settings->getGeoyfield();
         $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', '', false);
