@@ -10,12 +10,9 @@
  */
 namespace con4gis\ImportBundle\ContaoManager;
 
-use con4gis\ApiBundle\Con4gisApiBundle;
 use con4gis\CoreBundle\con4gisCoreBundle;
 use con4gis\ExportBundle\con4gisExportBundle;
 use con4gis\ImportBundle\con4gisImportBundle;
-use con4gis\MapsBundle\con4gisMapsBundle;
-use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
