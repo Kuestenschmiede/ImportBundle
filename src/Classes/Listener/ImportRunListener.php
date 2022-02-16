@@ -110,7 +110,10 @@ class ImportRunListener
             $data = [];
             $line = fgetcsv($file, 0, $delimiter, $enclosure, '\\');
             while ($line !== false) {
-                $data[] = mb_convert_encoding($line, 'UTF-8', mb_detect_encoding($line));
+                foreach ($line as $key => $item) {
+                    $line[$key] = mb_convert_encoding($item, 'UTF-8', mb_detect_encoding($item));;
+                }
+                $data[] = $line;
                 $line = fgetcsv($file, 0, $delimiter, $enclosure, '\\');
             }
             $event->setImportData($data);
