@@ -231,7 +231,7 @@ class TlC4gImport
                 if (is_array($lines) && count($lines)) {
                     $line = array_shift($lines);
 
-                    if ($line && $delimiter && $enclosure) {
+                    if ($line && $delimiter) {
                         $fields = str_getcsv($line, $delimiter, $enclosure);
                         $i = 1;
                         if (count($fields) === 1) {
