@@ -20,15 +20,11 @@ $strName = 'tl_c4g_import';
  */
 $GLOBALS['TL_DCA'][$strName] = array
 (
-
-	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => true
 	),
-
-	// List
 	'list' => array
 	(
 		'sorting' => array
@@ -97,27 +93,19 @@ $GLOBALS['TL_DCA'][$strName] = array
             )
 		)
 	),
-
-	// Select
 	'select' => array
 	(
 		'buttons_callback' => array()
 	),
-
-	// Edit
 	'edit' => array
 	(
 		'buttons_callback' => array()
 	),
-
-	// Palettes
 	'palettes' => array
 	(
 		'__selector__'                => array('sourcekind', 'useinterval', 'importaddresses'),
 		'default'                     => '{title_legend},title,description;{srcfile_legend},srcfile,headerline,renamefile,truncatetable;{sourcekind_legend},sourcekind,importaddresses;{expert_legend:hide},delimiter,enclosure;{usequeue_legend},usequeue,useinterval;'
 	),
-
-	// Subpalettes
 	'subpalettes' => array
 	(
 	    'sourcekind_import'           => '{srctable_legend},saveTlTables,srctable,namedfields',
@@ -125,8 +113,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         'useinterval'                 => 'intervalkind,intervalcount',
         'importaddresses'             => 'addressfields,geotable,geoxfield,geoyfield'
 	),
-
-	// Fields
 	'fields' => array
 	(
 	    'title' => array
