@@ -136,7 +136,7 @@ class ImportRunListener
         $convertEvent->setImportData($importData);
         $convertEvent->setData($event->getData());
         $convertEvent->setAdditionalData($additionalData);
-        $dispatcher->dispatch($convertEvent::NAME, $convertEvent);
+        $dispatcher->dispatch($convertEvent, $convertEvent::NAME);
         $data = $convertEvent->getData();
         $event->setData($data);
     }
@@ -156,7 +156,7 @@ class ImportRunListener
         $beforeSaveEvent->setData($data);
         $beforeSaveEvent->setSettings($settings);
         $beforeSaveEvent->setAdditionalData($additionalData);
-        $dispatcher->dispatch($beforeSaveEvent::NAME, $beforeSaveEvent);
+        $dispatcher->dispatch($beforeSaveEvent, $beforeSaveEvent::NAME);
         $data = $beforeSaveEvent->getData();
         $event->setData($data);
     }
@@ -174,7 +174,7 @@ class ImportRunListener
         $saveEvent = new SaveDataEvent();
         $saveEvent->setSettings($settings);
         $saveEvent->setData($data);
-        $dispatcher->dispatch($saveEvent::NAME, $saveEvent);
+        $dispatcher->dispatch($saveEvent, $saveEvent::NAME);
     }
 
     /**

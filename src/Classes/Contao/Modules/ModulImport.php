@@ -99,7 +99,7 @@ class ModulImport
     {
         $event = new ImportRunEvent();
         $event->setImportId($this->importId);
-        $this->dispatcher->dispatch($event::NAME, $event);
+        $this->dispatcher->dispatch($event, $event::NAME);
         $this->template->dataCount = $event->getDataCount();
 
         return $this->template->parse();
