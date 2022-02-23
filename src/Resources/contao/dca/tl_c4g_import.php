@@ -117,7 +117,6 @@ $GLOBALS['TL_DCA'][$strName] = array
 	(
 	    'title' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['title'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -125,7 +124,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'description' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['description'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -133,7 +131,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srcfile' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srcfile'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'fileTree',
@@ -141,7 +138,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'renamefile' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['renamefile'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -149,7 +145,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'headerline' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['headerline'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -157,7 +152,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'truncatetable' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['truncatetable'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -165,7 +159,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'sourcekind' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['sourcekind'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -175,7 +168,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srctable' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srctable'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -184,7 +176,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'namedfields' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['namedfields'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
@@ -195,7 +186,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                 (
                     'destfields' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['destfields'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'select',
@@ -204,7 +194,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'srccolumnname' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['srccolumnname'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'select',
@@ -213,7 +202,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'defaultvalue' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['defaultvalue'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
@@ -221,7 +209,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'overridevalue' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['overridevalue'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'checkbox'
@@ -230,7 +217,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             )
         ),
         'importaddresses' => [
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['importaddresses'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -238,7 +224,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ],
         'addressfields' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['addressfields'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -247,7 +232,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'geoxfield' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['geoxfield'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -256,7 +240,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'geoyfield' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['geoyfield'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -265,7 +248,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srctablename' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srctablename'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -274,7 +256,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'fieldnames' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['fieldnames'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'multiColumnWizard',
@@ -287,7 +268,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                 (
                     'destfields' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['destfields'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
@@ -295,7 +275,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'csvField' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['csvField'],
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'select',
@@ -304,7 +283,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'fieldtype' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['fieldtype'],
                         'default'                 => 'varchar',
                         'exclude'                 => true,
                         'inputType'               => 'text',
@@ -312,7 +290,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                     ),
                     'fieldlength' => array
                     (
-                        'label'                   => &$GLOBALS['TL_LANG'][$strName]['fieldlength'],
                         'default'                 => '255',
                         'exclude'                 => true,
                         'inputType'               => 'text',
@@ -323,7 +300,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'additionaldata' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['additionaldata'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -331,7 +307,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'delimiter' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['delimiter'],
             'exclude'                 => true,
             'default'                 => ';',
             'inputType'               => 'text',
@@ -339,7 +314,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'enclosure' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['enclosure'],
             'exclude'                 => true,
             'default'                 => '"',
             'inputType'               => 'text',
@@ -347,7 +321,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'saveTlTables' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['saveTlTables'],
             'exclude'                 => true,
             'default'                 => false,
             'inputType'               => 'checkbox',
@@ -355,7 +328,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'usequeue' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['usequeue'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -364,7 +336,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'useinterval' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['useinterval'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'checkbox',
@@ -372,7 +343,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'intervalkind' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalkind'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
@@ -382,7 +352,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'intervalcount' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalcount'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
