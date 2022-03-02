@@ -317,7 +317,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'default'                 => '"',
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true),
+            'eval'                    => array('maxlength'=>1, 'tl_class'=>'w50', 'nospace'=>true, 'preserveTags'=>true),
         ),
         'saveTlTables' => array
         (
