@@ -61,11 +61,13 @@ class SaveDataListener
             $tableName = $settings->getSrctablename();
         }
 
-        if ($settings->getTruncatetable() && $tableName) {
-            $connection = $this->entityManager->getConnection();
-            $platform = $connection->getDatabasePlatform();
-            $connection->executeUpdate($platform->getTruncateTableSQL($tableName, true));
-        }
+        try {
+            if ($settings->getTruncatetable() && $tableName) {
+                $connection = $this->entityManager->getConnection();
+                $platform = $connection->getDatabasePlatform();
+                $connection->executeUpdate($platform->getTruncateTableSQL($tableName, true));
+            }
+        } catch (\Throwable $throwable) {}
     }
 
     /**
