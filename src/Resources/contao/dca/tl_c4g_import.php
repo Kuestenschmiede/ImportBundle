@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['runimport'],
                 'href'                => 'key=runimport',
-                'icon'                => 'web/bundles/con4gisimport/images/be-icons/import.svg',
+                'icon'                => 'bundles/con4gisimport/images/be-icons/import.svg',
                 'button_callback'     => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbGenerateButton'),
                 'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['importConfirm'] . '\'))return false;Backend.getScrollOffset()"'
             )
