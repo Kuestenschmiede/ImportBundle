@@ -24,9 +24,9 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "contao/core-bundle": "^4.9",
-    "con4gis/core": "^6.0.4",
-    "con4gis/queue": "^1.5.2",
-    "doctrine/orm": "^2.8.1",
+    "con4gis/core": "^6.0.16",
+    "con4gis/queue": "^1.5.3",
+    "doctrine/orm": "^2.8.5",
     "doctrine/data-fixtures": "^1.4.4",
     "doctrine/persistence": "^2.3.0"
   },
