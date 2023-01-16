@@ -103,6 +103,9 @@ class ConvertDataListener
         $srcFields = $event->getFieldnames();
         $destFields = $settings->getNamedfields();
         $destFields = ($destFields) ? $destFields : $settings->getFieldnames(); // Felder beim Anlegen der Tabelle!
+        $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
+        $sh = new StringHelper();
+
         $tmpdata = [];
 
         if (is_array($data) && count($data)) {
@@ -127,6 +130,9 @@ class ConvertDataListener
                             $csvField = str_replace(['.',' '], '', $csvField);
 
                             if ($csvField !== '') {
+                                // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
+                                $csvField = $sh->removeSpecialSigns($csvField, 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+
                                 $cloumnNumber = array_search($csvField, $srcFields);
 
                                 if ($defaultValue !== null && $defaultValue !== '' &&
