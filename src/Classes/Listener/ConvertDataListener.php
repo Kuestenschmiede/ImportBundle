@@ -131,7 +131,7 @@ class ConvertDataListener
 
                             if ($csvField !== '') {
                                 // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
-                                $csvField = $sh->removeSpecialSigns($csvField, 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+                                $csvField = $sh->removeSpecialSigns($csvField, 'a-zA-Zß0-9' . preg_quote("'\+*?[^]$(){}=!<>|:-#" . $delimiter));
 
                                 $cloumnNumber = array_search($csvField, $srcFields);
 

@@ -270,8 +270,6 @@ class SaveDataListener
                 }
 
                 foreach ($datum as $field => $value) {
-                    // replace commas with dots to prevent SQL syntax error
-                    $value = str_replace(',', '.', $value);
                     $query .= "`$field` = '$value', ";
                 }
 
