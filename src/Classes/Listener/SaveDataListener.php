@@ -270,6 +270,9 @@ class SaveDataListener
                 }
 
                 foreach ($datum as $field => $value) {
+                    if (is_numeric(str_replace(',','.', $value))) {
+                        $value = str_replace(',','.', $value);
+                    }
                     $query .= "`$field` = '$value', ";
                 }
 
