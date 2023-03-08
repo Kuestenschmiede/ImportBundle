@@ -26,7 +26,7 @@ class ConvertDataListener
      * @var \Contao\Database|null
      */
     protected $database = null;
-
+    protected $sh = null;
     /**
      * ConvertDataListener constructor.
      * @param Database|null $database
@@ -38,6 +38,7 @@ class ConvertDataListener
         } else {
             $this->database = Database::getInstance();
         }
+        $this->sh = new StringHelper();
     }
 
     /**
@@ -64,14 +65,14 @@ class ConvertDataListener
 
         if ($settings->getHeaderline()) {
             // Spaltennamen auslesen, wenn Spaltennamen vorhanden.
-            $sh = new StringHelper();
+
             // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
 
             $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
             $enclosure = ($settings->getEnclosure() != '') ? $settings->getEnclosure() : '"';
             $fieldnames = array_shift($data);
             foreach ($fieldnames as $key => $value) {
-                $fieldnames[$key] = $sh->removeSpecialSigns($value, 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
+                $fieldnames[$key] = $this->sh->removeSpecialSigns($value, 'a-zA-Zß0-9' . preg_quote("\+*?[^]$(){}=!<>|:-#" . $delimiter));
             }
 
             $event->setFieldnames($fieldnames);
@@ -104,7 +105,6 @@ class ConvertDataListener
         $destFields = $settings->getNamedfields();
         $destFields = ($destFields) ? $destFields : $settings->getFieldnames(); // Felder beim Anlegen der Tabelle!
         $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
-        $sh = new StringHelper();
 
         $tmpdata = [];
 
@@ -128,10 +128,9 @@ class ConvertDataListener
                             }
 
                             $csvField = str_replace(['.',' '], '', $csvField);
-
                             if ($csvField !== '') {
                                 // Sonderzeichen entfernen, damit die Spaltenüberschriften wieder mit den Feldnamen des MCW übereinstimmen!
-                                $csvField = $sh->removeSpecialSigns($csvField, 'a-zA-Zß0-9' . preg_quote("'\+*?[^]$(){}=!<>|:-#" . $delimiter));
+                                $csvField = $this->sh->removeSpecialSigns($csvField, 'a-zA-Zß0-9' . preg_quote("'\+*?[^]$(){}=!<>|:-#" . $delimiter));
 
                                 $cloumnNumber = array_search($csvField, $srcFields);
 
@@ -151,7 +150,17 @@ class ConvertDataListener
                                             $row[$cloumnNumber] !== 'null' &&
                                             $row[$cloumnNumber] !== null
                                         ) {
-                                            $tmprow[$dbField] = $row[$cloumnNumber];
+                                            switch ($field['fieldtype']) {
+                                                case 'decimal':
+                                                    $tmprow[$dbField] = floatval($row[$cloumnNumber]);
+                                                    break;
+                                                case 'int':
+                                                    $tmprow[$dbField] = intval($row[$cloumnNumber]);
+                                                    break;
+                                                default:
+                                                    $tmprow[$dbField] = $row[$cloumnNumber];
+                                                    break;
+                                            }
                                         } else {
                                             $tmprow[$dbField] = null;
                                         }

@@ -103,8 +103,12 @@ class SaveDataListener
                             }
                         }
                         $query .= ' ' . $field['destfields'] . ' ' . $field['fieldtype'];
-                        if ($field['fieldtype'] !== 'TEXT') {
+                        if ($field['fieldtype'] !== 'TEXT' && $field['fieldtype'] !== 'decimal') {
                             $query .= '(' . $field['fieldlength'] . ')';
+                        }
+                        else if ($field['fieldtype'] !== 'TEXT') {
+                            $query .= '(' . $field['fieldlength'] . ',5)';
+
                         }
 
                         if ($field['fieldtype'] == 'varchar' || $field['fieldtype'] == 'char' || $field['fieldtype'] === 'TEXT') {
