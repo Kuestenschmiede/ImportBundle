@@ -28,10 +28,6 @@ class con4gisImportExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
-//        $loader->load('listeners.yml');
-    }
-    public function getAlias()
-    {
-        return "con4gis_import";
+        $loader->load('services.yml');
     }
 }

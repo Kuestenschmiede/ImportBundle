@@ -12,6 +12,7 @@ namespace con4gis\ImportBundle\Classes\Listener;
 
 use con4gis\ImportBundle\Classes\Events\BeforeSaveDataEvent;
 use Contao\FilesModel;
+use Contao\System;
 use Doctrine\ORM\EntityManager;
 use con4gis\CoreBundle\Classes\Helper\InputHelper;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
@@ -88,7 +89,8 @@ class ImportRunListener
         $srcfile = $importSettings->getSrcfile();
         $modleFiles = FilesModel::findByUuid($srcfile);
         $path = $modleFiles->path;
-        $path = TL_ROOT . '/' . $path;
+        $rootDir = System::getContainer()->getParameter('kernel.project_dir');
+        $path = $rootDir . '/' . $path;
         $event->setImportFile($path);
     }
 

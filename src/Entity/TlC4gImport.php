@@ -12,6 +12,7 @@ namespace con4gis\ImportBundle\Entity;
 
 use \Doctrine\ORM\Mapping as ORM;
 use con4gis\CoreBundle\Entity\BaseEntity;
+use Contao\StringUtil;
 
 /**
  * Class TlC4gImport
@@ -392,7 +393,7 @@ class TlC4gImport extends BaseEntity
      */
     public function getNamedfields(): array
     {
-        return deserialize($this->namedfields, true);
+        return StringUtil::deserialize($this->namedfields, true);
     }
 
 
@@ -446,7 +447,7 @@ class TlC4gImport extends BaseEntity
      */
     public function getFieldnames(): array
     {
-        return deserialize($this->fieldnames, true);
+        return StringUtil::deserialize($this->fieldnames, true);
     }
 
 
@@ -465,7 +466,7 @@ class TlC4gImport extends BaseEntity
      */
     public function getAdditionaldata($name = null)
     {
-        $data = deserialize($this->additionaldata, true);
+        $data = StringUtil::deserialize($this->additionaldata, true);
 
         if ($name) {
             if (isset($data[$name])) {

@@ -15,9 +15,12 @@ use con4gis\CoreBundle\Classes\Helper\StringHelper;
 use con4gis\CoreBundle\Classes\C4GUtils;
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
+use Contao\StringUtil;
 use Contao\Controller;
+use Contao\System;
 use Contao\Image;
 use Contao\Input;
+use Contao\FilesModel;
 
 /**
  * Class TlC4gImport
@@ -56,7 +59,7 @@ class TlC4gImport
     ) {
         if ($this->testImport($arrRow)) {
             $link = '<a href="' . Controller::addToUrl($href) . '&id=' . $arrRow['id'];
-            $link .= '" title="' . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label);
+            $link .= '" title="' . StringUtil::specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label);
             $link .= '</a> ';
         } else {
             $link = '<span style="opacity: 0.4;">' . Image::getHtml($icon, $label) . '</span>';
@@ -88,14 +91,15 @@ class TlC4gImport
             return false;
         }
 
-        $file = \FilesModel::findByUuid($row['srcfile']);
+        $file = FilesModel::findByUuid($row['srcfile']);
+        $rootDir = System::getContainer()->getParameter('kernel.project_dir');
 
-        if (!$file || !is_file(TL_ROOT . '/' . $file->path)) {
+        if (!$file || !is_file($rootDir . '/' . $file->path)) {
             return false;
         }
 
         if ($row['sourcekind'] == 'import') {
-            $fields = deserialize($row['namedfields'], true);
+            $fields = StringUtil::deserialize($row['namedfields'], true);
 
             if (!count($fields)) {
                 return false;
@@ -103,7 +107,7 @@ class TlC4gImport
         }
 
         if ($row['sourcekind'] == 'create') {
-            $fields = deserialize($row['fieldnames'], true);
+            $fields = StringUtil::deserialize($row['fieldnames'], true);
 
             if (!count($fields)) {
                 return false;
@@ -219,11 +223,13 @@ class TlC4gImport
      */
     protected function getFields($srcfile, $delimiter, $enclosure, $headerline)
     {
-        $file = \FilesModel::findByUuid($srcfile);
+        $file = FilesModel::findByUuid($srcfile);
         $data = [];
 
-        if ($file && is_file(TL_ROOT . '/' . $file->path)) {
-            $content = file_get_contents(TL_ROOT . '/' . $file->path);
+        $rootDir = System::getContainer()->getParameter('kernel.project_dir');
+        if ($file && is_file($rootDir . '/' . $file->path)) {
+            $rootDir = System::getContainer()->getParameter('kernel.project_dir');
+            $content = file_get_contents($rootDir . '/' . $file->path);
 
             if ($content) {
                 $lines = explode(PHP_EOL, $content);
@@ -267,7 +273,7 @@ class TlC4gImport
      */
     public function cbConvertFieldNames($value, $dc)
     {
-        $arrFields = deserialize($value);
+        $arrFields = StringUtil::deserialize($value);
         foreach ($arrFields as $key => $field) {
             // catch specialchars in the fieldname
             $field['destfields'] = html_entity_decode($field['destfields']);
@@ -293,7 +299,7 @@ class TlC4gImport
 
                 break;
             case 'create':
-                $fields = \Contao\StringUtil::deserialize($dc->activeRecord->fieldnames);
+                $fields = StringUtil::deserialize($dc->activeRecord->fieldnames);
                 $arrFields = [];
                 foreach ($fields as $key => $field) {
                     $arrFields[$key] = $field['destfields'];

@@ -13,6 +13,7 @@ namespace con4gis\ImportBundle\Classes\Listener;
 use con4gis\CoreBundle\Classes\C4GUtils;
 use con4gis\CoreBundle\Resources\contao\models\C4gSettingsModel;
 use Contao\Database;
+use Contao\StringUtil;
 use Contao\Request;
 use Doctrine\ORM\EntityManager;
 use con4gis\ImportBundle\Classes\Events\SaveDataEvent;
@@ -191,7 +192,7 @@ class SaveDataListener
         }
 
         $addressFields = $settings->getAddressfields();
-        $arrAddressFields = \Contao\StringUtil::deserialize($addressFields);
+        $arrAddressFields = StringUtil::deserialize($addressFields);
         $geoxField = $settings->getGeoxfield();
         $geoyField = $settings->getGeoyfield();
         $keyForward = (array) C4GUtils::getKey($c4gSettings, '2', '', false);

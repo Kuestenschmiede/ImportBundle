@@ -8,7 +8,7 @@
  * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
-
+use Contao\DC_Table;
 /**
  * Set Tablename
  */
@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 (
 	'config' => array
 	(
-		'dataContainer'               => 'Table',
+        'dataContainer'               => DC_Table::class,
 		'enableVersioning'            => true
 	),
 	'list' => array
