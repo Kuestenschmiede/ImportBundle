@@ -171,7 +171,9 @@ class ConvertDataListener
                             }
                         }
                     }
-
+                    if ($event->getPid()) {
+                        $tmprow['pid'] = $event->getPid();
+                    }
                     $tmpdata[] = $tmprow;
                 }
             }

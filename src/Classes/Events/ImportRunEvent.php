@@ -65,6 +65,11 @@ class ImportRunEvent extends QueueEvent
     protected $dataCount = 0;
 
     /**
+     * @var int
+     */
+    protected $pid = 0;
+
+    /**
      * @return int
      */
     public function getImportId(): int
@@ -174,5 +179,21 @@ class ImportRunEvent extends QueueEvent
     public function setDataCount(int $dataCount): void
     {
         $this->dataCount = $dataCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPid(): int
+    {
+        return $this->pid;
+    }
+
+    /**
+     * @param int $pid
+     */
+    public function setPid(int $pid): void
+    {
+        $this->pid = $pid;
     }
 }

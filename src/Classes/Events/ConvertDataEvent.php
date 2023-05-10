@@ -54,6 +54,11 @@ class ConvertDataEvent extends Event
     protected $additionalData = [];
 
     /**
+     * @var int
+     */
+    protected $pid = [];
+
+    /**
      * @return null
      */
     public function getSettings()
@@ -131,5 +136,21 @@ class ConvertDataEvent extends Event
     public function setAdditionalData(array $additionalData)
     {
         $this->additionalData = $additionalData;
+    }
+
+    /**
+     * @return array|int
+     */
+    public function getPid()
+    {
+        return $this->pid;
+    }
+
+    /**
+     * @param array|int $pid
+     */
+    public function setPid($pid): void
+    {
+        $this->pid = $pid;
     }
 }
