@@ -2,56 +2,56 @@ services:
     con4gis_import.onImportRunGetSettings:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetSettings }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetSettings, priority: 70 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunGetInputData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetInputData }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetInputData, priority: 60 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunGetPath:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetPath }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunGetPath, priority: 50 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunLoadData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunLoadData }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunLoadData, priority: 40 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunConvertData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunConvertData }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunConvertData, priority: 30 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunBeforeSaveData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunBeforeSaveData }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunBeforeSaveData, priority: 20 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunSaveData:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunSaveData }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunSaveData, , priority: 10 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
     con4gis_import.onImportRunRenameFile:
         class: con4gis\ImportBundle\Classes\Listener\ImportRunListener
         tags:
-            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunRenameFile }
+            - { name: kernel.event_listener, event: con4gis.import.run, method: onImportRunRenameFile, priority: 0 }
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
