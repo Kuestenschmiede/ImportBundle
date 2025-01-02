@@ -2,10 +2,10 @@
 /*
  * This file is part of con4gis, the gis-kit for Contao CMS.
  * @package con4gis
- * @version 8
+ * @version 10
  * @author con4gis contributors (see "authors.txt")
  * @license LGPL-3.0-or-later
- * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
+ * @copyright (c) 2010-2025, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
 
@@ -51,7 +51,7 @@ $GLOBALS['TL_LANG'][$strName]['useinterval']        = array('Interval Execution'
 $GLOBALS['TL_LANG'][$strName]['intervalkind']       = array('Interval', 'Please choose the interval in which to repeat the task.');
 $GLOBALS['TL_LANG'][$strName]['intervalcount']      = array('Maximum Number of Executions', 'Please choose whether the task should finish after a set number of executions. Leave empty for infinite executions.');
 $GLOBALS['TL_LANG'][$strName]['csvField']      = array('Source column or -number', 'Please enter the header or number of the source column in the import file.');
-$GLOBALS['TL_LANG'][$strName]['importaddresses']      = array('Convert addresses (requires con4gis.io)', 'Set this checkbox if you wish to convert addresses into coordinates while importing data (requires a valid <a href="https://con4gis.io" target="_blank" rel="noopener">con4gis.io key</a>. The key must be entered in the con4gis Dashboard under Settings).');
+$GLOBALS['TL_LANG'][$strName]['importaddresses']      = array('Convert addresses (requires con4gis support)', 'Set this checkbox if you wish to convert addresses into coordinates while importing data (requires a valid <a href="https://con4gis.org/support" target="_blank" rel="noopener">con4gis support key</a>. The key must be entered in the con4gis Dashboard under Settings).');
 $GLOBALS['TL_LANG'][$strName]['addressfields']      = array('Address fields', 'Select the fields that hold the address.');
 $GLOBALS['TL_LANG'][$strName]['geoxfield']      = array('Field for X coordinate', 'Select the database field where the X coordinate should be stored.');
 $GLOBALS['TL_LANG'][$strName]['geoyfield']      = array('Field for Y coordinate', 'Select the database field where the Y coordinate should be stored.');
@@ -80,6 +80,8 @@ $GLOBALS['TL_LANG'][$strName]['intervalkind_ref']   = array('hourly' => 'hourly'
  * Operations
  */
 $GLOBALS['TL_LANG'][$strName]['runimport']          = array('Begin Import', 'Begin Import');
+
+$GLOBALS['TL_LANG'][$strName]['importConfirm'] = 'Would you like to import now?';
 
 
 /**
