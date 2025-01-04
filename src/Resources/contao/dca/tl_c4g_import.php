@@ -89,7 +89,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                 'href'                => 'key=runimport',
                 'icon'                => 'bundles/con4gisimport/images/be-icons/import.svg',
                 'button_callback'     => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbGenerateButton'),
-                'attributes'          => 'onclick="if(!confirm(\'' . key_exists('importConfirm',$GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName]['importConfirm'] : '' . '\'))return false;Backend.getScrollOffset()"'
+                'attributes'          => 'onclick="if(!confirm(\'' . key_exists($strName,$GLOBALS['TL_LANG']) && key_exists('importConfirm',$GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName]['importConfirm'] : '' . '\'))return false;Backend.getScrollOffset()"'
             )
 		)
 	),
