@@ -121,3 +121,9 @@ services:
             - { name: kernel.event_listener, event: con4gis.import.save, method: onSaveDataInsert }
         arguments:
             - '@doctrine.orm.default_entity_manager'
+
+    con4gis_map_importer:
+        class: con4gis\ImportBundle\Classes\MapImportService
+        autoconfigure: true
+        autowire: true
+        public: true

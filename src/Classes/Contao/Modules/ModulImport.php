@@ -11,6 +11,7 @@
 namespace con4gis\ImportBundle\Classes\Contao\Modules;
 
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
+use con4gis\ImportBundle\Entity\TlC4gImport;
 use Contao\BackendTemplate;
 use Contao\System;
 
@@ -97,10 +98,22 @@ class ModulImport
      */
     public function runImport()
     {
-        $event = new ImportRunEvent();
-        $event->setImportId($this->importId);
-        $this->dispatcher->dispatch($event, $event::NAME);
-        $this->template->dataCount = $event->getDataCount();
+        // check settings
+        if ($this->importId) {
+            $importSettings = $this->entityManager->getRepository(TlC4gImport::class)->findOneBy(['id' => $this->importId]);
+
+            if ($importSettings && $importSettings->getSourcekind() === "import_maps") {
+
+                // get map importer service
+                $mapImporter = System::getContainer()->get('con4gis_map_importer');
+                $this->template->dataCount = $mapImporter->importIntoMapStructure($importSettings);
+            } else {
+                $event = new ImportRunEvent();
+                $event->setImportId($this->importId);
+                $this->dispatcher->dispatch($event, $event::NAME);
+                $this->template->dataCount = $event->getDataCount();
+            }
+        }
 
         return $this->template->parse();
     }

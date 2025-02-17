@@ -87,7 +87,7 @@ class TlC4gImport
             return false;
         }
 
-        if ($row['srctable'] == '' && $row['srctablename'] == '') {
+        if (($row['sourcekind'] !== 'import_maps') && ($row['srctable'] == '' && $row['srctablename'] == '')) {
             return false;
         }
 
@@ -308,6 +308,8 @@ class TlC4gImport
                 return $arrFields;
 
                 break;
+            case 'import_maps':
+                return $this->getFieldsFromFile($dc);
         }
     }
 }

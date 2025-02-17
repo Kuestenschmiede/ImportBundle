@@ -95,7 +95,43 @@ class TlC4gImport extends BaseEntity
      * @ORM\Column(type="text", nullable=true)
      */
     protected $namedfields = '';
-    
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $mapStructure = 0;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $locstyleField = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $nameField = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $tooltipField = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $structureField = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $popupFields = '';
+
     /**
      * @var string
      * @ORM\Column(type="string", length=1, nullable=true)
@@ -672,5 +708,64 @@ class TlC4gImport extends BaseEntity
     {
         $this->geoyfield = $geoyfield;
     }
-    
+
+    public function getMapStructure(): int
+    {
+        return $this->mapStructure;
+    }
+
+    public function setMapStructure(int $mapStructure): void
+    {
+        $this->mapStructure = $mapStructure;
+    }
+
+    public function getLocstyleField(): string
+    {
+        return $this->locstyleField;
+    }
+
+    public function setLocstyleField(string $locstyleField): void
+    {
+        $this->locstyleField = $locstyleField;
+    }
+
+    public function getTooltipField(): string
+    {
+        return $this->tooltipField;
+    }
+
+    public function setTooltipField(string $tooltipField): void
+    {
+        $this->tooltipField = $tooltipField;
+    }
+
+    public function getStructureField(): string
+    {
+        return $this->structureField;
+    }
+
+    public function setStructureField(string $structureField): void
+    {
+        $this->structureField = $structureField;
+    }
+
+    public function getNameField(): string
+    {
+        return $this->nameField;
+    }
+
+    public function setNameField(string $nameField): void
+    {
+        $this->nameField = $nameField;
+    }
+
+    public function getPopupFields(): string
+    {
+        return $this->popupFields;
+    }
+
+    public function setPopupFields(string $popupFields): void
+    {
+        $this->popupFields = $popupFields;
+    }
 }

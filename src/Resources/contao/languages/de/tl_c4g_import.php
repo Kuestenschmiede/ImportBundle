@@ -56,6 +56,13 @@ $GLOBALS['TL_LANG'][$strName]['geoxfield']      = array('Feld für X-Koordinate'
 $GLOBALS['TL_LANG'][$strName]['geoyfield']      = array('Feld für Y-Koordinate', 'Wählen Sie das Datenbankfeld aus, in dem die Y-Koordinate gespeichert werden soll.');
 $GLOBALS['TL_LANG'][$strName]['csvField']      = array('Quellspalte oder -nummer', 'Bitte geben Sie die Überschrift oder die Nummer der Quellspalte der Importdatei ein.');
 
+$GLOBALS['TL_LANG'][$strName]['mapStructure']      = array('Eltern-Kartenstruktur', 'Bitte wählen Sie die Kartenstruktur aus, unterhalb derer die importierten Daten einsortiert werden sollen.');
+$GLOBALS['TL_LANG'][$strName]['nameField']      = array('Feld für Elementname', 'Bitte wählen Sie das Feld der Importdatei aus, welches einen Namen für das Element enthält.');
+$GLOBALS['TL_LANG'][$strName]['locstyleField']      = array('Feld für Lokationsstil', 'Bitte wählen Sie das Feld der Importdatei aus, welches einen Namen für einen Lokationsstil enthält. Wenn ein Lokationsstil mit dem Feldwert dieser Spalte existiert, wird dieser beim Import dem Element zugewiesen.');
+$GLOBALS['TL_LANG'][$strName]['tooltipField']      = array('Feld für Tooltip', 'Bitte wählen Sie das Feld der Importdatei aus, aus dem der Tooltip des Elements in der Karte importiert werden soll.');
+$GLOBALS['TL_LANG'][$strName]['structureField']      = array('Feld für Unterstrukturen', 'Bitte wählen Sie das Feld der Importdatei aus, welches einen Namen für das eine Unterstruktur enthält. Elemente werden dann unterhalb der Elternstruktur anhand ihres Wertes in diesem Feld weiter in Strukturen aufgeteilt.');
+$GLOBALS['TL_LANG'][$strName]['popupFields']      = array('Popup-Felder', 'Bitte wählen Sie die Felder aus, deren Inhalte im Popup des Elements in der Karte dargestellt werden sollen.');
+
 /**
  * Legends
  */
@@ -71,7 +78,7 @@ $GLOBALS['TL_LANG'][$strName]['usequeue_legend']    = 'Einstellungen für die Wa
  * Reference
  */
 $GLOBALS['TL_LANG'][$strName]['srckind_ref']        = array('byorder' => 'Felder anhand der Reihenfolge zuordnen (Es dürfen KEINE Spaltennamen in der Datei stehen!)', 'byname' => 'Felder anhand der Spaltenüberschriften zuordnen (In der ersten Zeile MÜSSEN die Spaltennamen stehen!)');
-$GLOBALS['TL_LANG'][$strName]['sourcekind_ref']     = array('import' => 'Nur importieren', 'create' => 'Tabellen anlegen und importieren');
+$GLOBALS['TL_LANG'][$strName]['sourcekind_ref']     = array('import' => 'Nur importieren', 'create' => 'Tabellen anlegen und importieren', 'import_maps' => 'Daten in Kartenstruktur importieren');
 $GLOBALS['TL_LANG'][$strName]['intervalkind_ref']   = array('hourly' => 'stündlich', 'daily' => 'täglich', 'weekly' => 'wöchentlich', 'monthly' => 'monatlich', 'yearly' => 'jährlich');
 
 

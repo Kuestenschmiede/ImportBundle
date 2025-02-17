@@ -110,6 +110,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 	(
 	    'sourcekind_import'           => '{srctable_legend},saveTlTables,srctable,namedfields',
         'sourcekind_create'           => '{srctable_legend},saveTlTables,srctablename,fieldnames',
+        'sourcekind_import_maps'      => '{srctable_legend},mapStructure,nameField,locstyleField,tooltipField,structureField,popupFields',
         'useinterval'                 => 'intervalkind,intervalcount',
         'importaddresses'             => 'addressfields,geotable,geoxfield,geoyfield'
 	),
@@ -162,7 +163,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'select',
-            'options'                 => array('import', 'create'),
+            'options'                 => array('import', 'create', 'import_maps'),
             'reference'               => &$GLOBALS['TL_LANG'][$strName]['sourcekind_ref'],
             'eval'                    => array('tl_class'=>'clr', 'submitOnChange'=>true, 'includeBlankOption'=>true, 'chosen'=>true),
         ),
@@ -216,6 +217,48 @@ $GLOBALS['TL_DCA'][$strName] = array
                 )
             )
         ),
+        'mapStructure' => [
+            'default'                 => 0,
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'foreignKey'              => 'tl_c4g_maps.name',
+            'eval'                    => ['tl_class'=>'clr'],
+        ],
+        'nameField' => [
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => ['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'],
+            'eval'                    => ['tl_class'=>'clr'],
+        ],
+        'locstyleField' => [
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => ['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'],
+            'eval'                    => ['tl_class'=>'clr', 'includeBlankOption' => true],
+        ],
+        'tooltipField' => [
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => ['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'],
+            'eval'                    => ['tl_class'=>'clr', 'includeBlankOption' => true],
+        ],
+        'structureField' => [
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => ['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'],
+            'eval'                    => ['tl_class'=>'clr', 'includeBlankOption' => true],
+        ],
+        'popupFields' => [
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => ['\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'],
+            'eval'                    => ['mandatory'=>false,'chosen'=>true, 'includeBlankOption'=>true, 'multiple' => true],
+        ],
         'importaddresses' => [
             'default'                 => '',
             'exclude'                 => true,
