@@ -5,6 +5,7 @@ namespace con4gis\ImportBundle\Classes;
 use con4gis\CoreBundle\Classes\C4GUtils;
 use con4gis\ImportBundle\Entity\TlC4gImport;
 use Contao\FilesModel;
+use Contao\Message;
 use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
 
@@ -27,37 +28,41 @@ class MapImportService
         $dataFileModel = FilesModel::findByUuid(StringUtil::binToUuid($dataFile));
         $path = $dataFileModel->path;
         $file = fopen($path, 'r');
-        $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
-        $headerFields = [];
-
-        if ($importConfig->getHeaderline()) {
-            $headerFields = $csvContent;
+        if ($file !== false) {
             $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
-        }
+            $headerFields = [];
 
-        while ($csvContent !== false) {
-            // process current line
-            $dataEntry = [];
-            foreach ($csvContent as $key => $item) {
-                $csvContent[$key] = mb_convert_encoding($item, 'UTF-8', mb_detect_encoding($item));
-
-                if ($headerFields) {
-                    $dataEntry[$headerFields[$key]] = $item;
-                } else {
-                    // problem
-                    $dataEntry[$key] = $item;
-                }
+            if ($importConfig->getHeaderline()) {
+                $headerFields = $csvContent;
+                $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
             }
 
-            // convert data and insert into db
-            $rowsInserted = $this->processDataEntry($dataEntry, $importConfig);
-            $dataCount += $rowsInserted;
+            while ($csvContent !== false) {
+                // process current line
+                $dataEntry = [];
+                foreach ($csvContent as $key => $item) {
+                    $csvContent[$key] = mb_convert_encoding($item, 'UTF-8', mb_detect_encoding($item));
 
-            // read next line
-            $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
+                    if ($headerFields) {
+                        $dataEntry[$headerFields[$key]] = $item;
+                    } else {
+                        // problem
+                        $dataEntry[$key] = $item;
+                    }
+                }
+
+                // convert data and insert into db
+                $rowsInserted = $this->processDataEntry($dataEntry, $importConfig);
+                $dataCount += $rowsInserted;
+
+                // read next line
+                $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
+            }
+
+            fclose($file);
+        } else {
+            Message::addError("File could not be opened.");
         }
-
-        fclose($file);
 
         return $dataCount;
     }
@@ -148,22 +153,27 @@ class MapImportService
             }
         }
 
-        // map fields
-        $mapData = [
-            'name' => $dataName,
-            'loc_geox' => $geox,
-            'loc_geoy' => $geoy,
-            'location_type' => 'single',
-            'pid' => $pid,
-            'locstyle' => $locstyleId,
-            'tooltip' => $dataEntry[$importConfig->getTooltipField()],
-            'popup_info' => $popupContent
-        ];
+        if ($geox && $geoy) {
+            // map fields
+            $mapData = [
+                'name' => $dataName,
+                'loc_geox' => $geox,
+                'loc_geoy' => $geoy,
+                'location_type' => 'single',
+                'pid' => $pid,
+                'locstyle' => $locstyleId,
+                'tooltip' => $dataEntry[$importConfig->getTooltipField()],
+                'popup_info' => $popupContent,
+                'addZoom' => 1
+            ];
 
-        if ($elementExists) {
-            return (int) $this->connection->update("tl_c4g_maps", $mapData, ['id' => $elementId]);
-        } else {
-            return (int) $this->connection->insert("tl_c4g_maps", $mapData);
+            if ($elementExists) {
+                return (int) $this->connection->update("tl_c4g_maps", $mapData, ['id' => $elementId]);
+            } else {
+                return (int) $this->connection->insert("tl_c4g_maps", $mapData);
+            }
         }
+
+        return 0;
     }
 }
