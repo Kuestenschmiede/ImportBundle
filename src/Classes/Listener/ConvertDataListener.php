@@ -11,6 +11,7 @@
 namespace con4gis\ImportBundle\Classes\Listener;
 
 use con4gis\CoreBundle\Classes\Helper\StringHelper;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\Database;
 use con4gis\ImportBundle\Classes\Events\ConvertDataEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -31,8 +32,9 @@ class ConvertDataListener
      * ConvertDataListener constructor.
      * @param Database|null $database
      */
-    public function __construct(Database $database = null)
+    public function __construct(ContaoFramework $framework, Database $database = null)
     {
+        $framework->initialize();
         if ($database !== null) {
             $this->database = $database;
         } else {
