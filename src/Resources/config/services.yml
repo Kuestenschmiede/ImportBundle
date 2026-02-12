@@ -66,26 +66,36 @@ services:
         class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
         tags:
             - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertDataToArray }
+        arguments:
+            - '@contao.framework'
 
     con4gis_import.onConvertFieldsByName:
             class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertFields }
+            arguments:
+                - '@contao.framework'
 
     con4gis_import.onConvertRowsToArrays:
             class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertRowsToArrays }
+            arguments:
+                - '@contao.framework'
 
     con4gis_import.onConvertRowsByName:
             class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertRows }
+            arguments:
+                - '@contao.framework'
 
     con4gis_import.onConvertInsertFields:
             class: con4gis\ImportBundle\Classes\Listener\ConvertDataListener
             tags:
                 - { name: kernel.event_listener, event: con4gis.import.convert, method: onConvertInsertFields }
+            arguments:
+                - '@contao.framework'
 
     con4gis_import.onSaveDataTruncateTable:
         class: con4gis\ImportBundle\Classes\Listener\SaveDataListener

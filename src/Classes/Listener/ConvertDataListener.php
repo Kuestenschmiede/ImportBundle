@@ -104,9 +104,13 @@ class ConvertDataListener
         $data = $event->getData();
         $sourcekind = $settings->getSourcekind();
         $srcFields = $event->getFieldnames();
-        $destFields = $settings->getNamedfields();
-        $destFields = ($destFields) ? $destFields : $settings->getFieldnames(); // Felder beim Anlegen der Tabelle!
         $delimiter = ($settings->getDelimiter() != '') ? $settings->getDelimiter() : ';';
+
+        if ($sourcekind === "create") {
+            $destFields = $settings->getFieldnames();
+        } else {
+            $destFields = $settings->getNamedfields();
+        }
 
         $tmpdata = [];
 

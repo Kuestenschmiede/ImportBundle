@@ -15,6 +15,7 @@ use con4gis\CoreBundle\Classes\Helper\StringHelper;
 use con4gis\CoreBundle\Classes\C4GUtils;
 use con4gis\ImportBundle\Classes\Events\ImportRunEvent;
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
+use Contao\CoreBundle\DataContainer\DataContainerOperation;
 use Contao\StringUtil;
 use Contao\Controller;
 use Contao\System;
@@ -30,42 +31,12 @@ class TlC4gImport
 {
     /**
      * button_callback: Prüft, ob ein Import ausgeführt werden kann.
-     * @param $arrRow
-     * @param $href
-     * @param $label
-     * @param $title
-     * @param $icon
-     * @param $attributes
-     * @param $strTable
-     * @param $arrRootIds
-     * @param $arrChildRecordIds
-     * @param $blnCircularReference
-     * @param $strPrevious
-     * @param $strNext
-     * @return string
      */
-    public function cbGenerateButton($arrRow,
-                                     $href,
-                                     $label,
-                                     $title,
-                                     $icon,
-                                     $attributes,
-                                     $strTable,
-                                     $arrRootIds,
-                                     $arrChildRecordIds,
-                                     $blnCircularReference,
-                                     $strPrevious,
-                                     $strNext
-    ) {
-        if ($this->testImport($arrRow)) {
-            $link = '<a href="' . Controller::addToUrl($href) . '&id=' . $arrRow['id'];
-            $link .= '" title="' . StringUtil::specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label);
-            $link .= '</a> ';
-        } else {
-            $link = '<span style="opacity: 0.4;">' . Image::getHtml($icon, $label) . '</span>';
+    public function cbGenerateButton(DataContainerOperation $operation)
+    {
+        if (!$this->testImport($operation->getRecord())) {
+            $operation->disable();
         }
-
-        return $link;
     }
 
     /**

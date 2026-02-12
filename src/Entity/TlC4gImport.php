@@ -17,225 +17,225 @@ use Contao\StringUtil;
 /**
  * Class TlC4gImport
  *
- * @ORM\Entity
- * @ORM\Table(name="tl_c4g_import")
  * @package con4gis\ImportBundle\Entity
  */
+#[ORM\Table(name: 'tl_c4g_import')]
+#[ORM\Entity]
 class TlC4gImport extends BaseEntity
 {
 
 
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id = 0;
 
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned":true, "default":0})
      */
+    #[ORM\Column(type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     protected $tstamp = 0;
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $title = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $description = '';
 
 
     /**
      * @var resource
-     * @ORM\Column(type="blob", nullable=true)
      */
+    #[ORM\Column(type: 'blob', nullable: true)]
     protected $srcfile = null;
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $headerline = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $renamefile = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $truncatetable = '0';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $srctable = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $namedfields = '';
 
     /**
      * @var int
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $mapStructure = 0;
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $locstyleField = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $nameField = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $tooltipField = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $structureField = '';
 
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $popupFields = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $importaddresses = '0';
     
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $addressfields = '';
     
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $geoxfield = '';
     
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $geoyfield = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $sourcekind = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $srctablename = '';
 
 
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $fieldnames = '';
 
 
     /**
      * Array für die Ablage zusätzlicher Daten.
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $additionaldata = '';
 
 
     /**
      * Trennzeichen des CSV-Strings
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $delimiter = ';';
 
 
     /**
      * Texteinschlusszeichen des CSV-Strings
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $enclosure = '"';
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $saveTlTables = '0';
 
 
     /**
      * Verarbeitung über Queue
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $usequeue = '';
 
 
     /**
      * Verarbeitungsintervall in der Queue benutzen
      * @var string
-     * @ORM\Column(type="string", length=1, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
     protected $useinterval = '';
 
 
     /**
      * Verarbeitungsintervall in der Queue
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $intervalkind = '';
 
 
     /**
      * Verarbeitungsanzahl in der Queue
      * @var string
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $intervalcount = '';
 
 

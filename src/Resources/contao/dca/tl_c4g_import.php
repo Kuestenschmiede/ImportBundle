@@ -58,38 +58,18 @@ $GLOBALS['TL_DCA'][$strName] = array
 		),
 		'operations' => array
 		(
-			'edit' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['edit'],
-				'href'                => 'act=edit',
-				'icon'                => 'edit.svg',
-			),
-			'copy' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['copy'],
-				'href'                => 'act=copy',
-				'icon'                => 'copy.svg'
-			),
-			'delete' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['delete'],
-				'href'                => 'act=delete',
-				'icon'                => 'delete.svg',
-				'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
-			),
-			'show' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['show'],
-				'href'                => 'act=show',
-				'icon'                => 'show.svg'
-			),
+            'edit',
+            '!copy',
+            '!delete',
+            '!show',
             'runimport' => array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['runimport'],
                 'href'                => 'key=runimport',
+                'primary' => true,
                 'icon'                => 'bundles/con4gisimport/images/be-icons/import.svg',
                 'button_callback'     => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'cbGenerateButton'),
-                'attributes'          => 'onclick="if(!confirm(\'' . key_exists($strName,$GLOBALS['TL_LANG']) && key_exists('importConfirm',$GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName]['importConfirm'] : '' . '\'))return false;Backend.getScrollOffset()"'
+                'attributes'          => 'onclick="if(!confirm(\'' . array_key_exists($strName,$GLOBALS['TL_LANG']) && array_key_exists('importConfirm',$GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName]['importConfirm'] : '' . '\'))return false;Backend.getScrollOffset()"'
             )
 		)
 	),
@@ -314,7 +294,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'default'                 => '',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px', "submitOnChange" => true),
+                        'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true,'tl_class'=>'w25', "submitOnChange" => true),
                     ),
                     'csvField' => array
                     (
@@ -322,21 +302,21 @@ $GLOBALS['TL_DCA'][$strName] = array
                         'exclude'                 => true,
                         'inputType'               => 'select',
                         'options_callback'        => array('\con4gis\ImportBundle\Classes\Contao\Callbacks\TlC4gImport', 'getFieldsFromFile'),
-                        'eval'                    => array('mandatory'=>false, 'chosen'=>true, 'includeBlankOption'=>true,'style'=>'width:200px', 'submitOnChange' => true),
+                        'eval'                    => array('mandatory'=>false, 'includeBlankOption'=>true,'tl_class'=>'w25', 'submitOnChange' => true),
                     ),
                     'fieldtype' => array
                     (
                         'default'                 => 'varchar',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('style'=>'width:200px', "submitOnChange" => true)
+                        'eval'                    => array('tl_class'=>'w25', "submitOnChange" => true)
                     ),
                     'fieldlength' => array
                     (
                         'default'                 => '255',
                         'exclude'                 => true,
                         'inputType'               => 'text',
-                        'eval'                    => array('style'=>'width:200px', "submitOnChange" => true)
+                        'eval'                    => array('tl_class'=>'w25', "submitOnChange" => true)
                     )
                 )
             )

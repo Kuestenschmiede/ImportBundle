@@ -29,12 +29,12 @@ class MapImportService
         $path = $dataFileModel->path;
         $file = fopen($path, 'r');
         if ($file !== false) {
-            $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
+            $csvContent = fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
             $headerFields = [];
 
             if ($importConfig->getHeaderline()) {
                 $headerFields = $csvContent;
-                $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
+                $csvContent = fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
             }
 
             while ($csvContent !== false) {
@@ -56,7 +56,7 @@ class MapImportService
                 $dataCount += $rowsInserted;
 
                 // read next line
-                $csvContent = \Safe\fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
+                $csvContent = fgetcsv($file, null, $importConfig->getDelimiter(), $importConfig->getEnclosure());
             }
 
             fclose($file);
